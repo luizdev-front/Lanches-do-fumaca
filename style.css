@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ff0000;
+  font-family: 'Poppins', sans-serif;
+}
+
+header {
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color:azure;
+  justify-content: space-between; /* 🔥 separa lados */
+}
+.horario p {
+  margin-left:auto;
+   margin: 2px 0;
+  font-size: 14px;
+  color: #ccc;
+  
+}
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  margin-right: 15px;
+  color:azure;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+   max-width: 100%;
+  height: auto;
+}
+
+.hero {
+  background: url('https://images.unsplash.com/photo-1601924579732-3ccde9aa7bb0') center/cover no-repeat;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.logo {
+  background: #d92128;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  color: yellow;
+  font-weight: bold;
+  font-size: 14px; /* menor que 18px */
+}
+
+.pedido-button {
+  display: inline-block;
+  background-color: #ffcc00;
+  color: #000;
+  padding: 15px 25px;
+  margin-top: 20px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+}
+.hero { 
+  display:flex;
+  align-items:center;
+  flex-direction:column;  
+}
+.info {
+  padding: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+}
