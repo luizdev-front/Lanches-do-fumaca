@@ -1,76 +1,78 @@
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #ff0000;
-  color: #fff;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Cabeçalho */
 header {
-  background-color: #333;
+  background-color:#333;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  flex-wrap: wrap;
-  color: azure;
-  position: relative;
+  padding: 10px 15px;
+  color:azure;
+  justify-content: space-between; /* 🔥 separa lados */
+}
+.menu {
+  display: none;
+  background-color: #fff;
+  list-style: none;
+  padding:0;
+  margin:0;
+  position: absolute;
+  top: 60px;
+  left: 15px; /* troquei de right: para left: */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease-in-out;
+  z-index: 1000;
+  flex-direction:columm;
 }
 
+.menu li {
+  padding: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #ccc;
+  color: #ccc;
+  transition: background-color 0.3s;
+}
+
+.menu li:hover {
+  background-color: #f9f9f9;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.horario p {
+  margin-left:auto;
+   margin: 2px 0;
+  font-size: 14px;
+  color: #ccc;
+  
+}
 .menu-icon {
-  font-size: 30px;
+  font-size: 26px;
   cursor: pointer;
-  z-index: 100;
-  color: #ffcc00;
+  margin-right: 15px;
+  color:azure;
 }
 
 .title {
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
-  flex: 1 100%;
-  margin-top: 10px;
+   max-width: 100%;
+  height: auto;
 }
-
 .horario {
   font-size: 14px;
   color: #ccc;
   text-align: right;
 }
 
-/* Menu oculto com JS */
-.nav-menu {
-  position: absolute;
-  top: 60px;
-  right: 15px;
-  background-color: #222;
-  border-radius: 10px;
-  display: none;
-  flex-direction: column;
-  padding: 10px 20px;
-  z-index: 99;
-}
 
-.nav-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-menu ul li {
-  margin: 10px 0;
-}
-
-.nav-menu ul li a {
-  color: #ffcc00;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.nav-menu.show {
-  display: flex;
-}
 
 /* Seção de pastéis */
 .pasteis-section {
