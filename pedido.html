@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finalizar Pedido</title>
+  <link rel="stylesheet" href="stylepedido.css" />
+
+</head>
+<body>
+
+  <h1>Finalizar Pedido</h1>
+  <p id="produto"></p>
+
+  <form id="pedido-form">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" required />
+
+    <label for="endereco">Endereço completo</label>
+    <textarea id="endereco" rows="3" required></textarea>
+
+    <label for="pagamento">Forma de pagamento</label>
+    <select id="pagamento" required>
+      <option value="">Selecione</option>
+      <option value="pix">Pix</option>
+      <option value="debito">Débito</option>
+      <option value="credito">Crédito</option>
+    </select>
+
+    <div id="qrcode" class="hidden">
+      <h2>Escaneie o QR Code para pagar:</h2>
+      <img src="qrcode-pix-exemplo.png" alt="QR Code Pix" width="250" />
+      <br />
+      <button type="button" onclick="enviarParaCliente()">Pagamento Realizado (WhatsApp)</button>
+    </div>   
+
+
+    <div id="botao-vendedora" class="hidden">
+      <button type="button" onclick="enviarParaVendedora()">Enviar pedido para vendedora (WhatsApp)</button>
+    </div>
+  </form>
+
+  <script src="scriptpedido.js"></script>
+</body>
+</html>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
