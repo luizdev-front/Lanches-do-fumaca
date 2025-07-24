@@ -120,14 +120,6 @@ header {
   gap: 20px;
 }
 
-.item-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
-}
-
 .item-card:hover {
   transform: scale(1.05);
 }
@@ -145,6 +137,41 @@ header {
   color: #fff;
   font-size: 16px;
 }
+.item-card button {
+ font-size: 28px;
+  cursor: pointer;
+  color: #ffcc00; /* amarelo */
+  padding: 8px 12px;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;  
+}
+.pedido-button {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ffcc00;
+  color: #d92128;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.pedido-button:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.pedido-button:active {
+  background-color: #cc9900;
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
 
 /* Bebidas e doces */
 .bebidas-list {
@@ -174,4 +201,25 @@ header {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
+  .title {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  .horario {
+    text-align: left;
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .menu-icon {
+    align-self: flex-end;
+  }
+}
