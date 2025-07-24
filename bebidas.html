@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylebebidas.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Document</title>
 </head>
 <body>
-  <header>
-  <div class="menu-icon" id="menuBtn">&#9776;</div>
- <ul class="menu" id="menu">
 
-  <li><a href="pastel.html">Pastel</a></li>
-  <li><a href="hamburguer.html">Hambúrguer</a></li>
-  <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
-</ul>
+<header>
+  <div class="menu-icon" id="menu-toggle">&#9776;</div>
+  <ul class="menu" id="nav-menu">
+    <li><a href="pastel.html">Pastel</a></li>
+    <li><a href="hamburguer.html">Hambúrguer</a></li>
+    <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
+  </ul>
 
-  <div class="title">BEM-VINDO A PASTELARIA DO FUMAÇA!</div>
+  <div class="title">Faça o seu pedido!</div>
   <div class="horario">
     <p>Aberto segunda a sexta 18:00 às 01:30</p>
     <p>Final de semana 19:00 às 2:00</p>
   </div>
 </header>
-    
-  <section class="hero">
-    <div class="logo">
-        <img src="logo.jpg" alt="logo da pastelaria"></img>
-      <br>Pastelaria do Fumaça<br>
-    </div>
-    <br>
-  </section>   
+<h3 class="section-subtitle" id="bebidas">Bebidas</h3>
+<div class="bebidas-container">
+  <div class="item-card">
+    <span>Refrigerante lata - R$ 5,00</span>
+    <button>+</button>
+  </div>
+
+  <div class="item-card">
+   
+    <span>Suco Maratá - R$ 8,00</span>
+    <button>+</button>
+  </div>
+
+  <div class="item-card">
+   
+    <span>Água - R$ 3,00</span>
+    <button>+</button>
+  </div>
+
+  <div class="item-card">
+    <span>It Guaraná ou Limão - R$ 8,00</span>
+    <button>+</button>
+  </div>
+</div>
+
+<script src="scriptbebidas.js"></script>
 </body>
 </html>

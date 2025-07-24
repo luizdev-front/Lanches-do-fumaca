@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ff0000;
+  font-family: 'Poppins', sans-serif;
+}
+
+header {
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color:azure;
+  justify-content: space-between; /* 🔥 separa lados */
+}
+.menu {
+  display: none;
+  background-color: #d92128; /* vermelho vivo da pastelaria */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 60px;
+  left: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-in-out;
+  width: 200px;
+}
+.menu li {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-bottom: 1px solid #aa1a1f;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu li a {
+  color: #ffcc00; /* amarelo chamativo */
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+}
+
+.menu li:hover {
+  background-color: #ffcc00; /* destaque amarelo no hover */
+}
+
+.menu li:hover a {
+  color: #d92128; /* texto vermelho no hover */
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.horario p {
+  margin-left:auto;
+   margin: 2px 0;
+  font-size: 14px;
+  color: #ccc;
+  
+}
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ffcc00; /* amarelo para combinar com o botão */
+  padding: 8px 12px;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.menu-icon:hover {
+  background-color: #ffcc00;
+  color: #d92128;
+  transform: scale(1.05);
+}
+.bebidas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Título da seção */
+.section-subtitle {
+  color: #fff;
+  font-size: 28px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+/* Cada card individual */
+.item-card {
+  background-color: #d92128;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.item-card:hover {
+  transform: scale(1.05);
+}
+
+/* Imagens dentro do card */
+.item-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Texto com nome e preço */
+.item-card span {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Botão “+” */
+.item-card button {
+  font-size: 24px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #ffcc00;
+  padding: 6px 12px;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.item-card button:hover {
+  background-color: #ffcc00;
+  color: #d92128;
+  transform: scale(1.1);
+}
+
+
+
+
