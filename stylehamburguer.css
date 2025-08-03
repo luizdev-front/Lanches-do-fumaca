@@ -171,4 +171,30 @@ header {
   transform: translateY(1px);
   box-shadow: none;
 }
+.item-card p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-weight: 400;
+  font-style: italic;
+  color: #f0e9e9;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding-left: 14px;
+}
 
+/* Bolinha decorativa */
+.item-card p::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffcc00;
+  font-weight: 700;
+}
+
+/* Destaque de ingredientes principais */
+.item-card p strong {
+  font-weight: 600;
+  color: #fff;
+}

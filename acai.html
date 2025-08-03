@@ -16,7 +16,7 @@
   <li><a href="pastel.html">Pastel</a></li>
   <li><a href="hamburguer.html">Hambúrguer</a></li>
   <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
-  <li><a href="acai.html">Açai</a></li> 
+  <li><a href="acai.html">Açai e Milk-Shake</a></li> 
 </ul>
 
 
@@ -26,6 +26,45 @@
     <p>Final de semana 19:00 às 2:00</p>
   </div>
 </header>
-<section class="acai" id ="Acai">
-    <h2 class= "titulo">Nossas variedades de Açai!</h2>
-    </section>
+<div id="acai-form">
+  <h3>Açaí</h3>
+  <label>Tamanho:
+    <select id="acai-tamanho">
+      <option value="300 ml" data-preco="13.00">300 ml 13,00</option>
+      <option value="400 ml" data-preco="17.00">400 ml 17,00</option>
+      <option value="550 ml" data-preco="20.00">550 ml 20,00</option>
+      <option value="700 ml" data-preco="26.00">700 ml 26,00</option>
+    </select>
+  </label>
+
+  <fieldset>
+    <legend>Acompanhamentos (você pode marcar vários):</legend>
+    <label><input type="checkbox" value="Ovomaltine" class="acompanhamento-acai"> Ovomaltine</label>
+    <label><input type="checkbox" value="Paçoca" class="acompanhamento-acai"> Paçoca</label>
+    <label><input type="checkbox" value="MM" class="acompanhamento-acai"> MM</label>
+    <label><input type="checkbox" value="Leite em pó" class="acompanhamento-acai"> Leite em Pó</label>
+    <label><input type="checkbox" value="Leite Condensado" class="acompanhamento-acai"> Leite Condensado</label>
+    <label><input type="checkbox" value="Granola" class="acompanhamento-acai"> Granola</label>
+  </fieldset>
+
+  <label><input type="checkbox" id="acai-extra-nutella"> Nutella (+7)</label>
+  <br>
+  <button id="adicionar-acai">Adicionar ao carrinho</button>
+  <div>Preço estimado: R$ <span id="preco-acai">0.00</span></div>
+</div>
+
+<div id="milkshake-form">
+  <h2>Milkshake 400 ml</h2>
+
+  <fieldset>
+    <legend>Sabor (escolha um):</legend>
+    <label><input type="radio" name="sabor" value="Morango" data-preco="15.00" checked> Morango</label>
+    <label><input type="radio" name="sabor" value="Paçoca" data-preco="15.00"> Paçoca</label>
+    <label><input type="radio" name="sabor" value="Ovomaltine" data-preco="15.00"> Ovomaltine</label>
+  </fieldset>
+
+  <label><input type="checkbox" id="milkshake-extra-nutella"> Nutella (+7)</label>
+  <br>
+  <button id="adicionar-milkshake">Adicionar ao carrinho</button>
+  <div>Preço estimado: R$ <span id="preco-milkshake">0.00</span></div>
+</div>
