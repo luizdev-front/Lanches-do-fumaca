@@ -107,3 +107,91 @@
     });
   }
 });
+// ACAI
+const acaiTamanho = document.getElementById("acai-tamanho");
+const acaiNutella = document.getElementById("acai-extra-nutella");
+const acompanhamentosAcai = document.querySelectorAll(".acompanhamento-acai");
+const precoAcaiSpan = document.getElementById("preco-acai");
+
+function calcularPrecoAcai() {
+  let preco = parseFloat(acaiTamanho.selectedOptions[0].dataset.preco);
+  if (acaiNutella.checked) preco += 7;
+  precoAcaiSpan.textContent = preco.toFixed(2);
+  return preco;
+}
+
+document.getElementById("adicionar-acai").addEventListener("click", () => {
+  const tamanho = acaiTamanho.value;
+  const preco = calcularPrecoAcai();
+  const acompanhamentos = Array.from(acompanhamentosAcai)
+    .filter(el => el.checked)
+    .map(el => el.value)
+    .join(", ");
+  const extras = acompanhamentos ? ` com ${acompanhamentos}` : "";
+  const nutella = acaiNutella.checked ? " + Nutella" : "";
+  const item = `Açaí ${tamanho}${extras}${nutella}`;
+
+  window.location.href = `pedido.html?item=${encodeURIComponent(item)}&preco=${preco.toFixed(2)}`;
+});
+
+// Atualiza preço ao alterar seleção
+acaiTamanho.addEventListener("change", calcularPrecoAcai);
+acaiNutella.addEventListener("change", calcularPrecoAcai);
+acompanhamentosAcai.forEach(cb => cb.addEventListener("change", calcularPrecoAcai));
+
+calcularPrecoAcai();
+
+
+// AÇAÍ
+document.getElementById('acai-tamanho').addEventListener('change', atualizarPrecoAcai);
+document.getElementById('acai-extra-nutella').addEventListener('change', atualizarPrecoAcai);
+document.querySelectorAll('.acompanhamento-acai').forEach(c => c.addEventListener('change', atualizarPrecoAcai));
+
+document.getElementById('adicionar-acai').addEventListener('click', () => {
+  const tamanho = document.getElementById('acai-tamanho');
+  const nome = `Açaí ${tamanho.value}`;
+  let preco = parseFloat(tamanho.selectedOptions[0].dataset.preco);
+
+  if (document.getElementById('acai-extra-nutella').checked) preco += 7;
+
+  const acompanhamentos = Array.from(document.querySelectorAll('.acompanhamento-acai:checked'))
+    .map(el => el.value)
+    .join(', ');
+
+  const itemFinal = acompanhamentos ? `${nome} com ${acompanhamentos}` : nome;
+
+  window.location.href = `pedido.html?item=${encodeURIComponent(itemFinal)}&preco=${preco.toFixed(2)}`;
+});
+
+function atualizarPrecoAcai() {
+  const tamanho = document.getElementById('acai-tamanho');
+  let preco = parseFloat(tamanho.selectedOptions[0].dataset.preco);
+
+  if (document.getElementById('acai-extra-nutella').checked) preco += 7;
+
+  document.getElementById('preco-acai').textContent = preco.toFixed(2);
+}
+
+
+// MILKSHAKE
+document.getElementById('adicionar-milkshake').addEventListener('click', () => {
+  const sabor = document.querySelector('input[name="sabor"]:checked');
+  const nome = `Milkshake ${sabor.value}`;
+  let preco = parseFloat(sabor.dataset.preco);
+
+  if (document.getElementById('milkshake-extra-nutella').checked) preco += 7;
+
+  window.location.href = `pedido.html?item=${encodeURIComponent(nome)}&preco=${preco.toFixed(2)}`;
+});
+
+document.querySelectorAll('input[name="sabor"], #milkshake-extra-nutella')
+  .forEach(el => el.addEventListener('change', atualizarPrecoMilkshake));
+
+function atualizarPrecoMilkshake() {
+  const sabor = document.querySelector('input[name="sabor"]:checked');
+  let preco = parseFloat(sabor.dataset.preco);
+
+  if (document.getElementById('milkshake-extra-nutella').checked) preco += 7;
+
+  document.getElementById('preco-milkshake').textContent = preco.toFixed(2);
+}

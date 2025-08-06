@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleacai.css" class="rel">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="scriptacai.js"></script>
-    <title>Pastelaria do fumaça</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styleacai.css" />
+  <title>Pastelaria do Fumaça - Açaí & Milkshake</title>
 </head>
 <body>
   <header>
-  <div class="menu-icon" id="menuBtn">&#9776;</div>
- <ul class="menu" id="menu">
+    <div class="menu-icon" id="menuBtn">&#9776;</div>
+    <ul class="menu" id="menu">
+      <li><a href="pastel.html">Pastel</a></li>
+      <li><a href="hamburguer.html">Hambúrguer</a></li>
+      <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
+      <li><a href="acai.html">Açai e Milk-Shake</a></li> 
+      <li><a href="index.html">Início</a></li>
+    </ul>
+    <div class="title">Faça o seu pedido!</div>
+    <div class="horario">
+      <p>Aberto segunda a sexta 18:00 às 01:30</p>
+      <p>Final de semana 19:00 às 2:00</p>
+    </div>
+  </header>
 
-  <li><a href="pastel.html">Pastel</a></li>
-  <li><a href="hamburguer.html">Hambúrguer</a></li>
-  <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
-  <li><a href="acai.html">Açai e Milk-Shake</a></li> 
-</ul>
+  <div id="acai-form">
+    <h3>Açaí</h3>
+    <label>Tamanho:
+      <select id="acai-tamanho">
+        <option value="300 ml" data-preco="13.00">300 ml - R$13,00</option>
+        <option value="400 ml" data-preco="17.00">400 ml - R$17,00</option>
+        <option value="550 ml" data-preco="20.00">550 ml - R$20,00</option>
+        <option value="700 ml" data-preco="26.00">700 ml - R$26,00</option>
+      </select>
+    </label>
 
+    <fieldset>
+      <legend>Acompanhamentos:</legend>
+      <label><input type="checkbox" value="Ovomaltine" class="acompanhamento-acai"> Ovomaltine</label>
+      <label><input type="checkbox" value="Paçoca" class="acompanhamento-acai"> Paçoca</label>
+      <label><input type="checkbox" value="MM" class="acompanhamento-acai"> MM</label>
+      <label><input type="checkbox" value="Leite em pó" class="acompanhamento-acai"> Leite em Pó</label>
+      <label><input type="checkbox" value="Leite Condensado" class="acompanhamento-acai"> Leite Condensado</label>
+      <label><input type="checkbox" value="Granola" class="acompanhamento-acai"> Granola</label>
+    </fieldset>
 
-  <div class="title">Faça o seu pedido!</div>
-  <div class="horario">
-    <p>Aberto segunda a sexta 18:00 às 01:30</p>
-    <p>Final de semana 19:00 às 2:00</p>
+    <label><input type="checkbox" id="acai-extra-nutella"> Nutella (+R$7,00)</label>
+    <br>
+    <button id="adicionar-acai">Adicionar ao carrinho</button>
+    <div>Preço estimado: R$ <span id="preco-acai">0.00</span></div>
   </div>
-</header>
-<div id="acai-form">
-  <h3>Açaí</h3>
-  <label>Tamanho:
-    <select id="acai-tamanho">
-      <option value="300 ml" data-preco="13.00">300 ml 13,00</option>
-      <option value="400 ml" data-preco="17.00">400 ml 17,00</option>
-      <option value="550 ml" data-preco="20.00">550 ml 20,00</option>
-      <option value="700 ml" data-preco="26.00">700 ml 26,00</option>
-    </select>
-  </label>
 
-  <fieldset>
-    <legend>Acompanhamentos (você pode marcar vários):</legend>
-    <label><input type="checkbox" value="Ovomaltine" class="acompanhamento-acai"> Ovomaltine</label>
-    <label><input type="checkbox" value="Paçoca" class="acompanhamento-acai"> Paçoca</label>
-    <label><input type="checkbox" value="MM" class="acompanhamento-acai"> MM</label>
-    <label><input type="checkbox" value="Leite em pó" class="acompanhamento-acai"> Leite em Pó</label>
-    <label><input type="checkbox" value="Leite Condensado" class="acompanhamento-acai"> Leite Condensado</label>
-    <label><input type="checkbox" value="Granola" class="acompanhamento-acai"> Granola</label>
-  </fieldset>
+  <div id="milkshake-form">
+    <h2>Milkshake 400 ml</h2>
+    <fieldset>
+      <legend>Sabor:</legend>
+      <label><input type="radio" name="sabor" value="Morango" data-preco="15.00" checked> Morango</label>
+      <label><input type="radio" name="sabor" value="Paçoca" data-preco="15.00"> Paçoca</label>
+      <label><input type="radio" name="sabor" value="Ovomaltine" data-preco="15.00"> Ovomaltine</label>
+    </fieldset>
 
-  <label><input type="checkbox" id="acai-extra-nutella"> Nutella (+7)</label>
-  <br>
-  <button id="adicionar-acai">Adicionar ao carrinho</button>
-  <div>Preço estimado: R$ <span id="preco-acai">0.00</span></div>
-</div>
+    <label><input type="checkbox" id="milkshake-extra-nutella"> Nutella (+R$7,00)</label>
+    <br>
+    <button id="adicionar-milkshake">Adicionar ao carrinho</button>
+    <div>Preço estimado: R$ <span id="preco-milkshake">0.00</span></div>
+  </div>
 
-<div id="milkshake-form">
-  <h2>Milkshake 400 ml</h2>
-
-  <fieldset>
-    <legend>Sabor (escolha um):</legend>
-    <label><input type="radio" name="sabor" value="Morango" data-preco="15.00" checked> Morango</label>
-    <label><input type="radio" name="sabor" value="Paçoca" data-preco="15.00"> Paçoca</label>
-    <label><input type="radio" name="sabor" value="Ovomaltine" data-preco="15.00"> Ovomaltine</label>
-  </fieldset>
-
-  <label><input type="checkbox" id="milkshake-extra-nutella"> Nutella (+7)</label>
-  <br>
-  <button id="adicionar-milkshake">Adicionar ao carrinho</button>
-  <div>Preço estimado: R$ <span id="preco-milkshake">0.00</span></div>
-</div>
+  <script src="scriptacai.js"></script>
+</body>
+</html>
