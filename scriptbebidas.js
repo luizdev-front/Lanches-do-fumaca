@@ -1,32 +1,40 @@
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("nav-menu");
-
-  toggle.addEventListener("click", () => {
-    // Alterna a visibilidade
-    if (menu.style.display === "block") {
-      menu.style.display = "none";
-    } else {
-      menu.style.display = "block";
-    }
-  });
-   function adicionarAoCarrinho(botao) {
-  const itemCard = botao.parentElement;
-  const texto = itemCard.querySelector('span').textContent;
-
-  // Exemplo: "Refrigerante lata - R$ 5,00"
-  const partes = texto.split(' - R$ ');
-  const nome = partes[0].trim();
-  const preco = parseFloat(partes[1].replace(',', '.'));
-
-  if (!nome || isNaN(preco)) {
-    alert('Erro ao adicionar o item. Por favor, tente novamente.');
+function atualizarCarrinho() {
+  const carrinhoContainer = document.getElementById('carrinho');
+  if (!carrinhoContainer) {
+    console.error('Elemento com id="carrinho" não encontrado.');
     return;
   }
 
-  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-  carrinho.push({ nome, preco });
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-  // Agora exibe corretamente o nome do produto
-  alert(nome + ' foi adicionado ao carrinho!');
+  carrinhoContainer.innerHTML = '';
+
+  let total = 0;
+
+  carrinho.forEach((item, index) => {
+    const precoValido = parseFloat(item.preco);
+    if (!isNaN(precoValido)) {
+      total += precoValido;
+    }
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'carrinho-item';
+    itemDiv.innerHTML = `
+      ${item.nome} - R$ ${precoValido.toFixed(2).replace('.', ',')}
+      <button onclick="removerDoCarrinho(${index})">Remover</button>
+    `;
+    carrinhoContainer.appendChild(itemDiv);
+  });
+
+  const totalDiv = document.createElement('div');
+  totalDiv.className = 'carrinho-total';
+
+  // Verifica se total é um número antes de exibir
+  if (!isNaN(total)) {
+    totalDiv.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
+  } else {
+    totalDiv.innerHTML = `<strong>Total: R$ 0,00</strong>`;
+  }
+
+  carrinhoContainer.appendChild(totalDiv);
 }
