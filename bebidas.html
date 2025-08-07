@@ -13,11 +13,12 @@
   <div class="menu-icon" id="menu-toggle">&#9776;</div>
 
   <ul class="menu" id="nav-menu">
+     <li><a href="index.html">Inicio</a></li>
     <li><a href="pastel.html">Pastel</a></li>
     <li><a href="hamburguer.html">Hambúrguer</a></li>
     <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
     <li><a href="acai.html">Açai e Milk-Shake</a></li> 
-     <li><a href="index.html">Inicio</a></li>
+     <li><a href="pedido.html">Carrinho</a></li>
   </ul>
 
   <div class="title">Faça o seu pedido!</div>
@@ -33,22 +34,21 @@
 
     <div class="item-card">
       <span>Refrigerante lata - R$ 5,00</span>
-      <a href="pedido.html?item=Refrigerante%20lata&preco=5.00" class="pedido-button">Pedir</a>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('Refrigerante lata', 5.00)">Pedir</button>
     </div>
-
     <div class="item-card">
-      <span>Suco Maratá - R$ 8,00</span>
-      <a href="pedido.html?item=Suco%20Marat%C3%A1&preco=8.00" class="pedido-button">Pedir</a>
-    </div>
+  <span>Suco Maratá - R$ 8,00</span>
+  <button class="pedido-button" onclick="adicionarAoCarrinho(this)">Pedir</button>
+</div>
 
     <div class="item-card">
       <span>Água - R$ 3,00</span>
-      <a href="pedido.html?item=%C3%81gua&preco=3.00" class="pedido-button">Pedir</a>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('Agua', 3.00)">Pedir</button>
     </div>
 
     <div class="item-card">
       <span>IT Guaraná ou Limão - R$ 8,00</span>
-      <a href="pedido.html?item=IT%20Guaran%C3%A1%20ou%20Lim%C3%A3o&preco=8.00" class="pedido-button">Pedir</a>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('IT Guaraná ou Limão', 8.00)">Pedir</button>
     </div>
 
 <script src="scriptbebidas.js"></script>

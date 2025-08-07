@@ -5,47 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Finalizar Pedido</title>
   <link rel="stylesheet" href="stylepedido.css" />
-
 </head>
 <body>
+ <div class="menu-icon" id="menuBtn">&#9776;</div>
+ <ul class="menu" id="menu">  
+<li><a href="index.html">Inicio</a></li>
+  
+  <h1>Seu Pedido</h1>
+  <div id="produto"></div>
 
-  <h1>Finalizar Pedido</h1>
-  <p id="produto"></p>
+  <h2>Dados para entrega</h2>
+  <input type="text" id="nome" placeholder="Seu nome"><br><br>
+  <input type="text" id="endereco" placeholder="Endereço de entrega"><br><br>
 
-  <form id="pedido-form">
-    <label for="nome">Nome</label>
-    <input type="text" id="nome" required />
+  <label for="pagamento">Forma de pagamento:</label>
+  <select id="pagamento">
+    <option value="">Selecione</option>
+    <option value="pix">PIX</option>
+    <option value="credito">Cartão de Crédito</option>
+    <option value="debito">Cartão de Débito</option>
+  </select><br><br>
 
-    <label for="endereco">Endereço completo</label>
-    <textarea id="endereco" rows="3" required></textarea>
+  <div id="qrcode" class="hidden">
+    <p>Aqui estaria o QR Code do PIX</p>
+    <!-- <img src="seu_qrcode.png" alt="QR Code"> -->
+  </div>
 
-    <label for="pagamento">Forma de pagamento</label>
-    <select id="pagamento" required>
-      <option value="">Selecione</option>
-      <option value="pix">Pix</option>
-      <option value="debito">Débito</option>
-      <option value="credito">Crédito</option>
-    </select>
-
-    <div id="qrcode" class="hidden">
-      <h2>Escaneie o QR Code para pagar:</h2>
-      <img src="qrcode-pix-exemplo.png" alt="QR Code Pix" width="250" />
-      <br />
-      <button type="button" onclick="enviarParaCliente()">Pagamento Realizado (WhatsApp)</button>
-    </div>   
-
-
-    <div id="botao-vendedora" class="hidden">
-      <button type="button" onclick="enviarParaVendedora()">Enviar pedido para vendedora (WhatsApp)</button>
-    </div>
-  </form>
+  <button onclick="enviarParaCliente()">Enviar para Cliente (Visualizar)</button>
+  <button onclick="enviarParaVendedora()" id="botao-vendedora" class="hidden">Enviar para Vendedora</button>
 
   <script src="scriptpedido.js"></script>
-</body>
-</html>
-    <title>Document</title>
-</head>
-<body>
-    
 </body>
 </html>
