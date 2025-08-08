@@ -1,9 +1,9 @@
 .menu {
   display: none;
-  position: fixed; /* trocar de absolute para fixed */
-  top: 50px;       /* ajustar conforme a altura do botão */
+  position: fixed; /* pra ficar fixo no lugar */
+  top: 50px;       /* alinhado logo abaixo do botão */
   left: 15px;
-  background-color: var(--menu-bg);
+  background-color: var(--menu-bg); /* cor original */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -14,7 +14,6 @@
   animation: fadeIn 0.25s ease-in-out;
   width: 220px;
 }
-
 .menu.open {
   display: block;
 }
