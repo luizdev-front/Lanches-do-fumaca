@@ -71,4 +71,3 @@ document.addEventListener('click', (e) => {
 
 // 👉 Atualiza carrinho ao carregar a página
 window.addEventListener('DOMContentLoaded', atualizarCarrinho);
-`
