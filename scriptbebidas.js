@@ -1,4 +1,4 @@
-function atualizarCarrinho() 
+function atualizarCarrinho() {
   const carrinhoContainer = document.getElementById('carrinho');
   if (!carrinhoContainer) {
     console.error('Elemento com id="carrinho" não encontrado.');
@@ -6,7 +6,6 @@ function atualizarCarrinho()
   }
 
   const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
   carrinhoContainer.innerHTML = '';
 
   let total = 0;
@@ -28,34 +27,32 @@ function atualizarCarrinho()
 
   const totalDiv = document.createElement('div');
   totalDiv.className = 'carrinho-total';
+  totalDiv.innerHTML = <strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>;
+  carrinhoContainer.appendChild(totalDiv);
+}
 
-  // Verifica se total é um número antes de exibir
-  if (!isNaN(total)) {
-    totalDiv.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
-  } else {
-    totalDiv.innerHTML = `<strong>Total: R$ 0,00</strong>`;
-  }
+function removerDoCarrinho(index) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  atualizarCarrinho();
+}
 
-  carrinhoContainer.appendChild(total)
-const menuToggle = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
-
-menuToggle.addEventListener("click", (e) => {
-  e.stopPropagation();
-  navMenu.classList.toggle("open");
-});
-
+// Menu hambúrguer funcional
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
-menuToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-  menuToggle.classList.toggle('active');
+menuToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  navMenu.classList.toggle('open');
 });
 
 document.addEventListener('click', (e) => {
   if (!navMenu.contains(e.target) && e.target !== menuToggle) {
-    navMenu.classList.remove('active');
-    menuToggle.classList.remove('active');
+    navMenu.classList.remove('open');
   }
 });
+
+// Atualiza carrinho ao carregar a página
+window.addEventListener('DOMContentLoaded', atualizarCarrinho);
+`
