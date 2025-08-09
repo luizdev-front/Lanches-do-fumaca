@@ -1,3 +1,26 @@
+// 👉 Função para adicionar item ao carrinho
+function adicionarAoCarrinho(nome, preco) {
+  if (!nome || isNaN(preco)) {
+    console.error("Dados inválidos:", nome, preco);
+    return;
+  }
+
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.push({ nome, preco });
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert(${nome} foi adicionado ao carrinho!);
+  atualizarCarrinho(); // Atualiza visual após adicionar
+}
+
+// 👉 Função para remover item do carrinho
+function removerDoCarrinho(index) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  atualizarCarrinho();
+}
+
+// 👉 Função para atualizar visual do carrinho
 function atualizarCarrinho() {
   const carrinhoContainer = document.getElementById('carrinho');
   if (!carrinhoContainer) {
@@ -31,14 +54,7 @@ function atualizarCarrinho() {
   carrinhoContainer.appendChild(totalDiv);
 }
 
-function removerDoCarrinho(index) {
-  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-  carrinho.splice(index, 1);
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  atualizarCarrinho();
-}
-
-// Menu hambúrguer funcional
+// 👉 Menu hambúrguer funcional
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -53,6 +69,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Atualiza carrinho ao carregar a página
+// 👉 Atualiza carrinho ao carregar a página
 window.addEventListener('DOMContentLoaded', atualizarCarrinho);
 `
