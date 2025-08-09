@@ -100,7 +100,7 @@
       });
       mensagem += `\n*Total:* R$ ${total.toFixed(2)}\n*Endereço:* ${endereco}\n*Pagamento:* ${pagamento.toUpperCase()}`;
 
-      const numero = "5581999999999"; // Substitua com número real
+      const numero = "55 13988799046"; // Substitua com número real
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
       window.open(url, "_blank");
     }

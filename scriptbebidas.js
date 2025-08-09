@@ -1,4 +1,4 @@
-function atualizarCarrinho() {
+function atualizarCarrinho() 
   const carrinhoContainer = document.getElementById('carrinho');
   if (!carrinhoContainer) {
     console.error('Elemento com id="carrinho" não encontrado.');
@@ -36,8 +36,7 @@ function atualizarCarrinho() {
     totalDiv.innerHTML = `<strong>Total: R$ 0,00</strong>`;
   }
 
-  carrinhoContainer.appendChild(totalDiv);
-}
+  carrinhoContainer.appendChild(total)
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 
@@ -46,8 +45,17 @@ menuToggle.addEventListener("click", (e) => {
   navMenu.classList.toggle("open");
 });
 
-document.addEventListener("click", (e) => {
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  menuToggle.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
   if (!navMenu.contains(e.target) && e.target !== menuToggle) {
-    navMenu.classList.remove("open");
+    navMenu.classList.remove('active');
+    menuToggle.classList.remove('active');
   }
 });
