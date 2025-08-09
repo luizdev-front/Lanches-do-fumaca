@@ -31,26 +31,25 @@
 <section class="pasteis-section" id="bebidas">
   <h2 class="section-title">Cardápio de Bebidas</h2>
   <div class="pasteis-grid">
+<div class="item-card">
+  <span>Refrigerante lata - R$ 5,00</span>
+  <button class="pedido-button" onclick="adicionarAoCarrinho('Refrigerante lata', 5.00)">Pedir</button>
+</div>
 
-    <div class="item-card">
-      <span>Refrigerante lata - R$ 5,00</span>
-      <button class="pedido-button" onclick="adicionarAoCarrinho('Refrigerante lata', 5.00)">Pedir</button>
-    </div>
+<div class="item-card">
+  <span>Suco Maratá - R$ 8,00</span>
+  <button class="pedido-button" onclick="adicionarAoCarrinho('Suco Maratá', 8.00)">Pedir</button>
+</div>
 
-    <div class="item-card">
-      <span>Suco Maratá - R$ 8,00</span>
-      <button class="pedido-button" onclick="adicionarAoCarrinho('Suco Maratá', 8.00)">Pedir</button>
-    </div>
+<div class="item-card">
+  <span>Água - R$ 3,00</span>
+  <button class="pedido-button" onclick="adicionarAoCarrinho('Água', 3.00)">Pedir</button>
+</div>
 
-    <div class="item-card">
-      <span>Água - R$ 3,00</span>
-      <button class="pedido-button" onclick="adicionarAoCarrinho('Água', 3.00)">Pedir</button>
-    </div>
-
-    <div class="item-card">
-      <span>IT Guaraná ou Limão - R$ 8,00</span>
-      <button class="pedido-button" onclick="adicionarAoCarrinho('IT Guaraná ou Limão', 8.00)">Pedir</button>
-    </div>
+<div class="item-card">
+  <span>IT Guaraná ou Limão - R$ 8,00</span>
+  <button class="pedido-button" onclick="adicionarAoCarrinho('IT Guaraná ou Limão', 8.00)">Pedir</button>
+</div>
 
   </div>
 </section>
@@ -59,7 +58,14 @@
   <h2>Carrinho</h2>
   <div id="carrinho"></div>
 </section>
-
+<script>
+  function adicionarAoCarrinho(nome, preco) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.push({ nome, preco });
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    alert(`${nome} foi adicionado ao carrinho!`);
+  }
+</script>
 <script src="scriptbebidas.js"></script>
 </body>
 </html>
