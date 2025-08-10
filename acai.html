@@ -65,27 +65,7 @@
     <button id="adicionar-milkshake">Adicionar ao carrinho</button>
     <div>Preço estimado: R$ <span id="preco-milkshake">0.00</span></div>
   </div>
-<script>
-function finalizarPedido() {
-  // Busca o pedido salvo até agora (pode ter vindo de outro cardápio)
-  let pedidoExistente = JSON.parse(localStorage.getItem('pedido')) || {};
 
-  // Junta o pedido atual com o que já existe
-  Object.keys(pedido).forEach(id => {
-    if (pedidoExistente[id]) {
-      pedidoExistente[id] += pedido[id];
-    } else {
-      pedidoExistente[id] = pedido[id];
-    }
-  });
-
-  // Salva de volta
-  localStorage.setItem('pedido', JSON.stringify(pedidoExistente));
-
-  // Vai para a página de pedidos
-  window.location.href = 'pedidos.html';
-}
-</script>
   <script src="scriptacai.js"></script>
 </body>
 </html>
