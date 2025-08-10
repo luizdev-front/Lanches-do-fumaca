@@ -7,7 +7,7 @@ const pagamentoSelect = document.getElementById('pagamento');
 const qrcodeDiv = document.getElementById('qrcode');
 const botaoVendedora = document.getElementById('botao-vendedora');
 
-const chavePix = "12345678900"; // Coloque sua chave PIX aqui
+const chavePix = "48567777852"; // Coloque sua chave PIX aqui
 let qrcode = null;
 
 // Dados fixos dos produtos (mesmo do cardápio)
