@@ -1,4 +1,3 @@
-// 👉 Função para adicionar item ao carrinho
 function adicionarAoCarrinho(nome, preco) {
   if (!nome || isNaN(preco)) {
     console.error("Dados inválidos:", nome, preco);
@@ -6,13 +5,12 @@ function adicionarAoCarrinho(nome, preco) {
   }
 
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-  carrinho.push({ nome, preco });
+  carrinho.push({ nome: nome, preco: preco });
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert(${nome} foi adicionado ao carrinho!);
-  atualizarCarrinho(); // Atualiza visual após adicionar
+  alert(`${nome} foi adicionado ao carrinho!`);
+  atualizarCarrinho();
 }
 
-// 👉 Função para remover item do carrinho
 function removerDoCarrinho(index) {
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
   carrinho.splice(index, 1);
@@ -20,7 +18,6 @@ function removerDoCarrinho(index) {
   atualizarCarrinho();
 }
 
-// 👉 Função para atualizar visual do carrinho
 function atualizarCarrinho() {
   const carrinhoContainer = document.getElementById('carrinho');
   if (!carrinhoContainer) {
@@ -50,11 +47,10 @@ function atualizarCarrinho() {
 
   const totalDiv = document.createElement('div');
   totalDiv.className = 'carrinho-total';
-  totalDiv.innerHTML = <strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>;
+  totalDiv.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
   carrinhoContainer.appendChild(totalDiv);
 }
 
-// 👉 Menu hambúrguer funcional
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -69,5 +65,4 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// 👉 Atualiza carrinho ao carregar a página
 window.addEventListener('DOMContentLoaded', atualizarCarrinho);
