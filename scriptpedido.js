@@ -148,7 +148,7 @@ function enviarParaVendedora() {
   mensagem += `Total: R$ ${total.toFixed(2)}`;
 
   // Número da vendedora (exemplo)
-  const telefone = '5511999999999';
+  const telefone = '5513988799046';
 
   const url = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
