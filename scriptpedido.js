@@ -161,3 +161,4 @@ mostrarPedido();
 window.enviarParaCliente = enviarParaCliente;
 window.enviarParaVendedora = enviarParaVendedora;
 ;
+const pedido = JSON.parse(localStorage.getItem('pedido')) || {};
