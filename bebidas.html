@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -47,20 +47,29 @@
 </section>
 
 <script>
-  // Função para adicionar ao carrinho
   function adicionarAoCarrinho(nome, preco) {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome, preco });
+    if (!nome || isNaN(preco)) {
+      console.error("Dados inválidos:", nome, preco);
+      return;
+    }
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.push({ nome: nome, preco: preco });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${nome} foi adicionado ao carrinho!`);
     window.location.href = "pedido.html";
   }
 
-  // Script do menu hambúrguer
-  document.getElementById('menu-toggle').addEventListener('click', function() {
-    document.getElementById('nav-menu').classList.toggle('active');
+  document.getElementById('menu-toggle').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('nav-menu').classList.toggle('open');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!document.getElementById('nav-menu').contains(e.target) && e.target.id !== 'menu-toggle') {
+      document.getElementById('nav-menu').classList.remove('open');
+    }
   });
 </script>
 
 </body>
-</html>
+<
