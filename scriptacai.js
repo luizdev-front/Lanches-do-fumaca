@@ -1,4 +1,15 @@
-// ACAI
+MENU HAMBÚRGUER
+--------------------------- */
+const menuBtn = document.getElementById('menuBtn');
+const menu = document.getElementById('menu');
+
+menuBtn.addEventListener('click', () => {
+  menu.classList.toggle('open'); // usa .open do seu CSS
+});
+
+/* ---------------------------
+   AÇAÍ - cálculo já existente
+--------------------------- */
 const acaiTamanho = document.getElementById("acai-tamanho");
 const acaiNutella = document.getElementById("acai-extra-nutella");
 const acompanhamentosAcai = document.querySelectorAll(".acompanhamento-acai");
@@ -31,3 +42,19 @@ acaiNutella.addEventListener("change", calcularPrecoAcai);
 acompanhamentosAcai.forEach(cb => cb.addEventListener("change", calcularPrecoAcai));
 
 calcularPrecoAcai();
+
+/* ---------------------------
+   MILKSHAKE - preço fixo
+--------------------------- */
+const precoMilkshakeSpan = document.getElementById("preco-milkshake");
+const precoMilkshake = 15.00; // fixo
+
+// sempre mostra o preço ao carregar
+precoMilkshakeSpan.textContent = precoMilkshake.toFixed(2);
+
+document.getElementById("adicionar-milkshake").addEventListener("click", () => {
+  const saborSelecionado = document.querySelector('input[name="sabor"]:checked').value;
+  const item = `Milkshake ${saborSelecionado} 400 ml`;
+  window.location.href = `pedido.html?item=${encodeURIComponent(item)}&preco=${precoMilkshake.toFixed(2)}`;
+});
+</script>
