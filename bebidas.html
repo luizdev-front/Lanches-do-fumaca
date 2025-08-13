@@ -1,26 +1,24 @@
-<!DOCTYPE html>
+
+
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="stylebebidas.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <title>Pastelaria do Fumaça</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardápio de Bebidas</title>
+  <link rel="stylesheet" href="stylebebidas.css" />
 </head>
 <body>
 
 <header>
   <div class="menu-icon" id="menu-toggle">&#9776;</div>
-
   <ul class="menu" id="nav-menu">
-    <li><a href="index.html">Inicio</a></li>
+    <li><a href="index.html">Início</a></li>
     <li><a href="pastel.html">Pastel</a></li>
     <li><a href="hamburguer.html">Hambúrguer</a></li>
     <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
-    <li><a href="acai.html">Açai e Milk-Shake</a></li> 
+    <li><a href="acai.html">Açaí e Milk-Shake</a></li>
     <li><a href="pedido.html">Carrinho</a></li>
   </ul>
-
   <div class="title">Faça o seu pedido!</div>
   <div class="horario">
     <p>Aberto segunda a sexta 18:00 às 01:30</p>
@@ -31,46 +29,52 @@
 <section class="pasteis-section" id="bebidas">
   <h2 class="section-title">Cardápio de Bebidas</h2>
   <div class="pasteis-grid">
-<div class="item-card">
-  <span>Refrigerante lata - R$ 5,00</span>
-  <button class="pedido-button" onclick="adicionarAoCarrinho('Refrigerante lata', 5.00)">Pedir</button>
-</div>
+    <div class="item-card">
+      <span>Refrigerante lata - R$ 5,00</span>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('Refrigerante lata', 5.00)">Pedir</button>
+    </div>
 
-<div class="item-card">
-  <span>Suco Maratá - R$ 8,00</span>
-  <button class="pedido-button" onclick="adicionarAoCarrinho('Suco Maratá', 8.00)">Pedir</button>
-</div>
+    <div class="item-card">
+      <span>Suco Maratá - R$ 8,00</span>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('Suco Maratá', 8.00)">Pedir</button>
+    </div>
 
-<div class="item-card">
-  <span>Água - R$ 3,00</span>
-  <button class="pedido-button" onclick="adicionarAoCarrinho('Água', 3.00)">Pedir</button>
-</div>
+    <div class="item-card">
+      <span>Água - R$ 3,00</span>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('Água', 3.00)">Pedir</button>
+    </div>
 
-<div class="item-card">
-  <span>IT Guaraná ou Limão - R$ 8,00</span>
-  <button class="pedido-button" onclick="adicionarAoCarrinho('IT Guaraná ou Limão', 8.00)">Pedir</button>
-</div>
-
+    <div class="item-card">
+      <span>IT Guaraná ou Limão - R$ 8,00</span>
+      <button class="pedido-button" onclick="adicionarAoCarrinho('IT Guaraná ou Limão', 8.00)">Pedir</button>
+    </div>
   </div>
 </section>
 
-
-<section class="carrinho-section">
-  <h2>Carrinho</h2>
-  <div id="carrinho"></div>
-</section>
 <script>
   function adicionarAoCarrinho(nome, preco) {
+    if (!nome || isNaN(preco)) {
+      console.error("Dados inválidos:", nome, preco);
+      return;
+    }
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome, preco });
+    carrinho.push({ nome: nome, preco: preco });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${nome} foi adicionado ao carrinho!`);
+    window.location.href = "pedido.html";
   }
+
+  document.getElementById('menu-toggle').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('nav-menu').classList.toggle('open');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!document.getElementById('nav-menu').contains(e.target) && e.target.id !== 'menu-toggle') {
+      document.getElementById('nav-menu').classList.remove('open');
+    }
+  });
 </script>
 
-
-
-
-<script src="scriptbebidas.js"></script>
 </body>
-</html>
+<

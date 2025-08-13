@@ -1,4 +1,24 @@
-// Atualiza o carrinho
+
+function adicionarAoCarrinho(nome, preco) {
+  if (!nome || isNaN(preco)) {
+    console.error("Dados inválidos:", nome, preco);
+    return;
+  }
+
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.push({ nome: nome, preco: preco });
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert(`${nome} foi adicionado ao carrinho!`);
+  atualizarCarrinho();
+}
+
+function removerDoCarrinho(index) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  atualizarCarrinho();
+}
+
 function atualizarCarrinho() {
   const carrinhoContainer = document.getElementById('carrinho');
   if (!carrinhoContainer) {
@@ -6,7 +26,9 @@ function atualizarCarrinho() {
     return;
   }
 
-  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+
+
   carrinhoContainer.innerHTML = '';
 
   let total = 0;
@@ -32,6 +54,7 @@ function atualizarCarrinho() {
   carrinhoContainer.appendChild(totalDiv);
 }
 
+
 // Remove item do carrinho
 function removerDoCarrinho(index) {
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -40,22 +63,30 @@ function removerDoCarrinho(index) {
   atualizarCarrinho();
 }
 
+
+
 // Menu responsivo
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
 menuToggle.addEventListener('click', (e) => {
   e.stopPropagation();
+
   navMenu.classList.toggle('active');
   menuToggle.classList.toggle('active');
+
+  navMenu.classList.toggle('open')
 });
 
 document.addEventListener('click', (e) => {
   if (!navMenu.contains(e.target) && e.target !== menuToggle) {
-    navMenu.classList.remove('active');
-    menuToggle.classList.remove('active');
+    navMenu.classList.remove('open');
   }
 });
 
+
 // Atualiza o carrinho ao carregar a página
 document.addEventListener('DOMContentLoaded', atualizarCarrinho);
+
+window.addEventListener('DOMContentLoaded', atualizarCarrinho);
+

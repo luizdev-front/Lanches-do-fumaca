@@ -7,13 +7,16 @@
   <link rel="stylesheet" href="stylepedido.css" />
 </head>
 <body>
-  
-  <h1>Seu Pedido</h1>
+<h1>Seu Pedido</h1>
   <div id="produto"></div>
 
   <h2>Dados para entrega</h2>
   <input type="text" id="nome" placeholder="Seu nome"><br><br>
   <input type="text" id="endereco" placeholder="Endereço de entrega"><br><br>
+
+  <!-- Observações -->
+  <label for="observacoes">Observações:</label><br>
+  <textarea id="observacoes" rows="4" cols="50" placeholder="Digite aqui alguma observação sobre o pedido..."></textarea><br><br>
 
   <label for="pagamento">Forma de pagamento:</label>
   <select id="pagamento">
@@ -25,7 +28,6 @@
 
   <div id="qrcode" class="hidden">
     <p>Aqui estaria o QR Code do PIX</p>
-    <!-- <img src="seu_qrcode.png" alt="QR Code"> -->
   </div>
 
   <button onclick="enviarParaCliente()">Enviar para Cliente (Visualizar)</button>
