@@ -1,12 +1,12 @@
-function atualizarCarrinho() 
+// Atualiza o carrinho
+function atualizarCarrinho() {
   const carrinhoContainer = document.getElementById('carrinho');
   if (!carrinhoContainer) {
     console.error('Elemento com id="carrinho" não encontrado.');
     return;
   }
 
-  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
   carrinhoContainer.innerHTML = '';
 
   let total = 0;
@@ -28,27 +28,24 @@ function atualizarCarrinho()
 
   const totalDiv = document.createElement('div');
   totalDiv.className = 'carrinho-total';
+  totalDiv.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
+  carrinhoContainer.appendChild(totalDiv);
+}
 
-  // Verifica se total é um número antes de exibir
-  if (!isNaN(total)) {
-    totalDiv.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
-  } else {
-    totalDiv.innerHTML = `<strong>Total: R$ 0,00</strong>`;
-  }
+// Remove item do carrinho
+function removerDoCarrinho(index) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  atualizarCarrinho();
+}
 
-  carrinhoContainer.appendChild(total)
-const menuToggle = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
-
-menuToggle.addEventListener("click", (e) => {
-  e.stopPropagation();
-  navMenu.classList.toggle("open");
-});
-
+// Menu responsivo
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
-menuToggle.addEventListener('click', () => {
+menuToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
   navMenu.classList.toggle('active');
   menuToggle.classList.toggle('active');
 });
@@ -59,3 +56,6 @@ document.addEventListener('click', (e) => {
     menuToggle.classList.remove('active');
   }
 });
+
+// Atualiza o carrinho ao carregar a página
+document.addEventListener('DOMContentLoaded', atualizarCarrinho);

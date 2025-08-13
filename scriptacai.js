@@ -195,3 +195,29 @@ function atualizarPrecoMilkshake() {
 
   document.getElementById('preco-milkshake').textContent = preco.toFixed(2);
 }
+const precoBaseVitamina = 20.00;
+const vitaminaNutella = document.getElementById('vitamina-extra-nutella');
+const precoVitaminaSpan = document.getElementById('preco-vitamina');
+const btnAdicionarVitamina = document.getElementById('adicionar-vitamina');
+
+function atualizarPrecoVitamina() {
+  let preco = precoBaseVitamina;
+  if (vitaminaNutella.checked) preco += 7.00;
+  precoVitaminaSpan.textContent = preco.toFixed(2);
+}
+
+vitaminaNutella.addEventListener('change', atualizarPrecoVitamina);
+
+btnAdicionarVitamina.addEventListener('click', () => {
+  const item = {
+    produto: "Vitamina de Açaí 400 ml",
+    extraNutella: vitaminaNutella.checked,
+    preco: parseFloat(precoVitaminaSpan.textContent)
+  };
+
+  // Aqui você adapta para o seu carrinho
+  console.log("Item adicionado:", item);
+  alert("Vitamina de Açaí adicionada ao carrinho!");
+});
+
+atualizarPrecoVitamina();
