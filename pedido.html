@@ -5,16 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Finalizar Pedido</title>
   <link rel="stylesheet" href="stylepedido.css" />
+  <style>
+    .hidden { display: none; }
+    .item-carrinho { margin-bottom: 10px; }
+    .btn-remover { margin-left: 10px; }
+  </style>
 </head>
 <body>
-<h1>Seu Pedido</h1>
+  <h1>Seu Pedido</h1>
   <div id="produto"></div>
 
   <h2>Dados para entrega</h2>
   <input type="text" id="nome" placeholder="Seu nome"><br><br>
   <input type="text" id="endereco" placeholder="Endereço de entrega"><br><br>
 
-  <!-- Observações -->
   <label for="observacoes">Observações:</label><br>
   <textarea id="observacoes" rows="4" cols="50" placeholder="Digite aqui alguma observação sobre o pedido..."></textarea><br><br>
 
@@ -31,7 +35,7 @@
   </div>
 
   <button onclick="enviarParaCliente()">Enviar para Cliente (Visualizar)</button>
-  <button onclick="enviarParaVendedora()" id="botao-vendedora" class="hidden">Enviar para Vendedora</button>
+  <button onclick="finalizarPedido()" id="botao-vendedora" class="hidden">Enviar para Vendedora</button>
 
   <script src="scriptpedido.js"></script>
 </body>
