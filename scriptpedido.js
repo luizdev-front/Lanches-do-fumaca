@@ -6,6 +6,14 @@ const qrcodeDiv = document.getElementById('qrcode');
 const menuHamburguer = document.getElementById('menu-hamburguer');
 const menu = document.getElementById('menu');
 
+// Teste: adiciona itens no carrinho automaticamente
+if (!localStorage.getItem('carrinho')) {
+  localStorage.setItem('carrinho', JSON.stringify([
+    { nome: "X-Burger", preco: 12.50 },
+    { nome: "Coca-Cola", preco: 5.00 }
+  ]));
+}
+
 // Mostrar carrinho
 function mostrarCarrinho() {
   const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
