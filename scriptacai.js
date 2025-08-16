@@ -90,3 +90,80 @@ btnAdicionarVitamina.addEventListener('click', () => {
 
   window.location.href = `pedido.html?item=${encodeURIComponent(item)}&preco=${precoBaseVitamina.toFixed(2)}`;
 });
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ===== AÇAÍ =====
+  document.getElementById("adicionar-acai").addEventListener("click", () => {
+    const tamanhoSelect = document.getElementById("acai-tamanho");
+    const tamanho = tamanhoSelect.value;
+    const precoBase = parseFloat(tamanhoSelect.options[tamanhoSelect.selectedIndex].dataset.preco);
+
+    let adicionais = [];
+    document.querySelectorAll(".acompanhamento-acai:checked").forEach(chk => {
+      adicionais.push(chk.value);
+    });
+
+    let precoFinal = precoBase;
+
+    // Nutella extra
+    if (document.getElementById("acai-extra-nutella").checked) {
+      adicionais.push("Nutella");
+      precoFinal += 7.00;
+    }
+
+    const produto = {
+      nome: `Açaí ${tamanho}`,
+      adicionais: adicionais,
+      preco: precoFinal
+    };
+
+    adicionarAoCarrinho(produto);
+    alert(`Açaí adicionado ao carrinho! Total: R$ ${precoFinal.toFixed(2)}`);
+  });
+
+
+  // ===== MILKSHAKE =====
+  document.getElementById("adicionar-milkshake").addEventListener("click", () => {
+    const saborSelecionado = document.querySelector("input[name='sabor']:checked");
+    const sabor = saborSelecionado.value;
+    const preco = parseFloat(saborSelecionado.dataset.preco);
+
+    const produto = {
+      nome: `Milkshake 400ml - ${sabor}`,
+      adicionais: [],
+      preco: preco
+    };
+
+    adicionarAoCarrinho(produto);
+    alert(`Milkshake ${sabor} adicionado ao carrinho! Total: R$ ${preco.toFixed(2)}`);
+  });
+
+
+  // ===== VITAMINA =====
+  document.getElementById("adicionar-vitamina").addEventListener("click", () => {
+    const precoBase = 20.00;
+    let adicionais = [];
+
+    document.querySelectorAll(".extra:checked").forEach(chk => {
+      adicionais.push(chk.parentElement.textContent.trim());
+    });
+
+    const produto = {
+      nome: "Vitamina de Açaí 400ml",
+      adicionais: adicionais,
+      preco: precoBase
+    };
+
+    adicionarAoCarrinho(produto);
+    alert(`Vitamina adicionada ao carrinho! Total: R$ ${precoBase.toFixed(2)}`);
+  });
+
+
+  // ===== Função genérica para salvar no localStorage =====
+  function adicionarAoCarrinho(produto) {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    carrinho.push(produto);
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  }
+
+});
