@@ -52,7 +52,7 @@
   </div>
 
   <div id="milkshake-form">
-<<<<<<< HEAD
+
     <h2>Milkshake 400 ml</h2>
     <fieldset>
       <legend>Sabor:</legend>
@@ -65,23 +65,31 @@
   </div>
  <div id="vitamina-form">
   <h2>Vitamina de Açaí 400 ml - R$20,00</h2>
+  
+  <h3>Escolha seus adicionais:</h3>
+  <label>
+    <input type="checkbox" class="extra"> Banana
+  </label><br>
+  <label>
+    <input type="checkbox" class="extra"> Granola
+  </label><br>
+  <label>
+    <input type="checkbox" class="extra"> Leite Condensado
+  </label><br>
+  <label>
+    <input type="checkbox" class="extra"> Paçoca
+  </label><br>
+  <label>
+    <input type="checkbox" class="extra"> Leite
+  </label><br><br>
+  
   <button id="adicionar-vitamina">Adicionar ao carrinho</button>
-  <div>Preço estimado: R$ <span id="preco-vitamina">0.00</span></div>
-=======
-  <h2>Milkshake 400 ml - R$ 15,00</h2>
-  <fieldset>
-    <legend>Sabor:</legend>
-    <label><input type="radio" name="sabor" value="Morango" checked> Morango</label>
-    <label><input type="radio" name="sabor" value="Paçoca"> Paçoca</label>
-    <label><input type="radio" name="sabor" value="Ovomaltine"> Ovomaltine</label>
-  </fieldset>
-
-  <button id="adicionar-milkshake">Adicionar ao carrinho</button>
-  <div>Preço estimado: R$ <span id="preco-milkshake">15.00</span></div>
->>>>>>> 04daa388d3822a84cf5d1ad6fbf9404b60167f98
+  
+  <div>
+    Preço estimado: R$ <span id="preco-vitamina">20.00</span>
+  </div>
 </div>
-
-  <script src="scriptacai.js"></script>
+ <script src="scriptacai.js"></script>
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const menu = document.getElementById('menu');
@@ -89,6 +97,26 @@
     menuBtn.addEventListener('click', () => {
         menu.classList.toggle('active');
     });
+const precoBase = 20.00;
+  const precoSpan = document.getElementById("preco-vitamina");
+  const extras = document.querySelectorAll(".extra");
+  const botao = document.getElementById("adicionar-vitamina");
+
+  // Sempre mostra o preço fixo da vitamina
+  precoSpan.textContent = precoBase.toFixed(2);
+
+  botao.addEventListener("click", () => {
+    let escolhidos = [];
+    extras.forEach(extra => {
+      if (extra.checked) {
+        escolhidos.push(extra.parentElement.textContent.trim());
+      }
+    });
+
+    alert("Vitamina de Açaí adicionada ao carrinho!\nAdicionais: " 
+          + (escolhidos.length > 0 ? escolhidos.join(", ") : "Nenhum"));
+  });
+
   </script>
 </body>
 </html>
