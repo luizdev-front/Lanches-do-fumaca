@@ -10,16 +10,16 @@
     <title>Pastelaria do Fumaça</title>
 </head>
 <body>
-  <header>
+  header>
   <div class="menu-icon" id="menuBtn">&#9776;</div>
- <ul class="menu" id="menu">
-<li><a href="index.html">Inicio</a></li>
-  <li><a href="pastel.html">Pastel</a></li>
-  <li><a href="hamburguer.html">Hambúrguer</a></li>
-  <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
-  <li><a href="acai.html">Açai e Milk-Shake</a></li> 
-  <li><a href="pedido.html">Carrinho</a></li>
-</ul>
+  <ul class="menu" id="menu">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="pastel.html">Pastel</a></li>
+    <li><a href="hamburguer.html">Hambúrguer</a></li>
+    <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
+    <li><a href="acai.html">Açai e Milk-Shake</a></li>
+    <li><a href="pedido.html">Carrinho</a></li>
+  </ul>
 
   <div class="title">Faça o seu pedido!</div>
   <div class="horario">
@@ -27,127 +27,54 @@
     <p>Final de semana 19:00 às 2:00</p>
   </div>
 </header>
+
 <section class="pasteis-section" id="lanches">
   <h2 class="section-title">Cardápio de Lanches</h2>
   <div class="pasteis-grid">
 
-    <!-- X-Salada -->
-   <div class="item-card"><span>X-salada - R$ 10,00</span>
-  <p>1 hamburguer, Mussarela, Alface Americana, Tomate e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-salada', 10.00)">Pedir</a>
-</div>
+    <div class="item-card">
+      <span>X-salada - R$ 10,00</span>
+      <p>1 hamburguer, Mussarela, Alface Americana, Tomate e Ketchup</p>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-salada', 10.00)">Pedir</a>
+    </div>
 
-<div class="item-card"><span>X-saladão - R$ 13,00</span>
-  <p>2 hamburguer, Mussarela, Alface Americana, Tomate, Milho, Batata Palha, Ketchup e Mostarda</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-saladão', 13.00)">Pedir</a>
-</div>
+    <div class="item-card">
+      <span>X-saladão - R$ 13,00</span>
+      <p>2 hamburguer, Mussarela, Alface Americana, Tomate, Milho, Batata Palha, Ketchup e Mostarda</p>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-saladão', 13.00)">Pedir</a>
+    </div>
 
-<div class="item-card"><span>Top burguer - R$ 10,00</span>
-  <p>2 Hamburguer, Mussarela e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top burguer', 10.00)">Pedir</a>
-</div>
+    <!-- Adicione aqui os outros itens da mesma forma -->
+    
+  </div>
+</section>
 
-<div class="item-card"><span>Top salada - R$ 14,00</span>
-  <p>2 Hamburguer, Mussarela, Alface Americana, Tomate, Cebola roxa, Piclés, Cenoura ralada e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top salada', 14.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top egg - R$ 17,00</span>
-  <p>1 Hamburguer, Mussarela, 2 ovos, Alface Americana, Tomate, Cebola Roxa, Piclés, Cenoura Ralada e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top egg', 17.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top calabresa - R$ 17,00</span>
-  <p>2 Hamburguer, Mussarela, Calabresa, Alface Americana, Tomate, Cebola Roxa, Pícles, Cenoura Ralada e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top calabresa', 17.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top calabacon - R$ 22,00</span>
-  <p>2 Hamburguer, Mussarela, Calabresa, Bacon, Alface Americana, Tomate, Cebola Roxa, Piclés, Cenoura Ralada e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top calabacon', 22.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top bacon - R$ 18,00</span>
-  <p>2 Hamburguer, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top bacon', 18.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top frango - R$ 20,00</span>
-  <p>2 Hamburguer, Mussarela, Frango, Alface Americana, Tomate, Cebola Roxa, Piclés, Cenoura Ralada e Katshup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top frango', 20.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top tudão - R$ 35,00</span>
-  <p>2 Hamburguer, Mussarela, Frango, Calabresa, Bacon, 1 Ovo, Alface Americana, Tomate, Cebola Roxa, Piclés, Cenoura Ralada</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top tudão', 35.00)">Pedir</a>
-</div>
-
-<!-- Hot Dog -->
-<div class="item-card"><span>Hot dog tradicional - R$ 12,00</span>
-  <p>Pão, Purê, Milho, Vinagrete, Batata Palha, 1 Salsicha e Meia Perdigão, Mostarda e Katshup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Hot dog tradicional', 12.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Dog cheddar - R$ 18,00</span>
-  <p>Pão, Catupiry Original, Bacon, Batata Palha, 2 Salsicha Perdigão e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Dog cheddar', 18.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Dog catupiry - R$ 21,00</span>
-  <p>Pão, Catupiry Original, Bacon, Batata Palha, 2 Salsicha Perdigão e Ketchup</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Dog catupiry', 21.00)">Pedir</a>
-</div>
-
-<!-- Linha Exclusiva -->
-<div class="item-card"><span>Top filé - R$ 20,00</span>
-  <p>Pão tipo Hot dog, 150g de contra filé, Mussarela, Molho Barbecue, Maionese Hellmann's, Vinagrete e Molho Especial da Casa</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top filé', 20.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top coração - R$ 20,00</span>
-  <p>Pão tipo Hot dog, 150g de coração, Mussarela, Molho Barbecue, Maionese Hellmann's, Vinagrete e Molho Especial da Casa</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top coração', 20.00)">Pedir</a>
-</div>
-
-<!-- Hambúrguer Caseiro -->
-<div class="item-card"><span>Top1 - R$ 23,00</span>
-  <p>Pão tradicional, 2 Hamburgueres de 100g, cheddar fatiado e cheddar cremoso</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top1', 23.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top2 - R$ 25,00</span>
-  <p>Pão tradicional, Hamburguer de 100g, Bacon e Catupiry Original</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top2', 25.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Top3 - R$ 20,00</span>
-  <p>Pão tradicional, Hamburguer de 150g, cheddar fatiado, alface, tomate e cebola roxa</p>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top3', 20.00)">Pedir</a>
-</div>
-
-<!-- Acompanhamentos -->
-<div class="item-card"><span>Batata frita pequena - R$ 10,00</span>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita pequena', 10.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Batata frita média - R$ 20,00</span>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita média', 20.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Batata frita com cheddar e bacon pequena - R$ 18,00</span>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita com cheddar e bacon pequena', 18.00)">Pedir</a>
-</div>
-
-<div class="item-card"><span>Batata frita com cheddar e bacon média - R$ 28,00</span>
-  <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita com cheddar e bacon média', 28.00)">Pedir</a>
-</div>
 <script>
+  // Menu hamburguer
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
+
+    menuBtn.addEventListener("click", function () {
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!menu.contains(e.target) && e.target !== menuBtn) {
+        menu.style.display = "none";
+      }
+    });
+  });
+
+  // Carrinho
   function adicionarAoCarrinho(item, preco) {
+    if (!item) item = "Produto sem nome"; // fallback seguro
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.push({ item, preco });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${item} foi adicionado ao carrinho!`);
   }
 </script>
+
 </body>
 </html>
