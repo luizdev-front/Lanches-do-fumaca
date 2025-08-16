@@ -4,14 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pagamentoSelect = document.getElementById('pagamento');
   const qrcodeDiv = document.getElementById('qrcode');
 
-  // Teste: adicionar itens automaticamente se carrinho estiver vazio
-  if (!localStorage.getItem('carrinho')) {
-    localStorage.setItem('carrinho', JSON.stringify([
-      { nome: "X-Burger", preco: 12.50 },
-      { nome: "Coca-Cola", preco: 5.00 },
-      { nome: "Batata Frita", preco: 7.00 },
-      { nome: "Suco de Laranja", preco: 6.00 }
-    ]));
+  // 👉 Função para adicionar produto ao carrinho
+  window.adicionarAoCarrinho = function (produto) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.push(produto);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    mostrarCarrinho();
   }
 
   // Mostrar carrinho
