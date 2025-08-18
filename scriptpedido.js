@@ -93,3 +93,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mostrarCarrinho();
 });
+// Finalizar pedido e enviar para WhatsApp
+window.finalizarPedido = function() {
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  if (carrinho.length === 0) {
+    alert('Seu pedido está vazio!');
+    return;
+  }
+
+  // Monta mensagem do pedido
+  let mensagem = "📦 *Novo Pedido*\n\n";
+  let total = 0;
+  carrinho.forEach(item => {
+    const nome = item.nome || "Produto sem nome";
+    const preco = item.preco || 0;
+    mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
+    total += preco;
+  });
+  mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
+  mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
+  mensagem += `\nPor favor, confirme meu pedido. ✅`;
+
+  // Salva no histórico (opcional)
+  const novoPedido = {
+    itens: carrinho,
+    data: new Date().toLocaleString(),
+    status: "Aguardando"
+  };
+  const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+  pedidos.push(novoPedido);
+  localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+  // Limpa carrinho
+  localStorage.removeItem('carrinho');
+
+  // Envia para WhatsApp
+  const numero = "5513988799046"; 
+  const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+  window.open(link, "_blank");
+
+  // Atualiza a página
+  location.reload();
+}
