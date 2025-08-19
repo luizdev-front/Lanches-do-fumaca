@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="scripthamburguer.js"></script>
-     <link rel="stylesheet" href="stylehamburguer.css" class="rel">
+    <script src="scripthamburguer.js" defer></script>
+    <link rel="stylesheet" href="stylehamburguer.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
     <title>Pastelaria do Fumaça</title>
 </head>
 <body>
-  <header>
+<header>
   <div class="menu-icon" id="menuBtn">&#9776;</div>
   <ul class="menu" id="menu">
     <li><a href="index.html">Início</a></li>
@@ -32,170 +31,90 @@
   <h2 class="section-title">Cardápio de Lanches</h2>
   <div class="pasteis-grid">
 
-    <!-- X-Salada -->
+    <!-- Hambúrgueres -->
     <div class="item-card">
       <span>X-salada - R$ 10,00</span>
       <p>1 hambúrguer, Mussarela, Alface Americana, Tomate e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-salada', 10.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-salada', 10.00, event)">Pedir</a>
     </div>
 
-    <!-- X-Saladão -->
     <div class="item-card">
       <span>X-saladão - R$ 13,00</span>
       <p>2 hambúrgueres, Mussarela, Alface Americana, Tomate, Milho, Batata Palha, Ketchup e Mostarda</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-saladão', 13.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-saladão', 13.00, event)">Pedir</a>
     </div>
 
-    <!-- Top Burguer -->
     <div class="item-card">
       <span>Top Burguer - R$ 10,00</span>
       <p>2 hambúrgueres, Mussarela e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Burguer', 10.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Burguer', 10.00, event)">Pedir</a>
     </div>
 
-    <!-- Top Salada -->
     <div class="item-card">
       <span>Top Salada - R$ 14,00</span>
       <p>2 hambúrgueres, Mussarela, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Salada', 14.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Salada', 14.00, event)">Pedir</a>
     </div>
 
-    <!-- Top Egg -->
     <div class="item-card">
       <span>Top Egg - R$ 17,00</span>
       <p>1 hambúrguer, Mussarela, 2 Ovos, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Egg', 17.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Egg', 17.00, event)">Pedir</a>
     </div>
 
-    <!-- Top Calabresa -->
     <div class="item-card">
-      <span>Top Calabresa - R$ 17,00</span>
-      <p>2 hambúrgueres, Mussarela, Calabresa, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Calabresa', 17.00)">Pedir</a>
+      <span>X-Egg - R$ 15,00</span>
+      <p>1 hambúrguer, Mussarela, Ovo e Ketchup</p>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-Egg', 15.00, event)">Pedir</a>
     </div>
 
-    <!-- Top Calabacon -->
     <div class="item-card">
-      <span>Top Calabacon - R$ 22,00</span>
-      <p>2 hambúrgueres, Mussarela, Calabresa, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Calabacon', 22.00)">Pedir</a>
+      <span>X-Bacon - R$ 16,00</span>
+      <p>1 hambúrguer, Mussarela, Bacon e Ketchup</p>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-Bacon', 16.00, event)">Pedir</a>
     </div>
 
-    <!-- Top Bacon -->
     <div class="item-card">
-      <span>Top Bacon - R$ 18,00</span>
-      <p>2 hambúrgueres, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Bacon', 18.00)">Pedir</a>
-    </div>
-
-    <!-- Top Frango -->
-    <div class="item-card">
-      <span>Top Frango - R$ 20,00</span>
-      <p>2 hambúrgueres, Mussarela, Frango, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Frango', 20.00)">Pedir</a>
-    </div>
-
-    <!-- Top Tudão -->
-    <div class="item-card">
-      <span>Top Tudão - R$ 35,00</span>
-      <p>2 hambúrgueres, Mussarela, Frango, Calabresa, Bacon, 1 Ovo, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Tudão', 35.00)">Pedir</a>
-    </div>
-
-    <!-- Hot Dog Tradicional -->
-    <div class="item-card">
-      <span>Hot Dog Tradicional - R$ 12,00</span>
-      <p>Pão, Purê, Milho, Vinagrete, Batata Palha, 1 Salsicha e Meia Perdigão, Mostarda e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Hot Dog Tradicional', 12.00)">Pedir</a>
-    </div>
-
-    <!-- Dog Cheddar -->
-    <div class="item-card">
-      <span>Dog Cheddar - R$ 18,00</span>
-      <p>Pão Cheddar, Bacon, Batata Palha, 2 Salsichas Perdigão e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Dog Cheddar', 18.00)">Pedir</a>
-    </div>
-
-    <!-- Dog Catupiry -->
-    <div class="item-card">
-      <span>Dog Catupiry - R$ 21,00</span>
-      <p>Pão Catupiry Original, Bacon, Batata Palha, 2 Salsichas Perdigão e Ketchup</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Dog Catupiry', 21.00)">Pedir</a>
-    </div>
-
-    <!-- Top Filé -->
-    <div class="item-card">
-      <span>Top Filé - R$ 20,00</span>
-      <p>Pão tipo Hot Dog, 150g de Contra Filé, Mussarela, Molho Barbecue, Maionese Hellmann's, Vinagrete e Molho Especial da Casa</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Filé', 20.00)">Pedir</a>
-    </div>
-
-    <!-- Top Coração -->
-    <div class="item-card">
-      <span>Top Coração - R$ 20,00</span>
-      <p>Pão tipo Hot Dog, 150g de Coração, Mussarela, Molho Barbecue, Maionese Hellmann's, Vinagrete e Molho Especial da Casa</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Top Coração', 20.00)">Pedir</a>
-    </div>
-
-    <!-- Hambúrguer Caseiro TOP1 -->
-    <div class="item-card">
-      <span>Hambúrguer Caseiro TOP1 - R$ 23,00</span>
-      <p>Pão tradicional, 2 hambúrgueres de 100g, cheddar cremoso</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Hambúrguer Caseiro TOP1', 23.00)">Pedir</a>
-    </div>
-
-    <!-- Hambúrguer Caseiro TOP2 -->
-    <div class="item-card">
-      <span>Hambúrguer Caseiro TOP2 - R$ 25,00</span>
-      <p>Pão tradicional, 1 hambúrguer de 100g, bacon e catupiry original</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Hambúrguer Caseiro TOP2', 25.00)">Pedir</a>
-    </div>
-
-    <!-- Hambúrguer Caseiro TOP3 -->
-    <div class="item-card">
-      <span>Hambúrguer Caseiro TOP3 - R$ 20,00</span>
-      <p>Pão tradicional, 1 hambúrguer de 150g, cheddar, alface, tomate e cebola roxa</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Hambúrguer Caseiro TOP3', 20.00)">Pedir</a>
+      <span>X-Tudo - R$ 22,00</span>
+      <p>2 hambúrgueres, Mussarela, Alface, Tomate, Bacon, Ovo, Milho, Batata Palha e Ketchup</p>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('X-Tudo', 22.00, event)">Pedir</a>
     </div>
 
   </div>
 </section>
+
 <section class="pasteis-section" id="acompanhamentos">
   <h2 class="section-title">Acompanhamentos</h2>
   <div class="pasteis-grid">
 
-    <!-- Batata Frita Pequena -->
     <div class="item-card">
       <span>Batata frita pequena - R$ 10,00</span>
       <p>Porção pequena de batata frita crocante</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita pequena', 10.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita pequena', 10.00, event)">Pedir</a>
     </div>
 
-    <!-- Batata Frita Média -->
     <div class="item-card">
       <span>Batata frita média - R$ 20,00</span>
       <p>Porção média de batata frita crocante</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita média', 20.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita média', 20.00, event)">Pedir</a>
     </div>
 
-    <!-- Batata Frita com Cheddar e Bacon Pequena -->
     <div class="item-card">
       <span>Batata frita com cheddar e bacon (pequena) - R$ 18,00</span>
       <p>Porção pequena de batata frita com cheddar cremoso e bacon crocante</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita com cheddar e bacon (pequena)', 18.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita com cheddar e bacon (pequena)', 18.00, event)">Pedir</a>
     </div>
 
-    <!-- Batata Frita com Cheddar e Bacon Média -->
     <div class="item-card">
       <span>Batata frita com cheddar e bacon (média) - R$ 28,00</span>
       <p>Porção média de batata frita com cheddar cremoso e bacon crocante</p>
-      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita com cheddar e bacon (média)', 28.00)">Pedir</a>
+      <a href="#" class="pedido-button" onclick="adicionarAoCarrinho('Batata frita com cheddar e bacon (média)', 28.00, event)">Pedir</a>
     </div>
 
   </div>
 </section>
+
 <script>
-  // Menu hamburguer
   document.addEventListener("DOMContentLoaded", function () {
     const menuBtn = document.getElementById("menuBtn");
     const menu = document.getElementById("menu");
@@ -211,15 +130,14 @@
     });
   });
 
-  // Carrinho
-  function adicionarAoCarrinho(item, preco) {
-    if (!item) item = "Produto sem nome"; // fallback seguro
+  function adicionarAoCarrinho(item, preco, event) {
+    if (event) event.preventDefault();
+    if (!item) item = "Produto sem nome";
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.push({ item, preco });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${item} foi adicionado ao carrinho!`);
   }
 </script>
-
 </body>
 </html>
