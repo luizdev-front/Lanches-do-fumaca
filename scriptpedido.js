@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pagamentoSelect = document.getElementById('pagamento');
   const qrcodeDiv = document.getElementById('qrcode');
 
-  // 👉 Função para adicionar produto ao carrinho
+ 
   window.adicionarAoCarrinho = function (produto) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.push(produto);
