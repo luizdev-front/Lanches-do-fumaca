@@ -36,7 +36,23 @@
 
   <button onclick="enviarParaCliente()">Enviar</button>
   <button onclick="finalizarPedido()" id="botao-vendedora" class="hidden">Enviar para Vendedora</button>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  const lista = document.getElementById("lista-carrinho");
 
+  if (carrinho.length === 0) {
+    lista.innerHTML = "<p>Seu carrinho está vazio.</p>";
+    return;
+  }
+
+  carrinho.forEach(produto => {
+    const item = document.createElement("li");
+    item.textContent = `${produto.item} - R$ ${produto.preco.toFixed(2)}`;
+    lista.appendChild(item);
+  });
+});
+</script>
   <script src="scriptpedido.js"></script>
 </body>
 </html>
