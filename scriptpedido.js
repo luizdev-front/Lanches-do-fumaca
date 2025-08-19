@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarCarrinho();
   }
 
-  // Mostrar carrinho
+  
   function mostrarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     produtoDiv.innerHTML = '';
