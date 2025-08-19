@@ -24,3 +24,16 @@ function adicionarAoCarrinho(item, preco, event) {
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert(`${item} foi adicionado ao carrinho!`);
 }
+document.querySelectorAll('.pedido-button').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const item = btn.dataset.item || "Produto sem nome";
+    const preco = parseFloat(btn.dataset.preco) || 0;
+    
+    // Adiciona ao carrinho
+    adicionarAoCarrinho(item, preco);
+    
+    // Redireciona para a página do carrinho
+    window.location.href = "pedido.html"; 
+  });
+});
