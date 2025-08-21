@@ -81,16 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Monta mensagem do pedido
-    let mensagem = "📦 *Novo Pedido*\n\n";
-    let total = 0;
-    carrinho.forEach(item => {
-      const nome = item.nome || "Produto sem nome";
-      const preco = item.preco || 0;
-      mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
-      total += preco;
-    });
-    mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
+   // Monta mensagem do pedido
+let mensagem = "📦 *Novo Pedido*\n\n";
+let total = 0;
+carrinho.forEach(item => {
+  // Normaliza para evitar undefined
+  const nome = item.nome || item.titulo || item.descricao || "Produto sem nome";
+  const preco = item.preco || item.valor || 0;
+
+  mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
+  total += preco;
+});
+mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
     mensagem += `\nPor favor, confirme meu pedido. ✅`;
 
