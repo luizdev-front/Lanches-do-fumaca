@@ -1,42 +1,52 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const menuBtn = document.getElementById("menuBtn");
   const menu = document.getElementById("menu");
 
   // Alterna menu
-  menuBtn.addEventListener("click", function () {
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  menuBtn.addEventListener("click", () => {
+    menu.classList.toggle("show");
   });
 
   // Fecha o menu se clicar fora
-  document.addEventListener("click", function (e) {
+  document.addEventListener("click", (e) => {
     if (!menu.contains(e.target) && e.target !== menuBtn) {
-      menu.style.display = "none";
+      menu.classList.remove("show");
     }
   });
 
-  // Função para adicionar ao carrinho (padronizado com "nome" e "preco")
+  // Função para adicionar ao carrinho
   function adicionarAoCarrinho(item, preco) {
-    if (!item) item = "Produto sem nome";
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome: item, preco }); // <<< aqui corrige o problema
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    alert(`${item} foi adicionado ao carrinho!`);
+    if (!item) return; // se não houver nome, não adiciona
+
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    carrinho.push({ nome: item, preco });
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    // Exibe uma notificação temporária em vez de alert
+    const notif = document.createElement("div");
+    notif.className = "notificacao";
+    notif.innerText = `${item} foi adicionado ao carrinho!`;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 2000);
   }
 
   // Eventos nos botões de pedido
-  document.querySelectorAll('.pedido-button').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  document.querySelectorAll(".pedido-button").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
-      const button = e.currentTarget; // botão clicado
-      const item = button.dataset.item || "Produto sem nome";
+
+      const button = e.currentTarget;
+      const item = button.dataset.item?.trim();
       const preco = parseFloat(button.dataset.preco) || 0;
 
-      // Adiciona ao carrinho
+      if (!item) return; // não adiciona produto sem nome
+
       adicionarAoCarrinho(item, preco);
 
-      // Redireciona para a página do carrinho
-      window.location.href = "pedido.html"; 
+      // Redireciona após 500ms para ver a notificação
+      setTimeout(() => {
+        window.location.href = "pedido.html";
+      }, 500);
     });
   });
 });
