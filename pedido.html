@@ -47,10 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   carrinho.forEach(produto => {
-    const item = document.createElement("li");
-    item.textContent = `${produto.item} - R$ ${produto.preco.toFixed(2)}`;
-    lista.appendChild(item);
-  });
+  const item = document.createElement("li");
+  item.textContent = `${produto.nome} - R$ ${produto.preco.toFixed(2)}`;
+  lista.appendChild(item);
+});
 });
 </script>
   <script src="scriptpedido.js"></script>
