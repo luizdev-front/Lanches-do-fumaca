@@ -1,4 +1,5 @@
- document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function () {
   const menuBtn = document.getElementById("menuBtn");
   const menu = document.getElementById("menu");
 
@@ -14,11 +15,11 @@
     }
   });
 
-  // Função para adicionar ao carrinho
+  // Função para adicionar ao carrinho (padronizado com "nome" e "preco")
   function adicionarAoCarrinho(item, preco) {
     if (!item) item = "Produto sem nome";
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ item, preco });
+    carrinho.push({ nome: item, preco }); // <<< aqui corrige o problema
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${item} foi adicionado ao carrinho!`);
   }
