@@ -4,20 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const pagamentoSelect = document.getElementById('pagamento');
   const qrcodeDiv = document.getElementById('qrcode');
 
-  // Função para adicionar produto ao carrinho (padronizando nome e preco)
-  window.adicionarAoCarrinho = function (produto) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-    // Normaliza o produto antes de salvar
-    carrinho.push({
-      nome: produto.nome || produto.titulo || produto.descricao || "Produto sem nome",
-      preco: produto.preco || produto.valor || 0
-    });
-
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    mostrarCarrinho();
-  }
-
   function mostrarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     produtoDiv.innerHTML = '';
@@ -35,9 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const nome = item.nome || "Produto sem nome";
       const preco = item.preco || 0;
+      const adicionais = item.adicionais?.length ? ` + ${item.adicionais.join(", ")}` : "";
 
       const p = document.createElement('span');
-      p.textContent = `${nome} - R$ ${preco.toFixed(2)}`;
+      p.textContent = `${nome}${adicionais} - R$ ${preco.toFixed(2)}`;
 
       const btnRemover = document.createElement('button');
       btnRemover.textContent = "Remover";
@@ -60,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     botaoVendedora.classList.remove('hidden');
   }
 
-  // Remover item
   function removerItem(index) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.splice(index, 1);
@@ -68,12 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarCarrinho();
   }
 
-  // Mostrar QR Code se PIX
   pagamentoSelect.addEventListener('change', () => {
     qrcodeDiv.classList.toggle('hidden', pagamentoSelect.value !== 'pix');
   });
 
-  // Finalizar pedido e enviar para WhatsApp
   window.finalizarPedido = function() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     if (carrinho.length === 0) {
@@ -81,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Dados do cliente
     const nomeCliente = document.getElementById('nome').value.trim();
     const enderecoCliente = document.getElementById('endereco').value.trim();
     const observacoes = document.getElementById('observacoes').value.trim();
@@ -92,13 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Monta mensagem do pedido
     let mensagem = "📦 *Novo Pedido*\n\n";
     let total = 0;
     carrinho.forEach(item => {
       const nome = item.nome || "Produto sem nome";
       const preco = item.preco || 0;
-      mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
+      const adicionais = item.adicionais?.length ? ` + ${item.adicionais.join(", ")}` : "";
+      mensagem += `• ${nome}${adicionais} - R$ ${preco.toFixed(2)}\n`;
       total += preco;
     });
 
@@ -112,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
     mensagem += `\nPor favor, confirme meu pedido. ✅`;
 
-    // Salva no histórico
     const novoPedido = {
       itens: carrinho,
       cliente: nomeCliente,
@@ -126,15 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
     pedidos.push(novoPedido);
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
 
-    // Limpa carrinho
     localStorage.removeItem('carrinho');
 
-    // Envia para WhatsApp
     const numero = "5513988799046"; 
     const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
     window.open(link, "_blank");
 
-    // Atualiza a página
     location.reload();
   }
 
