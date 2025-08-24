@@ -81,24 +81,44 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-   // Monta mensagem do pedido
-let mensagem = "📦 *Novo Pedido*\n\n";
-let total = 0;
-carrinho.forEach(item => {
-  // Normaliza para evitar undefined
-  const nome = item.nome || item.titulo || item.descricao || "Produto sem nome";
-  const preco = item.preco || item.valor || 0;
+    // Dados do cliente
+    const nomeCliente = document.getElementById('nome').value.trim();
+    const enderecoCliente = document.getElementById('endereco').value.trim();
+    const observacoes = document.getElementById('observacoes').value.trim();
+    const formaPagamento = document.getElementById('pagamento').value;
 
-  mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
-  total += preco;
-});
-mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
+    if (!nomeCliente || !enderecoCliente || !formaPagamento) {
+      alert("Preencha nome, endereço e forma de pagamento!");
+      return;
+    }
+
+    // Monta mensagem do pedido
+    let mensagem = "📦 *Novo Pedido*\n\n";
+    let total = 0;
+    carrinho.forEach(item => {
+      const nome = item.nome || "Produto sem nome";
+      const preco = item.preco || 0;
+      mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
+      total += preco;
+    });
+
+    mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
+    mensagem += `👤 *Cliente:* ${nomeCliente}\n`;
+    mensagem += `🏠 *Endereço:* ${enderecoCliente}\n`;
+    if (observacoes) {
+      mensagem += `📝 *Observações:* ${observacoes}\n`;
+    }
+    mensagem += `💳 *Pagamento:* ${formaPagamento.toUpperCase()}\n`;
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
     mensagem += `\nPor favor, confirme meu pedido. ✅`;
 
     // Salva no histórico
     const novoPedido = {
       itens: carrinho,
+      cliente: nomeCliente,
+      endereco: enderecoCliente,
+      observacoes: observacoes,
+      pagamento: formaPagamento,
       data: new Date().toLocaleString(),
       status: "Aguardando"
     };
