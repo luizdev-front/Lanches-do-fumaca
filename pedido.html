@@ -52,6 +52,48 @@ document.addEventListener("DOMContentLoaded", function () {
   lista.appendChild(item);
 });
 });
+  function enviarParaCliente() {
+  const nome = document.getElementById('nome').value;
+  const endereco = document.getElementById('endereco').value;
+  const observacoes = document.getElementById('observacoes').value;
+  const formaPagamento = document.getElementById('pagamento').value;
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+  if (!nome || !endereco || !formaPagamento || carrinho.length === 0) {
+    alert('Preencha todos os campos e adicione produtos ao carrinho.');
+    return;
+  }
+
+  const valorTotal = carrinho.reduce((total, item) => total + item.preco, 0);
+
+  fetch('https://seu-projeto.vercel.app/api/create-pix', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      cliente: nome,
+      endereco: endereco,
+      observacoes: observacoes,
+      pagamento: formaPagamento,
+      valor: valorTotal,
+      itens: carrinho
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    if (formaPagamento === 'pix') {
+      document.getElementById('qrcode').classList.remove('hidden');
+      // Aqui você pode exibir o QR Code real, se sua API retornar um link ou imagem
+    }
+    alert('Pedido enviado com sucesso!');
+  })
+  .catch(err => {
+    console.error('Erro ao enviar pedido:', err);
+    alert('Falha ao enviar pedido.');
+  });
+  }
 </script>
   <script src="scriptpedido.js"></script>
 </body>
