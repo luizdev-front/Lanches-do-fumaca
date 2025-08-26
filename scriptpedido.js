@@ -131,12 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const numero = "5513988799046"; 
-    const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-    window.open(link, "_blank");
+   const numero = "5513988799046"; 
+const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+window.open(link, "_blank");
 
-    location.reload();
-  };
+if (formaPagamento !== 'pix') {
+  localStorage.removeItem('carrinho');
+  location.reload();
+}
 
   mostrarCarrinho();
 });
