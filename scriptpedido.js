@@ -111,22 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('carrinho');
 
     if (formaPagamento === 'pix') {
-      fetch(`/api/create-pix?amount=${total.toFixed(2)}&name=${encodeURIComponent(nomeCliente)}&message=${encodeURIComponent('Pedido via site')}`)
-        .then(res => res.json())
-        .then(data => {
-          const img = document.createElement('img');
-          img.src = data.qrCode;
-          img.alt = 'QR Code Pix';
-          img.style.width = '200px';
-          img.style.marginTop = '10px';
-          qrcodeDiv.innerHTML = '';
-          qrcodeDiv.appendChild(img);
-        })
-        .catch(err => {
-          console.error('Erro ao gerar QR Code:', err);
-          qrcodeDiv.textContent = 'Erro ao gerar QR Code Pix.';
-        });
-    }
+     fetch(`https://lanchonete-pix-backend.vercel.app/api/create-pix?amount=${total.toFixed(2)}&name=${encodeURIComponent(nomeCliente)}&message=${encodeURIComponent('Pedido via site')}`)
+  .then(res => res.json())
+  .then(data => {
+    const img = document.createElement('img');
+    img.src = data.qrCode;
+    img.alt = 'QR Code Pix';
+    img.style.width = '200px';
+    img.style.marginTop = '10px';
+    qrcodeDiv.innerHTML = '';
+    qrcodeDiv.appendChild(img);
+  })
+  .catch(err => {
+    console.error('Erro ao gerar QR Code:', err);
+    qrcodeDiv.textContent = 'Erro ao gerar QR Code Pix.';
+  });
 
     const numero = "5513988799046"; 
     const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
