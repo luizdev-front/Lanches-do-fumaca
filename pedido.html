@@ -93,12 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error('Erro ao enviar pedido:', err);
     alert('Falha ao enviar pedido.');
   });
-  }const qrDiv = document.getElementById('qrcode');
-qrDiv.innerHTML = `
-  <p>QR Code de teste:</p>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?data=PIX+TESTE&size=200x200" alt="QR Code de teste" />
-`;
-qrDiv.classList.remove('hidden');
+  }
 </script>
   <script src="scriptpedido.js"></script>
 </body>
