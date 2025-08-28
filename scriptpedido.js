@@ -29,9 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const btnRemover = document.createElement('button');
       btnRemover.textContent = "Remover";
       btnRemover.classList.add('btn-remover');
-      btnRemover.onclick = () => {
-        removerItem(index);
-      };
+      btnRemover.onclick = () => removerItem(index);
 
       itemDiv.appendChild(p);
       itemDiv.appendChild(btnRemover);
@@ -119,9 +117,32 @@ document.addEventListener('DOMContentLoaded', () => {
           img.alt = 'QR Code Pix';
           img.style.width = '200px';
           img.style.marginTop = '10px';
+
           qrcodeDiv.classList.remove('hidden');
-          qrcodeDiv.innerHTML = `<p>Escaneie o QR Code para pagar via Pix:</p>`;
+          qrcodeDiv.innerHTML = `
+            <p><strong>Valor do pedido:</strong> R$ ${total.toFixed(2)}</p>
+            <p>Escaneie o QR Code abaixo para pagar via Pix:</p>
+          `;
           qrcodeDiv.appendChild(img);
+
+          // Se sua API retornar o código Pix como texto (Pix Copia e Cola)
+          if (data.pixCode) {
+            const textarea = document.createElement('textarea');
+            textarea.value = data.pixCode;
+            textarea.readOnly = true;
+            textarea.style.width = '100%';
+            textarea.style.marginTop = '10px';
+            qrcodeDiv.appendChild(textarea);
+
+            const btnCopiar = document.createElement('button');
+            btnCopiar.textContent = 'Copiar código Pix';
+            btnCopiar.style.marginTop = '5px';
+            btnCopiar.onclick = () => {
+              navigator.clipboard.writeText(data.pixCode);
+              alert('Código Pix copiado!');
+            };
+            qrcodeDiv.appendChild(btnCopiar);
+          }
         })
         .catch(err => {
           console.error('Erro ao gerar QR Code:', err);
