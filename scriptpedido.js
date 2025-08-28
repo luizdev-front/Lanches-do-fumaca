@@ -142,3 +142,6 @@ if (formaPagamento !== 'pix') {
 
   mostrarCarrinho();
 });
+const img = document.createElement('img');
+img.src = resposta.qrCode; // onde 'resposta' é o JSON retornado da API
+document.body.appendChild(img);
