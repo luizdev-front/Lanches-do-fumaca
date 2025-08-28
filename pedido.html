@@ -14,7 +14,8 @@
 <body>
   <h1>Seu Pedido</h1>
   <div id="produto"></div>
-<ul id="lista-carrinho"></ul>
+  <ul id="lista-carrinho"></ul>
+
   <h2>Dados para entrega</h2>
   <input type="text" id="nome" placeholder="Seu nome"><br><br>
   <input type="text" id="endereco" placeholder="Endereço de entrega"><br><br>
@@ -30,99 +31,11 @@
     <option value="debito">Cartão de Débito</option>
   </select><br><br>
 
-  <div id="qr-container" class="hidden">
-    <p>Aqui estaria o QR Code do PIX</p>
-  </div>
+  <div id="qrcode" class="hidden"></div>
 
   <button onclick="enviarParaCliente()">Enviar</button>
   <button onclick="finalizarPedido()" id="botao-vendedora" class="hidden">Enviar para Vendedora</button>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-  const lista = document.getElementById("lista-carrinho");
 
-  if (carrinho.length === 0) {
-    lista.innerHTML = "<p>Seu carrinho está vazio.</p>";
-    return;
-  }
-
-  carrinho.forEach(produto => {
-  const item = document.createElement("li");
-  item.textContent = `${produto.nome} - R$ ${produto.preco.toFixed(2)}`;
-  lista.appendChild(item);
-});
-});
-  function enviarParaCliente() {
-  const nome = document.getElementById('nome').value;
-  const endereco = document.getElementById('endereco').value;
-  const observacoes = document.getElementById('observacoes').value;
-  const formaPagamento = document.getElementById('pagamento').value;
-  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-  if (!nome || !endereco || !formaPagamento || carrinho.length === 0) {
-    alert('Preencha todos os campos e adicione produtos ao carrinho.');
-    return;
-  }
-
-  const valorTotal = carrinho.reduce((total, item) => total + item.preco, 0);
-
-  fetch('https://seu-projeto.vercel.app/api/create-pix', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      cliente: nome,
-      endereco: endereco,
-      observacoes: observacoes,
-      pagamento: formaPagamento,
-      valor: valorTotal,
-      itens: carrinho
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-    if (formaPagamento === 'pix') {
-      document.getElementById('qrcode').classList.remove('hidden');
-      // Aqui você pode exibir o QR Code real, se sua API retornar um link ou imagem
-    }
-    alert('Pedido enviado com sucesso!');
-  })
-  .catch(err => {
-    console.error('Erro ao enviar pedido:', err);
-    alert('Falha ao enviar pedido.');
-  });
-  }
-  fetch('https://lanchonete-pix-backend.vercel.app/api/create-pix?amount=15&name=Luiz&message=Pedido')
-  .then(response => response.json())
-  .then(resposta => {
-    const img = document.createElement('img');
-    img.src = resposta.qrCode;
-    img.style.width = '300px'; // opcional: define tamanho
-    img.style.border = '1px solid #ccc'; // opcional: borda
-    document.getElementById('qr-container').appendChild(img);
-  })
-  .catch(error => {
-    console.error('Erro ao buscar QR Code:', error);
-  });
-fetch('https://lanchonete-pix-backend.vercel.app/api/create-pix?amount=15&name=Luiz&message=Pedido')
-  .then(response => response.json())
-  .then(resposta => {
-    const img = document.createElement('img');
-    img.src = resposta.qrCode;
-    img.style.width = '300px';
-    img.style.border = '1px solid #ccc';
-
-    const qrDiv = document.getElementById('qrcode');
-    qrDiv.classList.remove('hidden'); // 👈 isso faz o QR aparecer
-    qrDiv.innerHTML = ''; // limpa conteúdo anterior
-    qrDiv.appendChild(img);
-  })
-  .catch(error => {
-    console.error('Erro ao buscar QR Code:', error);
-  });
-</script>
   <script src="scriptpedido.js"></script>
 </body>
 </html>
