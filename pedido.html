@@ -94,6 +94,18 @@ document.addEventListener("DOMContentLoaded", function () {
     alert('Falha ao enviar pedido.');
   });
   }
+  fetch('https://lanchonete-pix-backend.vercel.app/api/create-pix?amount=15&name=Luiz&message=Pedido')
+  .then(response => response.json())
+  .then(resposta => {
+    const img = document.createElement('img');
+    img.src = resposta.qrCode;
+    img.style.width = '300px'; // opcional: define tamanho
+    img.style.border = '1px solid #ccc'; // opcional: borda
+    document.getElementById('qr-container').appendChild(img);
+  })
+  .catch(error => {
+    console.error('Erro ao buscar QR Code:', error);
+  });
 </script>
   <script src="scriptpedido.js"></script>
 </body>
