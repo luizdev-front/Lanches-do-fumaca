@@ -106,6 +106,22 @@ document.addEventListener("DOMContentLoaded", function () {
   .catch(error => {
     console.error('Erro ao buscar QR Code:', error);
   });
+fetch('https://lanchonete-pix-backend.vercel.app/api/create-pix?amount=15&name=Luiz&message=Pedido')
+  .then(response => response.json())
+  .then(resposta => {
+    const img = document.createElement('img');
+    img.src = resposta.qrCode;
+    img.style.width = '300px';
+    img.style.border = '1px solid #ccc';
+
+    const qrDiv = document.getElementById('qrcode');
+    qrDiv.classList.remove('hidden'); // 👈 isso faz o QR aparecer
+    qrDiv.innerHTML = ''; // limpa conteúdo anterior
+    qrDiv.appendChild(img);
+  })
+  .catch(error => {
+    console.error('Erro ao buscar QR Code:', error);
+  });
 </script>
   <script src="scriptpedido.js"></script>
 </body>
