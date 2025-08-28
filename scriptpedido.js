@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     pTotal.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
     produtoDiv.appendChild(pTotal);
 
-    // ✅ Mostra o botão se houver itens
     botaoVendedora.classList.remove('hidden');
   }
 
@@ -120,9 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
           img.alt = 'QR Code Pix';
           img.style.width = '200px';
           img.style.marginTop = '10px';
-          qrcodeDiv.innerHTML = `
-            <p>Escaneie o QR Code para pagar via Pix:</p>
-          `;
+          qrcodeDiv.classList.remove('hidden');
+          qrcodeDiv.innerHTML = `<p>Escaneie o QR Code para pagar via Pix:</p>`;
           qrcodeDiv.appendChild(img);
         })
         .catch(err => {
@@ -131,14 +129,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   const numero = "5513988799046"; 
-const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-window.open(link, "_blank");
+    const numero = "5513988799046"; 
+    const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(link, "_blank");
 
-if (formaPagamento !== 'pix') {
-  localStorage.removeItem('carrinho');
-  location.reload();
-}
+    if (formaPagamento !== 'pix') {
+      localStorage.removeItem('carrinho');
+      location.reload();
+    }
+
+    mostrarCarrinho();
+  };
+
+  window.enviarParaCliente = function() {
+    alert('Pedido enviado para o cliente!');
+  };
 
   mostrarCarrinho();
-})
+});
