@@ -2,7 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const produtoDiv = document.getElementById('produto');
   const botaoVendedora = document.getElementById('botao-vendedora');
   const pagamentoSelect = document.getElementById('pagamento');
-  const qrcodeDiv = document.getElementById('qrcode');
+  const pixDiv = document.getElementById('pix-info'); // novo div para Pix
+
+  const taxasEntrega = {
+    'maré mansa': 4.00,
+    'vila rã': 6.00,
+    'areião': 6.00,
+    'península': 6.00,
+    'pedreira': 8.00
+  };
 
   function mostrarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -53,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   pagamentoSelect.addEventListener('change', () => {
-    qrcodeDiv.classList.toggle('hidden', pagamentoSelect.value !== 'pix');
+    pixDiv.classList.toggle('hidden', pagamentoSelect.value !== 'pix');
   });
 
   window.finalizarPedido = function() {
@@ -64,13 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const nomeCliente = document.getElementById('nome').value.trim();
-    const enderecoCliente = document.getElementById('endereco').value.trim();
+    const enderecoCliente = document.getElementById('endereco').value.trim().toLowerCase();
     const observacoes = document.getElementById('observacoes').value.trim();
     const formaPagamento = document.getElementById('pagamento').value;
 
     if (!nomeCliente || !enderecoCliente || !formaPagamento) {
       alert("Preencha nome, endereço e forma de pagamento!");
       return;
+    }
+
+    let taxaEntrega = 0;
+    for (const bairro in taxasEntrega) {
+      if (enderecoCliente.includes(bairro)) {
+        taxaEntrega = taxasEntrega[bairro];
+        break;
+      }
     }
 
     let mensagem = "📦 *Novo Pedido*\n\n";
@@ -83,7 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
       total += preco;
     });
 
-    mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
+    const totalComEntrega = total + taxaEntrega;
+
+    mensagem += `\n🚚 *Taxa de entrega:* R$ ${taxaEntrega.toFixed(2)}\n`;
+    mensagem += `💰 *Total com entrega:* R$ ${totalComEntrega.toFixed(2)}\n`;
     mensagem += `👤 *Cliente:* ${nomeCliente}\n`;
     mensagem += `🏠 *Endereço:* ${enderecoCliente}\n`;
     if (observacoes) {
@@ -91,7 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     mensagem += `💳 *Pagamento:* ${formaPagamento.toUpperCase()}\n`;
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
-    mensagem += `\nPor favor, confirme meu pedido. ✅`;
+
+    if (formaPagamento === 'pix') {
+      mensagem += `\n📲 *Pagamento via Pix*\n`;
+      mensagem += `Chave Pix: 13988799046\n`;
+      mensagem += `Valor: R$ ${totalComEntrega.toFixed(2)}\n`;
+      mensagem += `Envie o comprovante após o pagamento. ✅\n`;
+
+      pixDiv.classList.remove('hidden');
+      pixDiv.innerHTML = `
+        <p><strong>Chave Pix:</strong> 13988799046</p>
+        <p><strong>Valor:</strong> R$ ${totalComEntrega.toFixed(2)}</p>
+        <button onclick="navigator.clipboard.writeText('13988799046'); alert('Chave Pix copiada!')">Copiar chave Pix</button>
+        <p>Após o pagamento, envie o comprovante pelo WhatsApp.</p>
+      `;
+    }
 
     const novoPedido = {
       itens: carrinho,
@@ -108,54 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     localStorage.removeItem('carrinho');
 
-    if (formaPagamento === 'pix') {
-      fetch(`https://lanchonete-pix-backend.vercel.app/api/create-pix?amount=${total.toFixed(2)}&name=${encodeURIComponent(nomeCliente)}&message=${encodeURIComponent('Pedido via site')}`)
-        .then(res => res.json())
-        .then(data => {
-          const img = document.createElement('img');
-          img.src = data.qrCode;
-          img.alt = 'QR Code Pix';
-          img.style.width = '200px';
-          img.style.marginTop = '10px';
-
-          qrcodeDiv.classList.remove('hidden');
-          qrcodeDiv.innerHTML = `
-            <p><strong>Valor do pedido:</strong> R$ ${total.toFixed(2)}</p>
-            <p>Escaneie o QR Code abaixo para pagar via Pix:</p>
-          `;
-          qrcodeDiv.appendChild(img);
-
-          // Se sua API retornar o código Pix como texto (Pix Copia e Cola)
-          if (data.pixCode) {
-            const textarea = document.createElement('textarea');
-            textarea.value = data.pixCode;
-            textarea.readOnly = true;
-            textarea.style.width = '100%';
-            textarea.style.marginTop = '10px';
-            qrcodeDiv.appendChild(textarea);
-
-            const btnCopiar = document.createElement('button');
-            btnCopiar.textContent = 'Copiar código Pix';
-            btnCopiar.style.marginTop = '5px';
-            btnCopiar.onclick = () => {
-              navigator.clipboard.writeText(data.pixCode);
-              alert('Código Pix copiado!');
-            };
-            qrcodeDiv.appendChild(btnCopiar);
-          }
-        })
-        .catch(err => {
-          console.error('Erro ao gerar QR Code:', err);
-          qrcodeDiv.textContent = 'Erro ao gerar QR Code Pix.';
-        });
-    }
-
     const numero = "5513988799046"; 
     const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
     window.open(link, "_blank");
 
     if (formaPagamento !== 'pix') {
-      localStorage.removeItem('carrinho');
       location.reload();
     }
 
