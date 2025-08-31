@@ -9,6 +9,15 @@
     .hidden { display: none; }
     .item-carrinho { margin-bottom: 10px; }
     .btn-remover { margin-left: 10px; }
+    #pix-info {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+    #pix-info button {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -29,9 +38,10 @@
     <option value="pix">PIX</option>
     <option value="credito">Cartão de Crédito</option>
     <option value="debito">Cartão de Débito</option>
+    <option value="dinheiro">Dinheiro</option>
   </select><br><br>
 
-  <div id="qrcode" class="hidden"></div>
+  <div id="pix-info" class="hidden"></div>
 
   <button onclick="enviarParaCliente()">Enviar</button>
   <button onclick="finalizarPedido()" id="botao-vendedora" class="hidden">Enviar para Vendedora</button>
