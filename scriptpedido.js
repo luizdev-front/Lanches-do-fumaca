@@ -1,16 +1,20 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const produtoDiv = document.getElementById('produto');
   const botaoVendedora = document.getElementById('botao-vendedora');
   const pagamentoSelect = document.getElementById('pagamento');
-  const pixDiv = document.getElementById('pix-info'); // novo div para Pix
+  const pixDiv = document.getElementById('pix-info');
 
-  const taxasEntrega = {
-    'maré mansa': 4.00,
-    'vila rã': 6.00,
-    'areião': 6.00,
-    'península': 6.00,
-    'pedreira': 8.00
-  };
+  let bairrosTaxas = [];
+
+  async function carregarTaxasEntrega() {
+    try {
+      const response = await fetch('https://sua-api.com/bairros-taxas'); // Substitua pela URL real
+      const data = await response.json();
+      bairrosTaxas = data;
+    } catch (error) {
+      console.error('Erro ao carregar taxas de entrega:', error);
+    }
+  }
 
   function mostrarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -82,9 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let taxaEntrega = 0;
-    for (const bairro in taxasEntrega) {
-      if (enderecoCliente.includes(bairro)) {
-        taxaEntrega = taxasEntrega[bairro];
+    for (const item of bairrosTaxas) {
+      if (enderecoCliente.includes(item.bairro.toLowerCase())) {
+        taxaEntrega = item.taxa;
         break;
       }
     }
@@ -156,5 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Pedido enviado para o cliente!');
   };
 
+  await carregarTaxasEntrega();
   mostrarCarrinho();
 });
