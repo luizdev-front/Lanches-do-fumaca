@@ -92,6 +92,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         break;
       }
     }
+const bairroEncontrado = bairrosTaxas.find(item =>
+  enderecoCliente.includes(item.bairro.toLowerCase())
+);
+
+if (!bairroEncontrado) {
+  alert("Desculpe, não entregamos nesse bairro.");
+  return;
+}
+
+const taxaEntrega = bairroEncontrado.taxa;
 
     let mensagem = "📦 *Novo Pedido*\n\n";
     let total = 0;
