@@ -2,9 +2,9 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="styleacai.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pastelaria do Fumaça - Açaí & Milkshake</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
@@ -24,99 +24,66 @@
     </div>
   </header>
 
-  <div id="acai-form">
-    <h3>Açaí</h3>
-    <label>Tamanho:
-      <select id="acai-tamanho">
-        <option value="300 ml" data-preco="13.00">300 ml - R$13,00</option>
-        <option value="400 ml" data-preco="17.00">400 ml - R$17,00</option>
-        <option value="550 ml" data-preco="20.00">550 ml - R$20,00</option>
-        <option value="700 ml" data-preco="26.00">700 ml - R$26,00</option>
-      </select>
-    </label>
+  <main>
+    <section id="acai-form">
+      <h3>Açaí</h3>
+      <label>Tamanho:
+        <select id="acai-tamanho">
+          <option value="300 ml" data-preco="13.00">300 ml - R$13,00</option>
+          <option value="400 ml" data-preco="17.00">400 ml - R$17,00</option>
+          <option value="550 ml" data-preco="20.00">550 ml - R$20,00</option>
+          <option value="700 ml" data-preco="26.00">700 ml - R$26,00</option>
+        </select>
+      </label>
 
-    <fieldset>
-      <legend>Acompanhamentos:</legend>
-      <label><input type="checkbox" value="Ovomaltine" class="acompanhamento-acai"> Ovomaltine</label>
-      <label><input type="checkbox" value="Paçoca" class="acompanhamento-acai"> Paçoca</label>
-      <label><input type="checkbox" value="MM" class="acompanhamento-acai"> MM</label>
-      <label><input type="checkbox" value="Leite em pó" class="acompanhamento-acai"> Leite em Pó</label>
-      <label><input type="checkbox" value="Leite Condensado" class="acompanhamento-acai"> Leite Condensado</label>
-      <label><input type="checkbox" value="Granola" class="acompanhamento-acai"> Granola</label>
-    </fieldset>
+      <fieldset>
+        <legend>Acompanhamentos:</legend>
+        <label><input type="checkbox" value="Ovomaltine" class="acompanhamento-acai"> Ovomaltine</label>
+        <label><input type="checkbox" value="Paçoca" class="acompanhamento-acai"> Paçoca</label>
+        <label><input type="checkbox" value="MM" class="acompanhamento-acai"> MM</label>
+        <label><input type="checkbox" value="Leite em pó" class="acompanhamento-acai"> Leite em Pó</label>
+        <label><input type="checkbox" value="Leite Condensado" class="acompanhamento-acai"> Leite Condensado</label>
+        <label><input type="checkbox" value="Granola" class="acompanhamento-acai"> Granola</label>
+      </fieldset>
 
-    <label><input type="checkbox" id="acai-extra-nutella"> Nutella (+R$7,00)</label>
-    <br>
-    <button id="adicionar-acai">Adicionar ao carrinho</button>
-    <div>Preço estimado: R$ <span id="preco-acai">0.00</span></div>
-  </div>
+      <label><input type="checkbox" id="acai-extra-nutella"> Nutella (+R$7,00)</label>
+      <br>
+      <button id="adicionar-acai">Adicionar ao carrinho</button>
+      <div>Preço estimado: R$ <span id="preco-acai">0.00</span></div>
+    </section>
 
-  <div id="milkshake-form">
+    <section id="milkshake-form">
+      <h2>Milkshake 400 ml R$15,00 </h2>
+      <fieldset>
+        <legend>Sabor:</legend>
+        <label><input type="radio" name="sabor" value="Morango" data-preco="15.00" checked> Morango</label>
+        <label><input type="radio" name="sabor" value="Paçoca" data-preco="15.00"> Paçoca</label>
+        <label><input type="radio" name="sabor" value="Ovomaltine" data-preco="15.00"> Ovomaltine</label>
+      </fieldset> 
+      <button id="adicionar-milkshake">Adicionar ao carrinho</button>
+      <div>Preço estimado: R$ <span id="preco-milkshake">15.00</span></div>
+    </section>
 
-    <h2>Milkshake 400 ml R$15,00 </h2>
-    <fieldset>
-      <legend>Sabor:</legend>
-      <label><input type="radio" name="sabor" value="Morango" data-preco="15.00" checked> Morango</label>
-      <label><input type="radio" name="sabor" value="Paçoca" data-preco="15.00"> Paçoca</label>
-      <label><input type="radio" name="sabor" value="Ovomaltine" data-preco="15.00"> Ovomaltine</label>
-    </fieldset> 
-    <button id="adicionar-milkshake">Adicionar ao carrinho</button>
-    <div>Preço estimado: R$ <span id="preco-milkshake">0.00</span></div>
-  </div>
- <div id="vitamina-form">
-  <h2>Vitamina de Açaí 400 ml - R$20,00</h2>
-  
-  <h3>Escolha seus adicionais:</h3>
-  <label>
-    <input type="checkbox" class="extra"> Banana
-  </label><br>
-  <label>
-    <input type="checkbox" class="extra"> Granola
-  </label><br>
-  <label>
-    <input type="checkbox" class="extra"> Leite Condensado
-  </label><br>
-  <label>
-    <input type="checkbox" class="extra"> Paçoca
-  </label><br>
-  <label>
-    <input type="checkbox" class="extra"> Leite
-  </label><br><br>
-  
-  <button id="adicionar-vitamina">Adicionar ao carrinho</button>
-  
-  <div>
-    Preço estimado: R$ <span id="preco-vitamina">20.00</span>
-  </div>
-</div>
- <script src="scriptacai.js"></script>
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const menu = document.getElementById('menu');
+    <section id="vitamina-form">
+      <h2>Vitamina de Açaí 400 ml - R$20,00</h2>
+      <h3>Escolha seus adicionais:</h3>
+      <label><input type="checkbox" class="extra"> Banana</label><br>
+      <label><input type="checkbox" class="extra"> Granola</label><br>
+      <label><input type="checkbox" class="extra"> Leite Condensado</label><br>
+      <label><input type="checkbox" class="extra"> Paçoca</label><br>
+      <label><input type="checkbox" class="extra"> Leite</label><br><br>
+      <button id="adicionar-vitamina">Adicionar ao carrinho</button>
+      <div>Preço estimado: R$ <span id="preco-vitamina">20.00</span></div>
+    </section>
 
-    menuBtn.addEventListener('click', () => {
-        menu.classList.toggle('active');
-    });
-const precoBase = 20.00;
-  const precoSpan = document.getElementById("preco-vitamina");
-  const extras = document.querySelectorAll(".extra");
-  const botao = document.getElementById("adicionar-vitamina");
+    <section id="carrinho">
+      <h2>Carrinho de Compras</h2>
+      <ul id="carrinho-list"></ul>
+      <div id="total">Total: R$ 0.00</div>
+      <button id="finalizar-pedido" disabled>Finalizar Pedido via WhatsApp</button>
+    </section>
+  </main>
 
-  // Sempre mostra o preço fixo da vitamina
-  precoSpan.textContent = precoBase.toFixed(2);
-
-  botao.addEventListener("click", () => {
-    let escolhidos = [];
-    extras.forEach(extra => {
-      if (extra.checked) {
-        escolhidos.push(extra.parentElement.textContent.trim());
-      }
-    });
-
-    alert("Vitamina de Açaí adicionada ao carrinho!\nAdicionais: " 
-          + (escolhidos.length > 0 ? escolhidos.join(", ") : "Nenhum"));
-  });
-
-  </script>
+  <script src="script.js" defer></script>
 </body>
 </html>
