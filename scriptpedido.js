@@ -1,20 +1,16 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   const produtoDiv = document.getElementById('produto');
-  const botaoVendedora = document.getElementById('botao-vendedora');
+  const botaoVendedora = document.getElementById('enviar-vendedora-btn');
   const pagamentoSelect = document.getElementById('pagamento');
   const pixDiv = document.getElementById('pix-info');
+  const enviarClienteBtn = document.getElementById('enviar-cliente-btn');
 
-  let bairrosTaxas = [];
-
-  async function carregarTaxasEntrega() {
-    try {
-      const response = await fetch('https://sua-api.com/bairros-taxas'); // Substitua pela URL real
-      const data = await response.json();
-      bairrosTaxas = data;
-    } catch (error) {
-      console.error('Erro ao carregar taxas de entrega:', error);
-    }
-  }
+  // Array estático de bairros e taxas — substitua ou complemente se tiver API
+  const bairrosTaxas = [
+    { bairro: "centro", taxa: 5.0 },
+    { bairro: "jardim américa", taxa: 7.5 },
+    { bairro: "vila nova", taxa: 6.0 }
+  ];
 
   function mostrarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -22,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let total = 0;
 
     if (carrinho.length === 0) {
-      produtoDiv.textContent = "Nenhum item no pedido.";
+      produtoDiv.textContent = 'Nenhum item no pedido.';
       botaoVendedora.classList.add('hidden');
       return;
     }
@@ -31,19 +27,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       const itemDiv = document.createElement('div');
       itemDiv.classList.add('item-carrinho');
 
-      const nome = item.nome || "Produto sem nome";
+      const nome = item.nome || 'Produto sem nome';
       const preco = item.preco || 0;
-      const adicionais = item.adicionais?.length ? ` + ${item.adicionais.join(", ")}` : "";
+      const adicionais = item.adicionais?.length
+        ? ` + ${item.adicionais.join(', ')}`
+        : '';
 
-      const p = document.createElement('span');
-      p.textContent = `${nome}${adicionais} - R$ ${preco.toFixed(2)}`;
+      const span = document.createElement('span');
+      span.textContent = `${nome}${adicionais} - R$ ${preco.toFixed(2)}`;
 
       const btnRemover = document.createElement('button');
-      btnRemover.textContent = "Remover";
+      btnRemover.textContent = 'Remover';
       btnRemover.classList.add('btn-remover');
-      btnRemover.onclick = () => removerItem(index);
+      btnRemover.addEventListener('click', () => removerItem(index));
 
-      itemDiv.appendChild(p);
+      itemDiv.appendChild(span);
       itemDiv.appendChild(btnRemover);
       produtoDiv.appendChild(itemDiv);
 
@@ -58,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function removerItem(index) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.splice(index, 1);
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     mostrarCarrinho();
@@ -66,9 +64,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   pagamentoSelect.addEventListener('change', () => {
     pixDiv.classList.toggle('hidden', pagamentoSelect.value !== 'pix');
+    if (pagamentoSelect.value !== 'pix') {
+      pixDiv.innerHTML = '';
+    }
   });
 
-  window.finalizarPedido = function() {
+  botaoVendedora.addEventListener('click', finalizarPedido);
+  enviarClienteBtn.addEventListener('click', () => {
+    alert('Pedido enviado para o cliente!');
+  });
+
+  function finalizarPedido() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     if (carrinho.length === 0) {
       alert('Seu pedido está vazio!');
@@ -78,38 +84,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     const nomeCliente = document.getElementById('nome').value.trim();
     const enderecoCliente = document.getElementById('endereco').value.trim().toLowerCase();
     const observacoes = document.getElementById('observacoes').value.trim();
-    const formaPagamento = document.getElementById('pagamento').value;
+    const formaPagamento = pagamentoSelect.value;
 
     if (!nomeCliente || !enderecoCliente || !formaPagamento) {
-      alert("Preencha nome, endereço e forma de pagamento!");
+      alert('Preencha nome, endereço e forma de pagamento!');
       return;
     }
 
-    let taxaEntrega = 0;
-    for (const item of bairrosTaxas) {
-      if (enderecoCliente.includes(item.bairro.toLowerCase())) {
-        taxaEntrega = item.taxa;
-        break;
-      }
+    // Busca o bairro e a taxa correspondente
+    const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
+      enderecoCliente.includes(bairro)
+    );
+
+    if (!bairroEncontrado) {
+      alert('Desculpe, não entregamos nesse bairro.');
+      return;
     }
-const bairroEncontrado = bairrosTaxas.find(item =>
-  enderecoCliente.includes(item.bairro.toLowerCase())
-);
 
-if (!bairroEncontrado) {
-  alert("Desculpe, não entregamos nesse bairro.");
-  return;
-}
+    const taxaEntrega = bairroEncontrado.taxa;
 
-const taxaEntrega = bairroEncontrado.taxa;
-
-    let mensagem = "📦 *Novo Pedido*\n\n";
+    let mensagem = '📦 *Novo Pedido*\n\n';
     let total = 0;
-    carrinho.forEach(item => {
-      const nome = item.nome || "Produto sem nome";
-      const preco = item.preco || 0;
-      const adicionais = item.adicionais?.length ? ` + ${item.adicionais.join(", ")}` : "";
-      mensagem += `• ${nome}${adicionais} - R$ ${preco.toFixed(2)}\n`;
+
+    carrinho.forEach(({ nome = 'Produto sem nome', preco = 0, adicionais }) => {
+      const adicionaisTexto = adicionais?.length ? ` + ${adicionais.join(', ')}` : '';
+      mensagem += `• ${nome}${adicionaisTexto} - R$ ${preco.toFixed(2)}\n`;
       total += preco;
     });
 
@@ -135,41 +134,52 @@ const taxaEntrega = bairroEncontrado.taxa;
       pixDiv.innerHTML = `
         <p><strong>Chave Pix:</strong> 13988799046</p>
         <p><strong>Valor:</strong> R$ ${totalComEntrega.toFixed(2)}</p>
-        <button onclick="navigator.clipboard.writeText('13988799046'); alert('Chave Pix copiada!')">Copiar chave Pix</button>
+        <button id="btn-copiar-pix">Copiar chave Pix</button>
         <p>Após o pagamento, envie o comprovante pelo WhatsApp.</p>
       `;
+
+      const btnCopiarPix = document.getElementById('btn-copiar-pix');
+      btnCopiarPix.addEventListener('click', () => {
+        navigator.clipboard.writeText('13988799046').then(() => {
+          alert('Chave Pix copiada!');
+        });
+      });
+    } else {
+      pixDiv.classList.add('hidden');
+      pixDiv.innerHTML = '';
     }
 
+    // Salva pedido no histórico
     const novoPedido = {
       itens: carrinho,
       cliente: nomeCliente,
       endereco: enderecoCliente,
-      observacoes: observacoes,
+      observacoes,
       pagamento: formaPagamento,
       data: new Date().toLocaleString(),
-      status: "Aguardando"
+      status: 'Aguardando'
     };
+
     const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
     pedidos.push(novoPedido);
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
 
+    // Limpa carrinho e formulário
     localStorage.removeItem('carrinho');
-
-    const numero = "5513988799046"; 
-    const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-    window.open(link, "_blank");
+    mostrarCarrinho();
 
     if (formaPagamento !== 'pix') {
-      location.reload();
+      document.getElementById('nome').value = '';
+      document.getElementById('endereco').value = '';
+      document.getElementById('observacoes').value = '';
+      pagamentoSelect.value = '';
     }
 
-    mostrarCarrinho();
-  };
+    // Envia mensagem pelo WhatsApp
+    const numero = '5513988799046';
+    const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(link, '_blank');
+  }
 
-  window.enviarParaCliente = function() {
-    alert('Pedido enviado para o cliente!');
-  };
-
-  await carregarTaxasEntrega();
   mostrarCarrinho();
 });
