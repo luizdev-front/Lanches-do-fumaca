@@ -183,3 +183,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mostrarCarrinho();
 });
+// Coloque esse JS em scriptpedido.js ou dentro de <script> em pedido.html
+
+function renderizarCarrinho() {
+  const lista = document.getElementById("lista-carrinho");
+  lista.innerHTML = "";
+  const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  carrinho.forEach((item, idx) => {
+    const li = document.createElement("li");
+    li.className = "item-carrinho";
+    li.innerHTML = `
+      ${item.nome} - R$${item.preco.toFixed(2)}
+      <button class="btn-remover" onclick="removerDoCarrinho(${idx})">Retirar</button>
+    `;
+    lista.appendChild(li);
+  });
+}
+
+function removerDoCarrinho(index) {
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizarCarrinho();
+}
+
+// Atualiza o carrinho ao abrir página
+document.addEventListener("DOMContentLoaded", renderizarCarrinho);
