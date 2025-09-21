@@ -209,3 +209,32 @@ function removerDoCarrinho(index) {
 
 // Atualiza o carrinho ao abrir página
 document.addEventListener("DOMContentLoaded", renderizarCarrinho);
+function finalizarPedido() {
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  if (carrinho.length === 0) {
+    alert('Seu pedido está vazio!');
+    return;
+  }
+
+  const nomeCliente = document.getElementById('nome').value.trim();
+  const enderecoCliente = document.getElementById('endereco').value.trim();
+  const observacoes = document.getElementById('observacoes').value.trim();
+  const formaPagamento = document.getElementById('pagamento').value;
+
+  let total = 0;
+  let mensagem = '📦 *Novo Pedido*\n\n';
+
+  carrinho.forEach(({ nome, preco }) => {
+    mensagem += `• ${nome} - R$ ${preco.toFixed(2)}\n`;
+    total += preco;
+  });
+
+  mensagem += `\n💰 *Total:* R$ ${total.toFixed(2)}\n`;
+  mensagem += `\n👤 *Cliente:* ${nomeCliente}\n🏠 *Endereço:* ${enderecoCliente}\n`;
+  if (observacoes) mensagem += `\n📝 *Obs:* ${observacoes}\n`;
+  mensagem += `\n💳 *Pagamento:* ${formaPagamento}\n`;
+
+  const numero = '5513988799046';
+  const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+  window.open(link, '_blank');
+}
