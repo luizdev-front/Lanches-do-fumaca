@@ -1,9 +1,9 @@
 // 👉 Função para adicionar ao carrinho
-function adicionarAoCarrinho(item, preco) {
+function adicionarAoCarrinho(nome, preco) {
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-  carrinho.push({ item, preco });
+  carrinho.push({ nome: nome, preco: Number(preco) });
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert(`${item} foi adicionado ao carrinho!`);
+  alert(`${nome} foi adicionado ao carrinho!`);
 }
 
 // 👉 Controle do menu
@@ -21,4 +21,3 @@ document.addEventListener("click", (e) => {
     navMenu.classList.remove("open");
   }
 });
- 
