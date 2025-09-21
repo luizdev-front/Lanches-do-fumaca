@@ -77,30 +77,72 @@
     </section>
   </main>
 <script>
-  function adicionarAoCarrinho(nome, preco) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome: nome, preco: Number(preco) });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    alert(`${nome} foi adicionado ao carrinho!`);
-  }
+  // Função geral para adicionar itens ao carrinho
+function adicionarAoCarrinho(nome, preco) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.push({ nome, preco: Number(preco) });
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert(`${nome} foi adicionado ao carrinho!`);
+}
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById("menu-toggle");
-    const navMenu = document.getElementById("nav-menu");
+// Função para atualizar preço estimado de Açaí
+function atualizarPrecoAcai() {
+  const tamanhoSelect = document.getElementById('acai-tamanho');
+  const precoBase = parseFloat(tamanhoSelect.selectedOptions[0].dataset.preco);
+  let precoFinal = precoBase;
+  if (document.getElementById('acai-extra-nutella').checked) precoFinal += 7;
+  document.querySelector('#preco-acai').textContent = precoFinal.toFixed(2);
+  return precoFinal;
+}
 
-    if (!menuToggle || !navMenu) return;
+// Adicionar Açaí ao carrinho
+document.getElementById('adicionar-acai').addEventListener('click', () => {
+  const tamanhoSelect = document.getElementById('acai-tamanho');
+  const tamanho = tamanhoSelect.value;
+  const adicionais = Array.from(document.querySelectorAll('.acompanhamento-acai:checked')).map(i => i.value);
+  let precoFinal = atualizarPrecoAcai();
+  const nomeItem = `Açaí ${tamanho}${adicionais.length ? ' + ' + adicionais.join(', ') : ''}`;
+  adicionarAoCarrinho(nomeItem, precoFinal);
+});
 
-    menuToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      navMenu.classList.toggle("open");
-    });
+// Atualiza preço ao mudar tamanho ou selecionar Nutella
+document.getElementById('acai-tamanho').addEventListener('change', atualizarPrecoAcai);
+document.getElementById('acai-extra-nutella').addEventListener('change', atualizarPrecoAcai);
 
-    document.addEventListener("click", (e) => {
-      if (!navMenu.contains(e.target) && e.target !== menuToggle) {
-        navMenu.classList.remove("open");
-      }
-    });
+// Adicionar Milkshake ao carrinho
+document.getElementById('adicionar-milkshake').addEventListener('click', () => {
+  const sabor = document.querySelector('input[name="sabor"]:checked').value;
+  const preco = parseFloat(document.querySelector('input[name="sabor"]:checked').dataset.preco);
+  const nomeItem = `Milkshake ${sabor}`;
+  adicionarAoCarrinho(nomeItem, preco);
+});
+
+// Adicionar Vitamina ao carrinho
+document.getElementById('adicionar-vitamina').addEventListener('click', () => {
+  const extras = Array.from(document.querySelectorAll('#vitamina-form .extra:checked')).map(i => i.value);
+  const precoBase = 20;
+  const precoFinal = precoBase; // você pode adicionar valores extras por adicional se quiser
+  const nomeItem = `Vitamina${extras.length ? ' + ' + extras.join(', ') : ''}`;
+  adicionarAoCarrinho(nomeItem, precoFinal);
+});
+
+// Controle do menu mobile
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById("menuBtn");
+  const navMenu = document.getElementById("menu");
+  if (!menuToggle || !navMenu) return;
+
+  menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navMenu.classList.toggle("open");
   });
+
+  document.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target) && e.target !== menuToggle) {
+      navMenu.classList.remove("open");
+    }
+  });
+});
 </script>
 
   <script src="scriptacai.js" defer></script>
