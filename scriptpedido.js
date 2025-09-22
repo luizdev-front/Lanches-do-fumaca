@@ -1,8 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ...suas variáveis e mostrarCarrinho...
+  // ================================
+  // 1️⃣ Array de bairros e suas taxas
+  // ================================
+  const bairrosTaxas = [
+    { bairro: 'MARÉ MANSA', taxa: 4.00 },
+    { bairro: 'VILA RÃ', taxa: 6.00 },
+    { bairro: 'AREIÃO', taxa: 6.00 },
+    { bairro: 'PENÍNSULA', taxa: 6.00 },
+    { bairro: 'PEDREIRA', taxa: 8.00 }
+  ];
 
+  // ================================
+  // 2️⃣ Variáveis
+  // ================================
+  const botaoVendedora = document.getElementById('finalizar-pedido');
+  const pagamentoSelect = document.getElementById('pagamento');
+  const pixDiv = document.getElementById('pix-div');
+
+  // Função mostrarCarrinho já existente
+  function mostrarCarrinho() {
+    // Seu código para mostrar itens do carrinho
+  }
+
+  // ================================
+  // 3️⃣ Listener do botão
+  // ================================
   botaoVendedora.addEventListener('click', finalizarPedido);
 
+  // ================================
+  // 4️⃣ Função finalizarPedido
+  // ================================
   function finalizarPedido() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     if (carrinho.length === 0) {
@@ -11,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const nomeCliente = document.getElementById('nome').value.trim();
-    const enderecoCliente = document.getElementById('endereco').value.trim().toLowerCase();
+    const enderecoCliente = document.getElementById('endereco').value.trim().toUpperCase(); // transforma em maiúsculas
     const observacoes = document.getElementById('observacoes').value.trim();
     const formaPagamento = pagamentoSelect.value;
 
@@ -20,16 +47,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Busca bairro/taxa
+    // ================================
+    // 5️⃣ Validação do bairro e taxa
+    // ================================
     const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
       enderecoCliente.includes(bairro)
     );
+
     if (!bairroEncontrado) {
-      alert('Desculpe, não entregamos nesse bairro.');
+      alert('Desculpe, não entregamos nesse bairro. Entregamos apenas MARÉ MANSA, VILA RÃ, AREIÃO, PENÍNSULA e PEDREIRA.');
       return;
     }
+
     const taxaEntrega = bairroEncontrado.taxa;
 
+    // ================================
+    // 6️⃣ Monta a mensagem do pedido
+    // ================================
     let mensagem = '📦 *Novo Pedido*\n\n';
     let total = 0;
     carrinho.forEach(({ nome = 'Produto sem nome', preco = 0, adicionais }) => {
@@ -47,7 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mensagem += `💳 *Pagamento:* ${formaPagamento.toUpperCase()}\n`;
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
 
-    // Pix info
+    // ================================
+    // 7️⃣ Informações de Pix
+    // ================================
     if (formaPagamento === 'pix') {
       mensagem += `\n📲 *Pagamento via Pix*\nChave Pix: 13988799046\nValor: R$ ${totalComEntrega.toFixed(2)}\nEnvie o comprovante após o pagamento. ✅\n`;
       pixDiv.classList.remove('hidden');
@@ -65,7 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
       pixDiv.innerHTML = '';
     }
 
-    // Salva pedido, limpa carrinho e formulário
+    // ================================
+    // 8️⃣ Salva pedido, limpa carrinho e formulário
+    // ================================
     const novoPedido = {
       itens: carrinho,
       cliente: nomeCliente,
@@ -80,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
     localStorage.removeItem('carrinho');
     mostrarCarrinho();
+
     if (formaPagamento !== 'pix') {
       document.getElementById('nome').value = '';
       document.getElementById('endereco').value = '';
@@ -87,11 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
       pagamentoSelect.value = '';
     }
 
-    // Envia para WhatsApp
+    // ================================
+    // 9️⃣ Envia para WhatsApp
+    // ================================
     const numero = '5513988799046';
     const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
     window.open(link, '_blank');
   }
 
+  // ================================
+  // 10️⃣ Inicializa o carrinho
+  // ================================
   mostrarCarrinho();
 });
