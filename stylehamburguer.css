@@ -28,91 +28,103 @@ body {
 
 /* HEADER */
 header {
-background-color: var(--header-bg);
-display: flex;
-align-items: center;
-padding: 10px 15px;
-color: azure;
-gap: 1rem;
-position: relative;
-flex-wrap: nowrap;
-border-bottom: 2px solid rgba(255, 255, 255, 0.08);
-border-radius: 0 0 var(--radius) var(--radius);
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: azure;
+  gap: 1rem;
+  position: relative;
+  flex-wrap: nowrap;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0 0 var(--radius) var(--radius);
 }
+
 /* alinhamento à direita */
 .header-right {
-margin-left: auto;
-text-align: right;
+  margin-left: auto;
+  text-align: right;
 }
+
 /* ícone do menu */
 .menu-icon {
-position: fixed;
-top: 10px;
-left: 10px;
-z-index: 2000;
-font-size: 28px;
-cursor: pointer;
-padding: 8px 12px;
-border: 2px solid var(--highlight);
-border-radius: var(--radius);
-background: transparent;
-color: var(--highlight);
-transition: background-color var(--transition), transform var(--transition), color var(--transition);
-font-family: 'Poppins', sans-serif;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 2000;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border: 2px solid var(--highlight);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--highlight);
+  transition: background-color var(--transition), transform var(--transition), color var(--transition);
+  font-family: 'Poppins', sans-serif;
 }
+
 .menu-icon:hover,
 .menu-icon:focus-visible {
-background-color: var(--highlight);
-color: #d92128 -2547416;
-transform: scale(1.05);
-outline: none;
+  background-color: var(--highlight);
+  color: #d92128;
+  transform: scale(1.05);
+  outline: none;
 }
+
 .menu-icon.active {
-background-color: var(--highlight);
-color: #d92128 -2547416;
+  background-color: var(--highlight);
+  color: #d92128;
 }
+
 /* MENU dropdown */
 .menu {
-display: none;
-background-color: var(--menu-bg);
-list-style: none;
-padding: 0;
-margin: 0;
-position: absolute;
-top: 60px;
-left: 15px;
-border-radius: var(--radius);
-box-shadow: var(--shadow);
-z-index: 1000;
-overflow: hidden;
-animation: fadeIn 0.25s ease-in-out;
-width: 220px;
+  display: none;
+  background-color: var(--menu-bg);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 60px;
+  left: 15px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.25s ease-in-out;
+  width: 220px;
 }
+
 .menu.open {
-display: block;
+  display: block;
 }
+
 .menu li {
-padding: 12px 16px;
-font-size: 16px;
-border-bottom: 1px solid rgba(170, 26, 31, 0.6);
-transition: background-color var(--transition);
+  padding: 12px 16px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(170, 26, 31, 0.6);
+  transition: background-color var(--transition);
 }
+
 .menu li:last-child {
-border-bottom: none;
+  border-bottom: none;
 }
+
 .menu li a {
-color: var(--highlight);
-text-decoration: none;
-display: block;
-font-weight: bold;
-font-family: 'Poppins', sans-serif;
+  color: var(--highlight);
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
+
 .menu li:hover {
-background-color: rgba(255, 204, 0, 0.15);
+  background-color: rgba(255, 204, 0, 0.15);
 }
+
 .menu li:hover a {
-color: #fff;
+  color: #fff;
 }
+
 /* animação do menu */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-6px); }
