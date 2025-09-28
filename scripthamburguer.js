@@ -1,18 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const menuBtn = document.getElementById("menuBtn");
-  const menu = document.getElementById("menu");
-
-  // Alterna menu
-  menuBtn.addEventListener("click", () => {
-    menu.classList.toggle("show");
-  });
-
-  // Fecha o menu se clicar fora
-  document.addEventListener("click", (e) => {
-    if (!menu.contains(e.target) && e.target !== menuBtn) {
-      menu.classList.remove("show");
-    }
-  });
+// Menu Mobile toggle
+document.addEventListener("DOMContentLoaded", () => {
+const menuBtn = document.getElementById('menuBtn');
+const menu = document.getElementById('menu');
+menuBtn.addEventListener('click', () => {
+menu.classList.toggle('open');
+});
 
   // Função para adicionar ao carrinho
   function adicionarAoCarrinho(item, preco) {
