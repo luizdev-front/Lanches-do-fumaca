@@ -1,33 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ================================
-  // 1️⃣ Função para buscar bairros e taxas via API
+  // 1️⃣ Array local de bairros e taxas
   // ================================
-  async function buscarBairros() {
-    try {
-      const resposta = await fetch('https://suaapi.com/bairros'); // Substitua pela URL da sua API
-      if (!resposta.ok) throw new Error('Erro ao buscar dados da API');
+  const bairrosTaxas = [
+    { bairro: 'MARÉ MANSA', taxa: 4.00 },
+    { bairro: 'VILA RÃ', taxa: 6.00 },
+    { bairro: 'AREIÃO', taxa: 6.00 },
+    { bairro: 'PENÍNSULA', taxa: 6.00 },
+    { bairro: 'PEDREIRA', taxa: 8.00 }
+  ];
 
-      const dados = await resposta.json();
-      // Espera-se algo como: [{ bairro: 'MARÉ MANSA', taxa: 4.00 }, ...]
-      return dados;
-    } catch (erro) {
-      console.error('Falha ao buscar bairros:', erro);
-      // Retorna array vazio para não quebrar o restante do código
-      return [];
-    }
-  }
-const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
-  enderecoCliente
-    .toUpperCase()
-    .normalize('NFD') // remove acentos
-    .replace(/[\u0300-\u036f]/g, '')
-    .includes(
-      bairro
-        .toUpperCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-    )
-);
   // ================================
   // 2️⃣ Variáveis
   // ================================
@@ -35,16 +17,15 @@ const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
   const pagamentoSelect = document.getElementById('pagamento');
   const pixDiv = document.getElementById('pix-div');
 
-  // Função mostrarCarrinho já existente
+  // ================================
+  // 3️⃣ Função para mostrar carrinho
+  // ================================
   function mostrarCarrinho() {
-    // Seu código para mostrar itens do carrinho
+    // Seu código existente para mostrar itens do carrinho
   }
 
-  // ================================
-  // 3️⃣ Inicializa o carrinho e busca bairros
-  // ================================
-  let bairrosTaxas = [];
-  mostrarCarrinho(); // Inicializa o carrinho normalmente
+  // Inicializa o carrinho
+  mostrarCarrinho();
 
   // ================================
   // 4️⃣ Listener do botão
@@ -62,11 +43,15 @@ const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
     }
 
     const nomeCliente = document.getElementById('nome').value.trim();
-    const enderecoCliente = document.getElementById('endereco').value.trim().toUpperCase();
+    const enderecoClienteOriginal = document.getElementById('endereco').value.trim();
+    const enderecoCliente = enderecoClienteOriginal
+      .toUpperCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, ''); // Remove acentos
     const observacoes = document.getElementById('observacoes').value.trim();
     const formaPagamento = pagamentoSelect.value;
 
-    if (!nomeCliente || !enderecoCliente || !formaPagamento) {
+    if (!nomeCliente || !enderecoClienteOriginal || !formaPagamento) {
       alert('Preencha nome, endereço e forma de pagamento!');
       return;
     }
@@ -74,9 +59,13 @@ const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
     // ================================
     // 6️⃣ Validação do bairro e taxa
     // ================================
-    const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
-      enderecoCliente.includes(bairro.toUpperCase())
-    );
+    const bairroEncontrado = bairrosTaxas.find(({ bairro }) => {
+      const bairroFormatado = bairro
+        .toUpperCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      return enderecoCliente.includes(bairroFormatado);
+    });
 
     if (!bairroEncontrado) {
       const bairrosDisponiveis = bairrosTaxas.map(b => b.bairro).join(', ');
@@ -101,7 +90,7 @@ const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
     mensagem += `\n🚚 *Taxa de entrega:* R$ ${taxaEntrega.toFixed(2)}\n`;
     mensagem += `💰 *Total com entrega:* R$ ${totalComEntrega.toFixed(2)}\n`;
     mensagem += `👤 *Cliente:* ${nomeCliente}\n`;
-    mensagem += `🏠 *Endereço:* ${enderecoCliente}\n`;
+    mensagem += `🏠 *Endereço:* ${enderecoClienteOriginal}\n`;
     if (observacoes) mensagem += `📝 *Observações:* ${observacoes}\n`;
     mensagem += `💳 *Pagamento:* ${formaPagamento.toUpperCase()}\n`;
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
@@ -132,7 +121,7 @@ const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
     const novoPedido = {
       itens: carrinho,
       cliente: nomeCliente,
-      endereco: enderecoCliente,
+      endereco: enderecoClienteOriginal,
       observacoes,
       pagamento: formaPagamento,
       data: new Date().toLocaleString(),
