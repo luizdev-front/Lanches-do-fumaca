@@ -61,7 +61,7 @@ header {
   transition: background-color var(--transition), transform var(--transition), color var(--transition);
   font-family: 'Poppins', sans-serif;
   display: block;
-  position: static; /* ou fixed, se quiser que fique preso na tela */
+  position: fixed; /* ou fixed, se quiser que fique preso na tela */
 }
 
 .menu-icon:hover,
