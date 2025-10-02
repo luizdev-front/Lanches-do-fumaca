@@ -48,7 +48,6 @@ header {
 
 /* ícone do menu */
 .menu-icon {
-  position: fixed;
   top: 10px;
   left: 10px;
   z-index: 2000;
