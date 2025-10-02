@@ -16,7 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return [];
     }
   }
-
+const bairroEncontrado = bairrosTaxas.find(({ bairro }) =>
+  enderecoCliente
+    .toUpperCase()
+    .normalize('NFD') // remove acentos
+    .replace(/[\u0300-\u036f]/g, '')
+    .includes(
+      bairro
+        .toUpperCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+    )
+);
   // ================================
   // 2️⃣ Variáveis
   // ================================
@@ -33,12 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3️⃣ Inicializa o carrinho e busca bairros
   // ================================
   let bairrosTaxas = [];
-  async function init() {
-    bairrosTaxas = await buscarBairros();
-    mostrarCarrinho();
-  }
-
-  init();
+  mostrarCarrinho(); // Inicializa o carrinho normalmente
 
   // ================================
   // 4️⃣ Listener do botão
