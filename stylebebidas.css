@@ -29,7 +29,7 @@ header {
   color: #d92128;
   transform: scale(1.05);
 }
-
+ 
 .menu {
   display: none;
   background-color: #d92128;
@@ -165,4 +165,80 @@ header {
   background-color: #cc9900;
   transform: translateY(1px);
   box-shadow: none;
+}
+.header-pedido {
+  background-color: var(--vermelho-header);
+  color: var(--texto-claro);
+  padding: 16px 20px;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.pedido-bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+}
+
+.pedido-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pedido-titulo h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--texto-claro);
+}
+
+.pedido-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.horario {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 6px;
+}
+
+.menu-icon {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--amarelo);
+  border-radius: 10px;
+  color: var(--amarelo);
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 1001;
+}
+
+@media (max-width: 800px) {
+  .pedido-titulo h1 {
+    font-size: 1.3rem;
+  }
+
+  .pedido-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .horario {
+    font-size: 0.8rem;
+  }
+
+  .menu-icon {
+    top: 12px;
+    left: 12px;
+  }
 }
