@@ -58,7 +58,12 @@ display: block;
   width: 100%;
 
 }
-
+.pedido-bloco {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* ocupa toda a linha dentro do header */
+}
 /* Menu lateral */
 .menu {
   display: none;
