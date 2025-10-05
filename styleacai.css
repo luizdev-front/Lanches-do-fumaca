@@ -93,6 +93,7 @@ header {
   overflow: hidden;
   animation: fadeIn 0.25s ease-in-out;
   width: 220px;
+position: fixed;
 }
 
 .menu.open {
