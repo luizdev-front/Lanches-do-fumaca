@@ -58,8 +58,12 @@ header {
   line-height: 1.2;
 }
 
-/* ======= MENU ======= */
+/* ======= ÍCONE DO MENU ======= */
 .menu-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2001;
   font-size: 28px;
   cursor: pointer;
   padding: 8px 12px;
@@ -67,7 +71,7 @@ header {
   border-radius: var(--radius);
   background: transparent;
   color: var(--highlight);
-  transition: var(--transition);
+  transition: background-color var(--transition), transform var(--transition), color var(--transition);
 }
 
 .menu-icon:hover {
@@ -76,50 +80,49 @@ header {
   transform: scale(1.05);
 }
 
+/* ======= MENU LATERAL ======= */
 .menu {
-  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 240px;
   background-color: var(--menu-bg);
   list-style: none;
-  padding: 0;
+  padding-top: 70px;
   margin: 0;
-  position: absolute;
-  top: 60px;
-  left: 15px;
-  border-radius: var(--radius);
+  border-radius: 0;
   box-shadow: var(--shadow);
-  z-index: 1000;
-  width: 220px;
-  overflow: hidden;
+  transform: translateX(-100%);
+  transition: transform var(--transition);
+  z-index: 2000;
 }
 
 .menu.open {
-  display: block;
-  animation: fadeIn 0.25s ease-in-out;
+  transform: translateX(0);
 }
 
 .menu li {
+  padding: 14px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.menu li:last-child {
-  border-bottom: none;
-}
-
 .menu li a {
-  display: block;
-  padding: 12px 16px;
   color: var(--highlight);
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
+  display: block;
   transition: var(--transition);
 }
 
-.menu li:hover a {
+.menu li:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
 }
 
+.menu li:hover a {
+  color: #fff;
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
