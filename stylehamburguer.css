@@ -76,23 +76,22 @@ header {
   background-color: var(--highlight);
   color: #d92128;
 }
-
-/* MENU dropdown */
 .menu {
   display: none;
-  background-color: var(--menu-bg);
+  background-color: var(--menu-bg, #fff);
   list-style: none;
   padding: 0;
   margin: 0;
   position: absolute;
-  top: 60px;
+  top: 60px; /* abaixo do menu-icon */
   left: 15px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: var(--radius, 8px);
+  box-shadow: var(--shadow, 0 4px 16px rgba(0,0,0,0.10));
   z-index: 1000;
-  overflow: hidden;
-  animation: fadeIn 0.25s ease-in-out;
   width: 220px;
+}
+.menu.open {
+  display: block;
 }
 
 .menu.open {
