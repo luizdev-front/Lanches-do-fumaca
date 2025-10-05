@@ -54,6 +54,9 @@ header {
   text-align: right;
   font-size: 0.85rem;
   color: #ccc;
+display: block;
+  width: 100%;
+
 }
 
 /* Menu lateral */
@@ -67,7 +70,7 @@ header {
   border-radius: 10px;
   width: 200px;
   box-shadow: var(--sombra);
-  z-index: 1000;
+  z-index: 1000;ql
 }
 .menu.open {
   display: block;
