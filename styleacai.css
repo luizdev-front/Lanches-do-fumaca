@@ -29,105 +29,62 @@ body {
   line-height: 1.5;
 }
 
-/* ======= HEADER ======= */
 header {
-  background-color: var(--header-bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--vermelho-header);
+  color: var(--texto-claro);
   padding: 12px 20px;
-  color: var(--text);
-  flex-wrap: wrap;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0 0 var(--radius) var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: 0 0 12px 12px;
+}
+
+.menu-icon {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--amarelo);
+  border-radius: 10px;
+  color: var(--amarelo);
 }
 
 .title {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--highlight);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--texto-claro);
 }
 
 .horario {
-  font-size: 0.85rem;
-  color: var(--muted);
   text-align: right;
-  line-height: 1.2;
+  font-size: 0.85rem;
+  color: #ccc;
 }
 
-/* ======= ÍCONE DO MENU ======= */
-.menu-icon {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 2001;
-  font-size: 28px;
-  cursor: pointer;
-  padding: 8px 12px;
-  border: 2px solid var(--highlight);
-  border-radius: var(--radius);
-  background: transparent;
-  color: var(--highlight);
-  transition: background-color var(--transition), transform var(--transition), color var(--transition);
-}
-
-.menu-icon:hover {
-  background-color: var(--highlight);
-  color: var(--menu-bg);
-  transform: scale(1.05);
-}
-
-/* ======= MENU LATERAL ======= */
 .menu {
+  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 240px;
-  background-color: var(--menu-bg);
+  top: 60px;
+  left: 20px;
+  background-color: #fff;
   list-style: none;
-  padding-top: 70px;
-  margin: 0;
-  border-radius: 0;
-  box-shadow: var(--shadow);
-  transform: translateX(-100%);
-  transition: transform var(--transition);
-  z-index: 2000;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: var(--sombra);
+  z-index: 1000;
 }
-
 .menu.open {
-  transform: translateX(0);
-}
-
-.menu li {
-  padding: 14px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.menu li a {
-  color: var(--highlight);
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
   display: block;
-  transition: var(--transition);
 }
-
-.menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.menu li {
+  border-bottom: 1px solid #eee;
 }
-
-.menu li:hover a {
-  color: #fff;
+.menu li a {
+  color: #d92128;
+  text-decoration: none;
+  display: block;
+  padding: 12px 16px;
+  font-weight: 600;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 /* ======= SEÇÕES ======= */
 main {
   padding: 40px 20px;
