@@ -226,21 +226,24 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-
-body > header,
-body > section, /* seu conteúdo principal */
-body > footer {
-  /* só pra garantir que esses elementos sejam considerados */
-}
-
-body > section {
+ {
   flex: 1; /* faz o section ocupar o espaço disponível, empurrando o footer pra baixo */
 }
 
 footer {
   background-color: #000;
-  color: #fff;
-  padding: 15px 20px;
+  padding: 20px;
   text-align: center;
   border-radius: 0 0 12px 12px;
+}
+
+.instagram-link {
+  color: #fff;
+  font-size: 32px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.instagram-link:hover {
+  color: #ffcc00; /* Amarelo no hover, para combinar com seu tema */
 }
