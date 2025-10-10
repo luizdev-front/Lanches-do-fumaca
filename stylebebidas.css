@@ -218,4 +218,12 @@ header {
     top: 12px;
     left: 12px;
   }
+} 
+footer {
+  background-color: #000; /* fundo preto */
+  color: #fff; /* texto branco */
+  padding: 15px 20px;
+  text-align: center; /* texto centralizado */
+  border-radius: 0 0 12px 12px; /* cantos arredondados iguais ao header */
+  font-family: 'Poppins', sans-serif;
 }
