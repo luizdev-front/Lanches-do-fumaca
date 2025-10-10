@@ -219,11 +219,28 @@ header {
     left: 12px;
   }
 } 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body > header,
+body > section, /* seu conteúdo principal */
+body > footer {
+  /* só pra garantir que esses elementos sejam considerados */
+}
+
+body > section {
+  flex: 1; /* faz o section ocupar o espaço disponível, empurrando o footer pra baixo */
+}
+
 footer {
-  background-color: #000; /* fundo preto */
-  color: #fff; /* texto branco */
+  background-color: #000;
+  color: #fff;
   padding: 15px 20px;
-  text-align: center; /* texto centralizado */
-  border-radius: 0 0 12px 12px; /* cantos arredondados iguais ao header */
-  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
 }
