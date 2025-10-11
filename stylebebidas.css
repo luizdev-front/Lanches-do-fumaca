@@ -17,8 +17,9 @@ header {
   color: var(--texto-claro);
   padding: 12px 20px;
   border-radius: 0 0 12px 12px;
+  position: relative;
+  z-index: 10;
 }
-
 .menu-icon {
   font-size: 30px;
   cursor: pointer;
