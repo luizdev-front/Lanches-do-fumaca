@@ -15,19 +15,19 @@ body {
 /* HEADER */
 header {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centraliza o título */
   background-color: var(--vermelho-header);
   color: var(--texto-claro);
   padding: 16px 20px;
   border-radius: 0 0 12px 12px;
+  text-align: center; /* centraliza o texto */
 }
 
 /* Ícone do menu (hambúrguer) */
 .menu-icon {
   position: absolute;
   left: 20px;
+  top: 50%;
+  transform: translateY(-50%); /* centraliza verticalmente */
   font-size: 30px;
   cursor: pointer;
   padding: 10px;
@@ -40,18 +40,10 @@ header {
 
 /* Título centralizado */
 .title {
+  margin: 0;
   font-size: 1.4rem;
   font-weight: 800;
   color: var(--texto-claro);
-  text-align: center;
-}
-
-/* Horário (se quiser manter à direita) */
-.horario {
-  position: absolute;
-  right: 20px;
-  font-size: 0.85rem;
-  color: #ccc;
 }
 
 /* MENU LATERAL */
@@ -97,13 +89,6 @@ header {
   font-size: 32px;
   color: #ffcc00;
   margin-bottom: 30px;
-}
-
-.section-subtitle {
-  font-size: 24px;
-  color: #ffcc00;
-  margin-top: 40px;
-  margin-bottom: 20px;
 }
 
 /* GRID DE ITENS */
@@ -167,45 +152,6 @@ header {
   box-shadow: none;
 }
 
-/* BLOCO DO HEADER DE PEDIDO */
-.header-pedido {
-  background-color: var(--vermelho-header);
-  color: var(--texto-claro);
-  padding: 16px 20px;
-  border-radius: 0 0 12px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.pedido-bloco {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  text-align: center;
-}
-
-.pedido-titulo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.pedido-titulo h1 {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin: 0;
-  color: var(--texto-claro);
-}
-
-.pedido-icon {
-  width: 40px;
-  height: 40px;
-}
-
 /* RESPONSIVIDADE */
 @media (max-width: 800px) {
   .menu-icon {
@@ -215,20 +161,6 @@ header {
 
   .title {
     font-size: 1.2rem;
-  }
-
-  .pedido-titulo h1 {
-    font-size: 1.3rem;
-  }
-
-  .pedido-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .horario {
-    font-size: 0.8rem;
-    right: 12px;
   }
 }
 
