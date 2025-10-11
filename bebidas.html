@@ -18,9 +18,11 @@
     <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
     <li><a href="acai.html">Açai e Milk-Shake</a></li>
     <li><a href="pedido.html">Carrinho</a></li>
-<div class="title">Faça o seu pedido!</div>
-</header>
   </ul>
+  <!-- ✅ Agora a div está corretamente fora da ul -->
+  <div class="title">Faça o seu pedido!</div>
+</header>
+
 <section class="pasteis-section" id="bebidas">
   <h2 class="section-title">Cardápio de Bebidas</h2>
   <div class="pasteis-grid">
@@ -28,17 +30,14 @@
       <span>Refrigerante lata - R$ 5,00</span>
       <button class="pedido-button" onclick="adicionarAoCarrinho('Refrigerante lata', 5.00)">Pedir</button>
     </div>
-
     <div class="item-card">
       <span>Suco Maratá - R$ 8,00</span>
       <button class="pedido-button" onclick="adicionarAoCarrinho('Suco Maratá', 8.00)">Pedir</button>
     </div>
-
     <div class="item-card">
       <span>Água - R$ 3,00</span>
       <button class="pedido-button" onclick="adicionarAoCarrinho('Água', 3.00)">Pedir</button>
     </div>
-
     <div class="item-card">
       <span>IT Guaraná ou Limão - R$ 8,00</span>
       <button class="pedido-button" onclick="adicionarAoCarrinho('IT Guaraná ou Limão', 8.00)">Pedir</button>
@@ -47,53 +46,33 @@
 </section>
 
 <script>
+  // Corrigir função duplicada e IDs errados
   function adicionarAoCarrinho(nome, preco) {
-    if (!nome || isNaN(preco)) {
-      console.error("Dados inválidos:", nome, preco);
-      return;
-    }
+    if (!nome || isNaN(preco)) return;
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome: nome, preco: preco });
+    carrinho.push({ nome, preco });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${nome} foi adicionado ao carrinho!`);
     window.location.href = "pedido.html";
   }
 
-  document.getElementById('menu-toggle').addEventListener('click', function(e) {
-    e.stopPropagation();
-    document.getElementById('nav-menu').classList.toggle('open');
-  });
-
-  document.addEventListener('click', function(e) {
-    if (!document.getElementById('nav-menu').contains(e.target) && e.target.id !== 'menu-toggle') {
-      document.getElementById('nav-menu').classList.remove('open');
-    }
-  });
-  function adicionarAoCarrinho(nome, preco) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome: nome, preco: Number(preco) });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    alert(`${nome} foi adicionado ao carrinho!`);
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById("menu-toggle");
-    const navMenu = document.getElementById("nav-menu");
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
 
-    if (!menuToggle || !navMenu) return;
-
-    menuToggle.addEventListener("click", (e) => {
+    menuBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      navMenu.classList.toggle("open");
+      menu.classList.toggle("open");
     });
 
     document.addEventListener("click", (e) => {
-      if (!navMenu.contains(e.target) && e.target !== menuToggle) {
-        navMenu.classList.remove("open");
+      if (!menu.contains(e.target) && e.target !== menuBtn) {
+        menu.classList.remove("open");
       }
-    }); 
+    });
   });
-
 </script>
+
 </body>
+</html>
 
