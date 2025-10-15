@@ -28,27 +28,30 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--vermelho-header);
-  color: var(--texto-claro);
-  padding: 12px 20px;
-  border-radius: 0 0 12px 12px;
+  background-color: #333333; /* fundo escuro */
+  color: #fff; /* texto branco */
+  padding: 15px 30px; /* espaçamento maior */
+  border-radius: 0 0 25px 25px; /* bordas arredondadas inferiores */
+  box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3); /* sombra vermelha suave */
 }
 
 .menu-icon {
-  font-size: 30px;
+  font-size: 40px; /* maior tamanho do ícone */
   cursor: pointer;
-  padding: 10px;
-  border: 2px solid var(--amarelo);
-  border-radius: 10px;
-  color: var(--amarelo);
+  padding: 20px; /* padding maior no botão */
+  border: 3px solid #ffcc00; /* borda amarela grossa */
+  border-radius: 20px; /* bordas bem arredondadas */
+  color: #ffcc00; /* cor amarela */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--texto-claro);
+  font-size: 1.6rem; /* fonte maior */
+  font-weight: 900; /* negrito pesado */
+  color: #fff;
 }
-
 .horario {
   text-align: right;
   font-size: 0.85rem;
