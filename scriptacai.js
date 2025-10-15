@@ -1,13 +1,15 @@
 /* ---------------------------
 // Menu Mobile toggle
 document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.getElementById('menuBtn');
-  const menu = document.getElementById('menu');
+  const menuBtn = document.getElementById("menuBtn");
+  const menu = document.getElementById("menu");
 
-  menuBtn.addEventListener('click', () => {
-    menu.classList.toggle('open');
-  });
-
+  if (menuBtn && menu) {
+    menuBtn.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
+  }
+});
   // Elementos Açaí
   const acaiTamanho = document.getElementById("acai-tamanho");
   const acaiNutella = document.getElementById("acai-extra-nutella");
