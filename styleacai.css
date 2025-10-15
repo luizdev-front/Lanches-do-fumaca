@@ -3,12 +3,18 @@
 
 /* ======= VARIÁVEIS ======= */
 :root {
-  --vermelho-header: #d92128;
-  --texto-claro: #f0f0f8;
-  --amarelo: #ffcc00;
-  --sombra: 0 10px 25px rgba(0, 0, 0, 0.35);
-  /* já estavam definidos, mas agora estão completos */
+  --bg: #ff0000;
+  --header-bg: #333;
+  --menu-bg: #d92128;
+  --highlight: #ffcc00;
+  --surface: #1f1f28;
+  --text: #f0f0f8;
+  --muted: #ccc;
+  --radius: 10px;
+  --transition: 0.25s ease;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
+
 
 /* ======= RESET ======= */
 * {
