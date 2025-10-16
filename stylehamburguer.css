@@ -28,60 +28,66 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #333333; /* fundo escuro */
-  color: #fff; /* texto branco */
-  padding: 15px 30px; /* espaçamento maior */
-  border-radius: 0 0 25px 25px; /* bordas arredondadas inferiores */
-  box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3); /* sombra vermelha suave */
+  background-color: #333333;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
+  position: relative;
+  z-index: 2000;
 }
-
 .menu-icon {
-  font-size: 40px; /* maior tamanho do ícone */
+  font-size: 40px;
   cursor: pointer;
-  padding: 20px; /* padding maior no botão */
-  border: 3px solid #ffcc00; /* borda amarela grossa */
-  border-radius: 20px; /* bordas bem arredondadas */
-  color: #ffcc00; /* cor amarela */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
+  border: 3px solid #ffcc00;
+  border-radius: 20px;
+  color: #ffcc00;
+  user-select: none;
+  transition: background-color 0.3s, transform 0.2s;
 }
-
+.menu-icon:hover {
+  background-color: #ffcc00;
+  color: #d92128;
+  transform: scale(1.05);
+}
 .title {
-  font-size: 1.6rem; /* fonte maior */
-  font-weight: 900; /* negrito pesado */
+  font-size: 1.6rem;
+  font-weight: 900;
   color: #fff;
 }
-.horario {
-  text-align: right;
-  font-size: 0.85rem;
-  color: #ccc;
-}
-
 .menu {
-  display: none;
-  position: fixed;
-  top: 60px;
-  left: 20px;
-  background-color: #fff;
   list-style: none;
-  border-radius: 10px;
+  position: absolute;
+  top: 60px;
+  left: 15px;
   width: 200px;
-  box-shadow: var(--sombra);
+  background-color: #d92128;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
   z-index: 1000;
 }
 .menu.open {
-  display: block;
+  max-height: 500px;
 }
 .menu li {
-  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+  border-bottom: 1px solid #aa1a1f;
 }
 .menu li a {
-  color: #d92128;
+  color: #ffcc00;
+  font-weight: bold;
   text-decoration: none;
   display: block;
-  padding: 12px 16px;
-  font-weight: 600;
+}
+.menu li:hover {
+  background-color: #ffcc00;
+}
+.menu li:hover a {
+  color: #d92128;
 }
 /* Seção de pastéis */
 .pasteis-section {
