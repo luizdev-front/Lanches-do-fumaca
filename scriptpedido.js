@@ -1,13 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   const produtoDiv = document.getElementById('produto');
   const botaoVendedora = document.getElementById('enviar-vendedora-btn');
   const pagamentoSelect = document.getElementById('pagamento');
   const pixDiv = document.getElementById('pix-info');
 
-  // ================================
-  // 1️⃣ Bairros e taxas de entrega
-  // ================================
   const bairrosTaxas = [
     { bairro: 'MARÉ MANSA', taxa: 4.00 },
     { bairro: 'VILA RÃ', taxa: 6.00 },
@@ -16,9 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { bairro: 'PEDREIRA', taxa: 8.00 }
   ];
 
-  // ================================
-  // 2️⃣ Mostrar itens do carrinho
-  // ================================
   function mostrarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     produtoDiv.innerHTML = '';
@@ -65,18 +58,19 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarCarrinho();
   }
 
-  // ================================
-  // 3️⃣ Controle do campo Pix
-  // ================================
   pagamentoSelect.addEventListener('change', () => {
     pixDiv.classList.toggle('hidden', pagamentoSelect.value !== 'pix');
     if (pagamentoSelect.value !== 'pix') pixDiv.innerHTML = '';
   });
 
-  // ================================
-  // 4️⃣ Finalizar Pedido
-  // ================================
   botaoVendedora.addEventListener('click', finalizarPedido);
+
+  function gerarCodigoPedido() {
+    const agora = new Date();
+    const data = agora.toISOString().slice(0, 10).replace(/-/g, '');
+    const aleatorio = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    return `PED-${data}-${aleatorio}`;
+  }
 
   function finalizarPedido() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -87,21 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nomeCliente = document.getElementById('nome').value.trim();
     const enderecoClienteOriginal = document.getElementById('endereco').value.trim();
+    const ruaCliente = document.getElementById('rua').value.trim();
+    const numeroCasa = document.getElementById('numero').value.trim();
+    const observacoes = document.getElementById('observacoes').value.trim();
+    const formaPagamento = pagamentoSelect.value;
+
+    if (!nomeCliente || !enderecoClienteOriginal || !ruaCliente || !numeroCasa || !formaPagamento) {
+      alert('Preencha nome, endereço, rua, número e forma de pagamento!');
+      return;
+    }
+
     const enderecoCliente = enderecoClienteOriginal
       .toUpperCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
-    const observacoes = document.getElementById('observacoes').value.trim();
-    const formaPagamento = pagamentoSelect.value;
 
-    if (!nomeCliente || !enderecoClienteOriginal || !formaPagamento) {
-      alert('Preencha nome, endereço e forma de pagamento!');
-      return;
-    }
-
-    // ================================
-    // 5️⃣ Validação do bairro
-    // ================================
     const bairroEncontrado = bairrosTaxas.find(({ bairro }) => {
       const bairroFormatado = bairro
         .toUpperCase()
@@ -117,10 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const taxaEntrega = bairroEncontrado.taxa;
+    const codigoPedido = gerarCodigoPedido();
 
-    // ================================
-    // 6️⃣ Montar mensagem do pedido
-    // ================================
     let mensagem = '📦 *Novo Pedido*\n\n';
     let total = 0;
 
@@ -132,16 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalComEntrega = total + taxaEntrega;
     mensagem += `\n🚚 Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}\n`;
-    mensagem += `💰 Total com entrega: R$ ${totalComEntrega.toFixed(2)}\n`;
+    mensagem += `💰 Total com entrega: R$ ${totalComEntrega.toFixed(2)}\n\n`;
+
+    mensagem += `🔖 Código do Pedido: *${codigoPedido}*\n`;
     mensagem += `👤 Cliente: ${nomeCliente}\n`;
-    mensagem += `🏠 Endereço: ${enderecoClienteOriginal}\n`;
+    mensagem += `🏠 Endereço: ${ruaCliente}, Nº ${numeroCasa}, Bairro: ${enderecoClienteOriginal}\n`;
     if (observacoes) mensagem += `📝 Observações: ${observacoes}\n`;
     mensagem += `💳 Pagamento: ${formaPagamento.toUpperCase()}\n`;
     mensagem += `🕒 Data: ${new Date().toLocaleString()}\n`;
 
-    // ================================
-    // 7️⃣ Pix
-    // ================================
     if (formaPagamento === 'pix') {
       mensagem += `\n📲 Pagamento via Pix\nChave Pix: 13988799046\nValor: R$ ${totalComEntrega.toFixed(2)}\nEnvie o comprovante após o pagamento. ✅\n`;
       pixDiv.classList.remove('hidden');
@@ -159,13 +150,15 @@ document.addEventListener('DOMContentLoaded', () => {
       pixDiv.innerHTML = '';
     }
 
-    // ================================
-    // 8️⃣ Salvar pedido e limpar carrinho
-    // ================================
     const novoPedido = {
+      codigo: codigoPedido,
       itens: carrinho,
       cliente: nomeCliente,
-      endereco: enderecoClienteOriginal,
+      endereco: {
+        bairro: enderecoClienteOriginal,
+        rua: ruaCliente,
+        numero: numeroCasa
+      },
       observacoes,
       pagamento: formaPagamento,
       data: new Date().toLocaleString(),
@@ -178,21 +171,18 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('carrinho');
     mostrarCarrinho();
 
-    if (formaPagamento !== 'pix') {
-      document.getElementById('nome').value = '';
-      document.getElementById('endereco').value = '';
-      document.getElementById('observacoes').value = '';
-      pagamentoSelect.value = '';
-    }
+    // Limpar campos (exceto PIX se for necessário copiar)
+    document.getElementById('nome').value = '';
+    document.getElementById('endereco').value = '';
+    document.getElementById('rua').value = '';
+    document.getElementById('numero').value = '';
+    document.getElementById('observacoes').value = '';
+    pagamentoSelect.value = '';
 
-    // ================================
-    // 9️⃣ Envio para o WhatsApp
-    // ================================
-    const numero = '5513988799046'; // seu número aqui
+    const numero = '5513988799046';
     const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
     window.open(link, '_blank');
   }
 
-  // Inicializa carrinho ao carregar
   mostrarCarrinho();
 });
