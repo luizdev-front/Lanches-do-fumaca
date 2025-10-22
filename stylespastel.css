@@ -73,6 +73,14 @@ header {
 .menu li:hover a {
   color: #d92128;
 }
+/* TÍTULO NO HEADER */
+.title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--texto-claro);
+  margin-left: 15px;
+}
+
 
 /* ANIMAÇÃO */
 @keyframes fadeIn {
