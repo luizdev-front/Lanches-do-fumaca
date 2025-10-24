@@ -36,8 +36,10 @@ header {
   align-items: center;
   padding: 10px 15px;
   color: azure;
-  justify-content: space-between;
-  position: relative; /* necessário para o menu */
+  /* Mude para centralizar o conteúdo como um grupo no meio,
+     mas ainda precisamos isolar o menu-icon */
+  justify-content: center; 
+  position: relative;
   z-index: 2000;
 }
 
@@ -57,6 +59,19 @@ header {
   max-height: 0;
   transition: max-height 0.3s ease-in-out;
   z-index: 1000;
+}
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--highlight);
+  padding: 8px 12px;
+  border: 2px solid var(--highlight);
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  user-select: none;
+  
+  /* NOVO CÓDIGO AQUI: */
+  margin-right: auto; 
 }
 
 .menu.open {
