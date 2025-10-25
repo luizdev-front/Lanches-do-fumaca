@@ -24,78 +24,83 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ========== HEADER GERAL ========== */
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* espaço entre menu e título */
-  background-color: #333333;
-  color: #fff;
-  padding: 15px 30px;
-  border-radius: 0; /* tira o arredondamento para ficar reto */
-  box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
-  position: relative;
-  z-index: 2000;
+  justify-content: flex-start;
+  background-color: var(--vermelho-header);
+  color: var(--texto-claro);
+  padding: 12px 20px;
+  border-radius: 0 0 12px 12px;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Ícone do menu */
+/* ÍCONE DO MENU */
 .menu-icon {
-  font-size: 40px;
+  font-size: 30px;
   cursor: pointer;
   padding: 10px;
-  border: 3px solid #ffcc00;
-  border-radius: 15px;
-  color: #ffcc00;
-  user-select: none;
+  border: 2px solid var(--amarelo);
+  border-radius: 10px;
+  color: var(--amarelo);
   transition: background-color 0.3s, transform 0.2s;
 }
 .menu-icon:hover {
-  background-color: #ffcc00;
-  color: #d92128;
+  background-color: var(--amarelo);
+  color: var(--vermelho-header);
   transform: scale(1.05);
 }
 
-/* Centralizar o título dentro do header */
-.title {
-  flex: 1; /* ocupa o espaço restante */
-  text-align: center; /* centraliza o texto */
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: #fff;
-}
-
-/* Menu lateral */
+/* MENU LATERAL */
 .menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  background-color: #fff;
   list-style: none;
-  position: absolute;
-  top: 70px;
-  left: 15px;
-  width: 200px;
-  background-color: #d92128;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease-in-out;
+  width: 200px;
+  box-shadow: var(--sombra);
   z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 0;
+  margin: 0;
 }
 .menu.open {
-  max-height: 500px;
+  display: block;
 }
 .menu li {
-  padding: 12px 16px;
-  border-bottom: 1px solid #aa1a1f;
+  border-bottom: 1px solid #eee;
 }
 .menu li a {
-  color: #ffcc00;
-  font-weight: bold;
+  color: #d92128;
   text-decoration: none;
   display: block;
+  padding: 12px 16px;
+  font-weight: 600;
 }
 .menu li:hover {
   background-color: #ffcc00;
 }
 .menu li:hover a {
   color: #d92128;
+}
+
+/* TÍTULO */
+.title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--texto-claro);
+  margin-left: 15px;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 /* Seção de pastéis */
 .pasteis-section {
