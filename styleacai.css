@@ -29,18 +29,32 @@ body {
   color: var(--text);
   line-height: 1.5;
 }
-
 header {
   background-color: var(--header-bg);
   display: flex;
   align-items: center;
   padding: 10px 15px;
   color: azure;
-  /* Mude para centralizar o conteúdo como um grupo no meio,
-     mas ainda precisamos isolar o menu-icon */
-  justify-content: center; 
+  /* CORRIGIDO: Volta para space-between para separar o ícone do resto */
+  justify-content: space-between; 
   position: relative;
   z-index: 2000;
+}
+
+/* Remova este bloco se ele estiver duplicado, ou apenas modifique o item abaixo */
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--highlight);
+  padding: 8px 12px;
+  border: 2px solid var(--highlight);
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  user-select: none;
+
+  /* REMOVIDO: Esta linha empurrava o menu-icon para a esquerda, mas interferia na centralização do title. 
+     O justify-content: space-between já faz o trabalho de posicionamento. */
+  /* margin-right: auto; */ 
 }
 
 /* Menu dropdown */
@@ -60,20 +74,6 @@ header {
   transition: max-height 0.3s ease-in-out;
   z-index: 1000;
 }
-.menu-icon {
-  font-size: 28px;
-  cursor: pointer;
-  color: var(--highlight);
-  padding: 8px 12px;
-  border: 2px solid var(--highlight);
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-  user-select: none;
-  
-  /* NOVO CÓDIGO AQUI: */
-  margin-right: auto; 
-}
-
 .menu.open {
   max-height: 500px; /* suficiente para mostrar itens */
 }
