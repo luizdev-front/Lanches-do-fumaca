@@ -27,21 +27,23 @@ body {
 header {
   display: flex;
   align-items: center;
-justify-content: center; /* MUDADO: Tenta centralizar todos os itens */
+  justify-content: space-between; /* espaço entre menu e título */
   background-color: #333333;
   color: #fff;
   padding: 15px 30px;
-  border-radius: 0 0 25px 25px;
+  border-radius: 0; /* tira o arredondamento para ficar reto */
   box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
   position: relative;
   z-index: 2000;
 }
+
+/* Ícone do menu */
 .menu-icon {
   font-size: 40px;
   cursor: pointer;
-  padding: 20px;
+  padding: 10px;
   border: 3px solid #ffcc00;
-  border-radius: 20px;
+  border-radius: 15px;
   color: #ffcc00;
   user-select: none;
   transition: background-color 0.3s, transform 0.2s;
@@ -51,15 +53,21 @@ justify-content: center; /* MUDADO: Tenta centralizar todos os itens */
   color: #d92128;
   transform: scale(1.05);
 }
+
+/* Centralizar o título dentro do header */
 .title {
+  flex: 1; /* ocupa o espaço restante */
+  text-align: center; /* centraliza o texto */
   font-size: 1.6rem;
   font-weight: 900;
   color: #fff;
 }
+
+/* Menu lateral */
 .menu {
   list-style: none;
   position: absolute;
-  top: 60px;
+  top: 70px;
   left: 15px;
   width: 200px;
   background-color: #d92128;
