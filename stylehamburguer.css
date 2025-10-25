@@ -347,3 +347,20 @@
     left: 12px;
   }
 }
+/* GARANTIR FUNDO VERMELHO EM TODA A PÁGINA */
+html, body {
+  height: 100%;
+  background-color: #e02525 !important; /* 🔴 Vermelho de fundo */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Seções principais também vermelhas */
+main, section, .pasteis-section, .cardapio-section {
+  background-color: #e02525 !important;
+}
+
+/* Corrige texto e botões */
+h1, h2, h3, h4, h5, p, span {
+  color: #fff;
+}
