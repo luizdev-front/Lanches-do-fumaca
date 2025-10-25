@@ -35,13 +35,12 @@ header {
   align-items: center;
   padding: 10px 15px;
   color: azure;
-  /* CORRIGIDO: Volta para space-between para separar o ícone do resto */
+  /* CORRIGIDO: Usa space-between para forçar os 3 itens (ícone, título, placeholder) às extremidades */
   justify-content: space-between; 
   position: relative;
   z-index: 2000;
 }
 
-/* Remova este bloco se ele estiver duplicado, ou apenas modifique o item abaixo */
 .menu-icon {
   font-size: 28px;
   cursor: pointer;
@@ -51,11 +50,24 @@ header {
   border-radius: 8px;
   transition: background-color 0.3s, transform 0.2s;
   user-select: none;
-
-  /* REMOVIDO: Esta linha empurrava o menu-icon para a esquerda, mas interferia na centralização do title. 
-     O justify-content: space-between já faz o trabalho de posicionamento. */
-  /* margin-right: auto; */ 
+  /* Não precisa de margin-right: auto */
 }
+
+/* NOVO ESTILO: Garante que o placeholder tenha o mesmo tamanho do ícone */
+.menu-placeholder {
+  /* Largura e altura são as dimensões visuais do .menu-icon:
+     (Tamanho da Fonte + 2*Padding + 2*Borda) */
+  width: 56px; 
+  height: 48px;
+}
+
+.menu-icon:hover {
+  background-color: var(--highlight);
+  color: var(--highlight-hover);
+  transform: scale(1.05);
+}
+/* ... O restante do seu CSS para .title e .menu permanece o mesmo ... */
+
 
 /* Menu dropdown */
 .menu {
