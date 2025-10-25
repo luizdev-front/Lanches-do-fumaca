@@ -24,15 +24,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ========== HEADER GERAL ========== */
 header {
-  background-color: #333;
   display: flex;
   align-items: center;
-  padding: 10px 15px;
-  color:azure;
-  justify-content: space-between; /* 🔥 separa lados */
+  justify-content: flex-start;
+  background-color: var(--vermelho-header);
+  color: var(--texto-claro);
+  padding: 12px 20px;
+  border-radius: 0 0 12px 12px;
+  font-family: 'Poppins', sans-serif;
 }
-/* ÍCONE DO MENU */
+ ÍCONE DO MENU */
 .menu-icon {
   font-size: 30px;
   cursor: pointer;
