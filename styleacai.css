@@ -35,8 +35,7 @@ header {
   align-items: center;
   padding: 10px 15px;
   color: azure;
-  /* CORRIGIDO: Usa space-between para forçar os 3 itens (ícone, título, placeholder) às extremidades */
-  justify-content: space-between; 
+ justify-content: center; /* MUDADO: Tenta centralizar todos os itens */
   position: relative;
   z-index: 2000;
 }
