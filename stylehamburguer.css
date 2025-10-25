@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;800&display=swap');
 
 :root {
-  --vermelho-header: #000000; /* header preto */
+  --vermelho-header: #1a1a1a; /* preto estilo pastelaria */
   --amarelo: #ffcc00;
   --texto-claro: #fff;
   --sombra: 0 4px 10px rgba(0, 0, 0, 0.3);
