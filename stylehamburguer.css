@@ -2,12 +2,13 @@
 
 
 :root {
-  --vermelho-header: #d92128; /* vermelho da pastelaria */
-  --vermelho-fundo: #b71c1c;  /* 🔴 fundo vermelho do site */
-  --amarelo: #ffcc00;
+  --vermelho-header: #d92128; /* Vermelho pastelaria (header) */
+  --vermelho-fundo: #e02525;  /* 🔴 Fundo vermelho da página */
+  --amarelo: #ffcc00;         /* Amarelo vibrante */
   --texto-claro: #fff;
   --sombra: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
 
 body {
   font-family: 'Poppins', sans-serif;
