@@ -33,8 +33,9 @@ header {
   align-items: center;
   padding: 10px 15px;
   color: azure;
-  justify-content: space-between;
-  position: relative; /* necessário para o menu */
+  /* Mude 'space-between' para 'center' para centralizar o bloco 'Faça o seu pedido!' */
+  justify-content: center; 
+  position: relative;
   z-index: 2000;
 }
 
@@ -93,8 +94,10 @@ header {
   border-radius: 8px;
   transition: background-color 0.3s, transform 0.2s;
   user-select: none;
+  
+  /* ESTE É O TRUQUE: Empurra o ícone para a esquerda */
+  margin-right: auto; 
 }
-
 .menu-icon:hover {
   background-color: var(--highlight);
   color: var(--highlight-hover);
@@ -106,7 +109,7 @@ header {
   font-weight: bold;
   max-width: 100%;
   height: auto;
-align-itens:center;
+  /* Remova 'align-itens:center;' (que não funciona aqui) */
 }
 /* SEÇÃO DE BEBIDAS / PASTÉIS */
 .pasteis-section {
