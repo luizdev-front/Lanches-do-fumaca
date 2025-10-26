@@ -30,14 +30,46 @@ body {
 header {
   background-color: var(--header-bg);
   display: flex;
-  align-items: center;
+  align-items: center;       /* centraliza verticalmente */
+  justify-content: center;   /* centraliza o título horizontalmente */
   padding: 10px 15px;
-  color: azure;
-  /* Mude 'space-between' para 'center' para centralizar o bloco 'Faça o seu pedido!' */
-  justify-content: center; 
   position: relative;
   z-index: 2000;
+  height: 70px;              /* altura fixa opcional */
 }
+
+/* Ícone do menu */
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--highlight);
+  padding: 8px 12px;
+  border: 2px solid var(--highlight);
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  user-select: none;
+
+  /* posição fixa à esquerda */
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%); /* centraliza verticalmente no header */
+}
+
+.menu-icon:hover {
+  background-color: var(--highlight);
+  color: var(--highlight-hover);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Título centralizado */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--highlight);
+  text-align: center;
+}
+
 
 /* Menu dropdown */
 .menu {
