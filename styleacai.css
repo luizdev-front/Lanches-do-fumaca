@@ -33,13 +33,15 @@ header {
   background-color: var(--header-bg);
   display: flex;
   align-items: center;
+  justify-content: center;   /* Centraliza o título */
   padding: 10px 15px;
   color: azure;
- justify-content: center; /* MUDADO: Tenta centralizar todos os itens */
-  position: relative;
+  position: relative;        /* Necessário para posicionar o ícone */
   z-index: 2000;
+  height: 70px;              /* Altura padrão opcional */
 }
 
+/* ÍCONE DO MENU (HAMBÚRGUER) FIXO À ESQUERDA */
 .menu-icon {
   font-size: 28px;
   cursor: pointer;
@@ -49,32 +51,34 @@ header {
   border-radius: 8px;
   transition: background-color 0.3s, transform 0.2s;
   user-select: none;
-  /* Não precisa de margin-right: auto */
-}
 
-/* NOVO ESTILO: Garante que o placeholder tenha o mesmo tamanho do ícone */
-.menu-placeholder {
-  /* Largura e altura são as dimensões visuais do .menu-icon:
-     (Tamanho da Fonte + 2*Padding + 2*Borda) */
-  width: 56px; 
-  height: 48px;
+  position: absolute; /* fixa dentro do header */
+  left: 15px;         /* gruda na esquerda */
+  top: 50%;           /* centraliza verticalmente */
+  transform: translateY(-50%);
 }
 
 .menu-icon:hover {
   background-color: var(--highlight);
   color: var(--highlight-hover);
-  transform: scale(1.05);
+  transform: translateY(-50%) scale(1.05);
 }
-/* ... O restante do seu CSS para .title e .menu permanece o mesmo ... */
 
+/* TÍTULO CENTRALIZADO NO HEADER */
+.title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--highlight);
+  text-align: center;
+}
 
-/* Menu dropdown */
+/* MENU DROPDOWN */
 .menu {
   list-style: none;
   padding: 0;
   margin: 0;
   position: absolute;
-  top: 60px;
+  top: 70px;
   left: 15px;
   border-radius: var(--radius);
   width: 200px;
@@ -85,11 +89,12 @@ header {
   transition: max-height 0.3s ease-in-out;
   z-index: 1000;
 }
+
 .menu.open {
-  max-height: 500px; /* suficiente para mostrar itens */
+  max-height: 500px; /* mostra os itens */
 }
 
-/* Itens do menu */
+/* ITENS DO MENU */
 .menu li {
   padding: 12px 16px;
   font-size: 16px;
@@ -111,6 +116,7 @@ header {
 .menu li:hover a {
   color: var(--highlight-hover);
 }
+
 
 /* Botão do menu */
 .menu-icon {
