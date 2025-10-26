@@ -83,7 +83,8 @@ header {
   font-size: 1.4rem;
   font-weight: 800;
   color: var(--texto-claro);
-  margin-left: 15px;
+  margin-left: 15px;  
+  position: absolute;
 }
 
 /* ANIMAÇÃO */
