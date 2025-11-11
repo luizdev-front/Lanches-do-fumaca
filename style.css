@@ -20,6 +20,11 @@ body {
   -webkit-font-smoothing:antialiased;
 }
 
+/* Adicione esta classe para o body quando o menu estiver aberto */
+body.menu-open {
+  overflow: hidden;
+}
+
 .container {
   width: 100%;
   max-width: var(--max-width);
@@ -105,7 +110,25 @@ body {
   margin-right: auto;
 }
 
+/* [NOVO] Estilo do Overlay (fundo escurecido) */
+.menu-overlay {
+  position: fixed;
+  inset: 0; /* (top: 0, right: 0, bottom: 0, left: 0) */
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1250; /* Abaixo do menu, acima do header */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
 /* =================== HERO =================== */
+/* ... (Seu código do HERO continua igual) ... */
 .hero {
   position: relative;
   padding: 28px 12px 48px;
@@ -178,41 +201,59 @@ body {
   box-shadow: 0 8px 22px rgba(0,0,0,0.28);
 }
 
+
 /* =================== RESPONSIVIDADE =================== */
 @media (max-width: 900px){
   .small-info { display: none; }
 }
 
+/* [MODIFICADO] Bloco de Responsividade para o menu */
 @media (max-width: 768px){
   .navbar {
-    position: absolute;
-    top: 68px;
-    left: 12px;
+    /* 1. Mudar para position: fixed e alinhar à esquerda */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Altura total da tela */
     width: 240px;
+    
+    /* 2. Estilos visuais */
     background: var(--red-strong);
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0; /* Arredondar só os cantos da direita */
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    display: none;
+    
+    /* 3. Manter layout flexível e Z-index */
+    display: flex; /* Pode manter flex, vamos esconder com transform */
     flex-direction: column;
-    padding: 10px;
+    padding: 20px 10px; /* Mais padding no topo */
+    z-index: 1300; /* Acima de tudo (header e overlay) */
+
+    /* 4. Esconder fora da tela e animar */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
   }
   .navbar ul {
     flex-direction: column;
     gap: 8px;
+    width: 100%; /* Garantir que a lista ocupe o espaço */
   }
   .navbar a {
     padding: 10px;
     display: block;
   }
+  
+  /* 5. Estado Ativo: Mostrar o menu */
   .navbar.active {
-    display: flex;
+    transform: translateX(0);
   }
 
+  /* 6. Mostrar o botão toggle */
   .menu-toggle {
     display: block;
-    margin-right: auto;
+    margin-right: auto; /* Mantendo seu estilo original */
   }
 
+  /* ... (Resto dos seus estilos do hero) ... */
   .hero {
     min-height: 420px;
     padding-top: 18px;
