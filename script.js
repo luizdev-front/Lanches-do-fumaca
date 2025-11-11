@@ -1,6 +1,9 @@
-  const menuBtn = document.getElementById("menuBtn"); 
-  const menu = document.getElementById("menu");
+// Seleciona os elementos
+const menuToggle = document.getElementById("menuToggle");
+const navbar = document.getElementById("navbar");
 
-  menuBtn.addEventListener("click", () => {
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  });
+// Alterna o menu no clique
+menuToggle.addEventListener("click", () => {
+  const isOpen = navbar.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", isOpen);
+});
