@@ -217,3 +217,14 @@ body {
   .hero { min-height: 420px; padding-top: 18px; padding-bottom: 36px; }
   .hero-content { padding: 16px; }
 }
+.menu-toggle {
+  display: none; /* já está assim */
+  background: transparent;
+  border: none;
+  color: var(--yellow);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+
+  order: -1; /* joga o botão antes dos outros elementos */
+}
