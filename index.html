@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>Pastelaria do Fumaça</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- ===== HEADER ===== -->
-  <header class="header">
-    <div class="header-container">
-      <button id="menuBtn" class="menu-btn">☰</button>
-      <div class="logo-container">
-        <img src="https://i.ibb.co/ZB2kZjn/logo-pastelaria.png" alt="Logo" class="header-logo" />
-        <div class="header-text">
-          <h1>Pastelaria do Fumaça</h1>
-          <p>Aberto: Seg–Sex 18:00–01:30 · Fds 19:00–02:00</p>
+  <!-- HEADER REUTILIZÁVEL -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="logo-area">
+        <img src="logo.jpg" alt="Logo Pastelaria do Fumaça" class="logo" />
+        <div>
+          <div class="brand">Pastelaria do Fumaça</div>
+          <div class="small-info">Aberto: Seg–Sex 18:00–01:30 · Fds 19:00–02:00</div>
         </div>
       </div>
-    </div>
 
-    nav class="navbar" id="navbar">
+      <nav class="navbar" id="navbar" role="navigation" aria-label="Menu principal">
         <ul>
           <li><a href="index.html">Início</a></li>
           <li><a href="pastel.html">Pastéis</a></li>
@@ -31,30 +29,31 @@
           <li><a href="pedido.html">Carrinho</a></li>
         </ul>
       </nav>
+
+      <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="navbar" aria-label="Abrir menu">☰</button>
     </div>
-  </header
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-content">
-      <img src="https://i.ibb.co/ZB2kZjn/logo-pastelaria.png" alt="Logo da Pastelaria" class="hero-logo">
-      <h2 class="hero-title">Bem-vindo à Pastelaria do Fumaça!</h2>
-      <p class="info">📞 <strong>(13) 99603-9919</strong></p>
-      <p class="info">📍 R. Luís Custódio do Vale, 725 - Guarujá - SP, 11444-680</p>
-      <p class="info">🚴 Entregas de 30 a 60 minutos</p>
-      <a href="#" class="pedido-button">Fazer Pedido</a>
-    </div>
-  </section>
+  <!-- HERO / BANNER -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <img src="logo.jpg" alt="Mascote Pastelaria do Fumaça" class="hero-logo" />
+        <h2 class="hero-title">Bem-vindo à Pastelaria do Fumaça!</h2>
 
-  <!-- ===== SCRIPT ===== -->
-  <script>
-    const menuBtn = document.getElementById("menuBtn"); 
-    const menu = document.getElementById("menu");
+        <p class="info">
+          <strong>Contato:</strong> (13) 99603-9919<br>
+          📍 R. Luís Custódio do Vale, 725 - Guarujá - SP, 11444-680<br>
+          🚴‍♂️ 30 a 60 Min - Tempo estimado de entrega
+        </p>
 
-    menuBtn.addEventListener("click", () => {
-      menu.classList.toggle("active");
-    });
-  </script>
+        <a href="pedido.html" class="pedido-button">Fazer Pedido</a>
+      </div>
+    </section>
+
+    <!-- resto do conteúdo ... -->
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
