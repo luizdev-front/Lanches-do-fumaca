@@ -1,106 +1,162 @@
+/* ======= ESTILOS GERAIS ======= */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ff0000;
   font-family: 'Poppins', sans-serif;
+  background-color: #ff0000;
 }
 
-header {
-  background-color: #333;
+/* ======= HEADER GLOBAL ======= */
+.site-header {
+  background-color: #d92128; /* vermelho principal */
+  color: #ffcc00;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.site-header .container {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
-  color:azure;
-  justify-content: space-between; /* 🔥 separa lados */
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.menu {
-  display: none;
-  background-color: #d92128; /* vermelho vivo da pastelaria */
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #ffcc00;
+  object-fit: cover;
+}
+
+.brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.navbar ul {
+  display: flex;
   list-style: none;
-  padding: 0;
   margin: 0;
-  position: absolute;
-  top: 60px;
-  left: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease-in-out;
-  width: 200px;
-}
-.menu li {
-  padding: 12px 16px;
-  font-size: 16px;
-  border-bottom: 1px solid #aa1a1f;
-  transition: background-color 0.3s, color 0.3s;
+  padding: 0;
+  gap: 20px;
 }
 
-.menu li a {
-  color: #ffcc00; /* amarelo chamativo */
+.navbar a {
   text-decoration: none;
-  display: block;
-  font-weight: bold;
+  color: #ffcc00;
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
-.menu li:hover {
-  background-color: #ffcc00; /* destaque amarelo no hover */
+.navbar a:hover {
+  color: white;
 }
 
-.menu li:hover a {
-  color: #d92128; /* texto vermelho no hover */
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.horario p {
-  margin-left:auto;
-   margin: 2px 0;
-  font-size: 14px;
-  color: #ccc;
-  
-}
-.menu-icon {
+/* ==== MENU MOBILE ==== */
+.menu-toggle {
+  display: none;
   font-size: 28px;
   cursor: pointer;
-  color: #ffcc00; /* amarelo para combinar com o botão */
-  padding: 8px 12px;
-  border: 2px solid #ffcc00;
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-.menu-icon:hover {
-  background-color: #ffcc00;
-  color: #d92128;
-  transform: scale(1.05);
+  color: #ffcc00;
 }
 
+/* Responsivo */
+@media (max-width: 768px) {
+  .navbar {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 220px;
+    background: #d92128;
+    display: none;
+    flex-direction: column;
+    text-align: right;
+    border-top-left-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+  }
 
-.title {
-  font-size: 20px;
-  font-weight: bold;
-   max-width: 100%;
-  height: auto;
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar.active {
+    display: flex;
+  }
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======= HERO SECTION ======= */
 .hero {
   background: url('https://images.unsplash.com/photo-1601924579732-3ccde9aa7bb0') center/cover no-repeat;
   text-align: center;
   padding: 40px 20px;
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.logo {
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ======= LOGO E INFO ======= */
+.logo-box {
   background: #d92128;
   padding: 10px;
   border-radius: 10px;
   display: inline-block;
   color: yellow;
   font-weight: bold;
-  font-size: 14px; /* menor que 18px */
+  font-size: 14px;
+  margin-top: 15px;
 }
 
+.info {
+  padding: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: white;
+}
+
+/* ======= BOTÃO DE PEDIDO ======= */
 .pedido-button {
   display: inline-block;
   background-color: #ffcc00;
@@ -110,14 +166,23 @@ header {
   text-decoration: none;
   border-radius: 30px;
   font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
 }
-.hero { 
-  display:flex;
-  align-items:center;
-  flex-direction:column;  
+
+.pedido-button:hover {
+  background-color: #ffe066;
+  transform: scale(1.05);
 }
-.info {
-  padding: 20px;
-  font-size: 15px;
-  line-height: 1.6;
+
+/* ======= HORÁRIO / INFORMAÇÕES ======= */
+.horario p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* ======= ANIMAÇÕES ======= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
