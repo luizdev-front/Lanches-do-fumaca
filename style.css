@@ -1,19 +1,13 @@
-/* ======= ESTILOS GERAIS ======= */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #ff0000;
-}
-
-/* ======= HEADER GLOBAL ======= */
+/* ===== HEADER GERAL ===== */
 .site-header {
-  background-color: #d92128; /* vermelho principal */
-  color: #ffcc00;
+  background: #d92128;
+  color: #fff;
   padding: 10px 20px;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .site-header .container {
@@ -21,7 +15,12 @@ body {
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto;
+}
+
+/* alinhamento à esquerda: botão → logo → menu */
+.site-header .container {
+  gap: 10px;
 }
 
 .logo-area {
@@ -30,20 +29,25 @@ body {
   gap: 10px;
 }
 
-.logo {
+.logo-area .logo {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  border: 2px solid #ffcc00;
-  object-fit: cover;
 }
 
 .brand {
-  font-size: 1.2rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  color: #ffcc00;
+  font-size: 18px;
 }
 
+.small-info {
+  font-size: 12px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+/* ===== NAVBAR ===== */
 .navbar ul {
   display: flex;
   list-style: none;
@@ -53,136 +57,113 @@ body {
 }
 
 .navbar a {
-  text-decoration: none;
   color: #ffcc00;
   font-weight: 600;
-  transition: color 0.3s;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .navbar a:hover {
-  color: white;
+  color: #fff;
 }
 
-/* ==== MENU MOBILE ==== */
+/* ===== BOTÃO MENU MOBILE ===== */
 .menu-toggle {
-  display: none;
+  background: none;
+  border: none;
+  color: #ffcc00;
   font-size: 28px;
   cursor: pointer;
-  color: #ffcc00;
+  display: none;
 }
 
-/* Responsivo */
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
   .navbar {
     position: absolute;
-    top: 70px;
-    right: 0;
-    width: 220px;
-    background: #d92128;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: #b9171f;
     display: none;
     flex-direction: column;
-    text-align: right;
-    border-top-left-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.3s ease;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  .navbar.open {
+    display: flex;
+    animation: fadeIn 0.3s ease;
   }
 
   .navbar ul {
     flex-direction: column;
     gap: 10px;
-    padding: 15px;
   }
 
-  .menu-toggle {
-    display: block;
-  }
-
-  .navbar.active {
-    display: flex;
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ======= HERO SECTION ======= */
+/* ===== HERO ===== */
 .hero {
-  background: url('https://images.unsplash.com/photo-1601924579732-3ccde9aa7bb0') center/cover no-repeat;
+  margin-top: 100px;
+  background: url('https://images.unsplash.com/photo-1601924579732-3ccde9aa7bb0?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  color: #fff;
   text-align: center;
-  padding: 40px 20px;
+  padding: 80px 20px;
   position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 0;
+  background: rgba(0,0,0,0.5);
 }
 
-.hero > * {
+.hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* ======= LOGO E INFO ======= */
-.logo-box {
-  background: #d92128;
-  padding: 10px;
+.hero-logo {
+  width: 180px;
   border-radius: 10px;
-  display: inline-block;
-  color: yellow;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 28px;
+  color: #ffcc00;
+  margin-bottom: 15px;
 }
 
 .info {
-  padding: 20px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
-  color: white;
 }
 
-/* ======= BOTÃO DE PEDIDO ======= */
 .pedido-button {
-  display: inline-block;
   background-color: #ffcc00;
-  color: #000;
-  padding: 15px 25px;
-  margin-top: 20px;
+  color: #b9171f;
+  padding: 12px 25px;
+  border-radius: 25px;
   text-decoration: none;
-  border-radius: 30px;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
+  display: inline-block;
+  margin-top: 15px;
+  transition: 0.3s;
 }
 
 .pedido-button:hover {
-  background-color: #ffe066;
-  transform: scale(1.05);
+  background-color: #fff;
+  color: #b9171f;
 }
-
-/* ======= HORÁRIO / INFORMAÇÕES ======= */
-.horario p {
-  margin: 2px 0;
-  font-size: 14px;
-  color: #ccc;
-}
-
-/* ======= ANIMAÇÕES ======= */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-} 
