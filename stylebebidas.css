@@ -1,240 +1,285 @@
-/* ======= VARIÁVEIS ======= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* =================== GLOBAL =================== */
 :root {
-  --bg: #ff0000;
-  --header-bg: #333;
-  --menu-bg: #d92128;       /* fundo do menu */
-  --highlight: #ffcc00;     /* cor de destaque / texto e hover */
-  --highlight-hover: #d92128; /* cor do texto quando hover no item amarelo */
-  --surface: #1f1f28;
-  --text: #f0f0f8;
-  --muted: #ccc;
-  --radius: 10px;
-  --transition: 0.25s ease;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  --red-strong: #d92128;
+  --red-bg: #e31b23;
+  --yellow: #ffcc00;
+  --white-trans: rgba(255,255,255,0.92);
+  --max-width: 1200px;
+  --fw-regular: 400;
+  --fw-600: 600;
+  --fw-700: 700;
+  --sombra: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ======= RESET ======= */
-* {
-  box-sizing: border-box;
+* { 
+  box-sizing: border-box; 
   margin: 0;
   padding: 0;
+}
+
+html, body { 
+  height: 100%; 
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--red-bg);
+  color: #111;
+  -webkit-font-smoothing: antialiased;
 }
 
-header {
-  background-color: var(--header-bg);
-  display: flex;
-  align-items: center;       /* centraliza verticalmente */
-  justify-content: center;   /* centraliza o título horizontalmente */
-  padding: 10px 15px;
-  position: relative;
-  z-index: 2000;
-  height: 70px;              /* altura fixa opcional */
-}
-
-/* Ícone do menu */
-.menu-icon {
-  font-size: 28px;
-  cursor: pointer;
-  color: var(--highlight);
-  padding: 8px 12px;
-  border: 2px solid var(--highlight);
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-  user-select: none;
-
-  /* posição fixa à esquerda */
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%); /* centraliza verticalmente no header */
-}
-
-.menu-icon:hover {
-  background-color: var(--highlight);
-  color: var(--highlight-hover);
-  transform: translateY(-50%) scale(1.05);
-}
-
-/* Título centralizado */
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-
-
-/* Menu dropdown */
-.menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 60px;
-  left: 15px;
-  border-radius: var(--radius);
-  width: 200px;
-  background-color: var(--menu-bg);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+body.menu-open {
   overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease-in-out;
-  z-index: 1000;
 }
 
-.menu.open {
-  max-height: 500px; /* suficiente para mostrar itens */
+/* =================== HEADER =================== */
+header {
+  background-color: var(--red-strong);
+  color: var(--yellow);
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 20px;
+  gap: 15px;
 }
 
-/* Itens do menu */
-.menu li {
-  padding: 12px 16px;
-  font-size: 16px;
-  border-bottom: 1px solid #aa1a1f;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.menu li a {
-  color: var(--highlight);
-  text-decoration: none;
-  display: block;
-  font-weight: bold;
-}
-
-.menu li:hover {
-  background-color: var(--highlight);
-}
-
-.menu li:hover a {
-  color: var(--highlight-hover);
-}
-
-/* Botão do menu */
+/* ÍCONE DO MENU (HAMBÚRGUER) */
 .menu-icon {
-  font-size: 28px;
+  display: none;
+  background: transparent;
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  font-size: 24px;
   cursor: pointer;
-  color: var(--highlight);
   padding: 8px 12px;
-  border: 2px solid var(--highlight);
   border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-  user-select: none;
-  
-  /* ESTE É O TRUQUE: Empurra o ícone para a esquerda */
-  margin-right: auto; 
+  transition: all 0.3s ease;
 }
+
 .menu-icon:hover {
-  background-color: var(--highlight);
-  color: var(--highlight-hover);
+  background-color: var(--yellow);
+  color: var(--red-strong);
   transform: scale(1.05);
 }
 
+/* TÍTULO NO HEADER */
 .title {
-  font-size: 20px;
-  font-weight: bold;
-  max-width: 100%;
-  height: auto;
-  /* Remova 'align-itens:center;' (que não funciona aqui) */
-}
-/* SEÇÃO DE BEBIDAS / PASTÉIS */
-.pasteis-section {
-  background-color: #d92128;
-  padding: 40px 20px;
+  font-size: 1.4rem;
+  font-weight: var(--fw-700);
+  color: var(--yellow);
+  flex: 1;
   text-align: center;
-  position: relative;
 }
 
-/* Títulos */
+/* MENU (DESKTOP) */
+.menu {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+  align-items: center;
+}
+
+.menu a {
+  color: var(--yellow);
+  text-decoration: none;
+  font-weight: var(--fw-600);
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.menu a:hover, 
+.menu a:focus {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+/* OVERLAY DO MENU */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1250;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =================== SEÇÃO DE BEBIDAS =================== */
+.pasteis-section {
+  background-color: var(--red-bg);
+  text-align: center;
+  padding: 40px 20px 60px;
+  min-height: calc(100vh - 80px);
+}
+
 .section-title {
-  font-size: 32px;
-  color: #ffcc00;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--yellow);
+  font-weight: var(--fw-700);
   margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* GRID DE ITENS */
 .pasteis-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
-/* CARD DO ITEM */
+/* CARD DOS ITENS */
 .item-card {
-  background-color: transparent;
-  padding: 10px;
-  border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,204,0,0.3);
+  border-radius: 16px;
+  padding: 24px 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 140px;
+  justify-content: space-between;
 }
 
 .item-card:hover {
-  transform: scale(1.05);
-}
-
-.item-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 8px;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  border-color: var(--yellow);
 }
 
 .item-card span {
-  display: block;
+  font-size: 1.1rem;
   color: #fff;
-  font-size: 16px;
-  margin-bottom: 8px;
+  font-weight: var(--fw-600);
+  line-height: 1.4;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* BOTÃO DE PEDIDO */
+/* BOTÃO PEDIR */
 .pedido-button {
-  display: inline-block;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: #ffcc00;
-  color: #d92128;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+  color: var(--yellow);
+  font-weight: var(--fw-700);
+  border: 2px solid var(--yellow);
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
 }
 
 .pedido-button:hover {
-  background-color: #e6b800;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  background-color: var(--yellow);
+  color: var(--red-strong);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255,204,0,0.4);
 }
 
-.pedido-button:active {
-  background-color: #cc9900;
-  transform: translateY(1px);
-  box-shadow: none;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 800px) {
-  .menu-icon {
-    left: 12px;
-    font-size: 26px;
+/* =================== RESPONSIVIDADE =================== */
+@media (max-width: 768px) {
+  /* Reorganizar header */
+  header {
+    justify-content: flex-start;
   }
-
+  
+  /* Mostrar ícone do menu hambúrguer */
+  .menu-icon {
+    display: block;
+    order: -1;
+  }
+  
+  /* Título centralizado */
   .title {
+    flex: 1;
+    text-align: center;
     font-size: 1.2rem;
   }
+  
+  /* Menu lateral (mobile) */
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: var(--red-strong);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    flex-direction: column;
+    padding: 20px 10px;
+    z-index: 1300;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    gap: 8px;
+  }
+  
+  .menu.open {
+    transform: translateX(0);
+  }
+  
+  .menu li {
+    width: 100%;
+  }
+  
+  .menu a {
+    display: block;
+    padding: 12px 16px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  /* Grid responsivo */
+  .pasteis-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 10px;
+  }
+  
+  .pasteis-section {
+    padding: 30px 15px 50px;
+  }
 }
 
-/* Estrutura base */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+@media (min-width: 769px) and (max-width: 1024px) {
+  .pasteis-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .pasteis-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ANIMAÇÃO DE FADE IN */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
