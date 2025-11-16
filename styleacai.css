@@ -1,241 +1,365 @@
-/* ======= FONTES ======= */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-/* ======= VARIÁVEIS ======= */
+/* =================== GLOBAL =================== */
 :root {
-  --bg: #ff0000;
-  --header-bg: #333;
-  --menu-bg: #d92128;       /* fundo do menu */
-  --highlight: #ffcc00;     /* cor de destaque / texto e hover */
-  --highlight-hover: #d92128; /* cor do texto quando hover no item amarelo */
-  --surface: #1f1f28;
-  --text: #f0f0f8;
-  --muted: #ccc;
-  --radius: 10px;
-  --transition: 0.25s ease;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  --red-strong: #d92128;
+  --red-bg: #e31b23;
+  --yellow: #ffcc00;
+  --white-trans: rgba(255,255,255,0.92);
+  --max-width: 1200px;
+  --fw-regular: 400;
+  --fw-600: 600;
+  --fw-700: 700;
+  --sombra: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ======= RESET ======= */
-* {
-  box-sizing: border-box;
+* { 
+  box-sizing: border-box; 
   margin: 0;
   padding: 0;
+}
+
+html, body { 
+  height: 100%; 
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--red-bg);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
 }
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* =================== HEADER =================== */
 header {
-  background-color: var(--header-bg);
+  background-color: var(--red-strong);
+  color: var(--yellow);
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   display: flex;
   align-items: center;
-  justify-content: center;   /* Centraliza o título */
-  padding: 10px 15px;
-  color: azure;
-  position: relative;        /* Necessário para posicionar o ícone */
-  z-index: 2000;
-  height: 70px;              /* Altura padrão opcional */
+  justify-content: flex-start;
+  padding: 12px 20px;
+  gap: 15px;
 }
 
-/* ÍCONE DO MENU (HAMBÚRGUER) FIXO À ESQUERDA */
+/* ÍCONE DO MENU (HAMBÚRGUER) */
 .menu-icon {
-  font-size: 28px;
+  display: none;
+  background: transparent;
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  font-size: 24px;
   cursor: pointer;
-  color: var(--highlight);
   padding: 8px 12px;
-  border: 2px solid var(--highlight);
   border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-  user-select: none;
-
-  position: absolute; /* fixa dentro do header */
-  left: 15px;         /* gruda na esquerda */
-  top: 50%;           /* centraliza verticalmente */
-  transform: translateY(-50%);
+  transition: all 0.3s ease;
 }
 
 .menu-icon:hover {
-  background-color: var(--highlight);
-  color: var(--highlight-hover);
-  transform: translateY(-50%) scale(1.05);
-}
-
-/* TÍTULO CENTRALIZADO NO HEADER */
-.title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  text-align: center;
-}
-
-/* MENU DROPDOWN */
-.menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 70px;
-  left: 15px;
-  border-radius: var(--radius);
-  width: 200px;
-  background-color: var(--menu-bg);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease-in-out;
-  z-index: 1000;
-}
-
-.menu.open {
-  max-height: 500px; /* mostra os itens */
-}
-
-/* ITENS DO MENU */
-.menu li {
-  padding: 12px 16px;
-  font-size: 16px;
-  border-bottom: 1px solid #aa1a1f;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.menu li a {
-  color: var(--highlight);
-  text-decoration: none;
-  display: block;
-  font-weight: bold;
-}
-
-.menu li:hover {
-  background-color: var(--highlight);
-}
-
-.menu li:hover a {
-  color: var(--highlight-hover);
-}
-
-
-/* Botão do menu */
-.menu-icon {
-  font-size: 28px;
-  cursor: pointer;
-  color: var(--highlight);
-  padding: 8px 12px;
-  border: 2px solid var(--highlight);
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-  user-select: none;
-}
-
-.menu-icon:hover {
-  background-color: var(--highlight);
-  color: var(--highlight-hover);
+  background-color: var(--yellow);
+  color: var(--red-strong);
   transform: scale(1.05);
 }
 
+/* TÍTULO NO HEADER */
 .title {
-  font-size: 20px;
-  font-weight: bold;
-  max-width: 100%;
-  height: auto;
+  font-size: 1.4rem;
+  font-weight: var(--fw-700);
+  color: var(--yellow);
+  flex: 1;
+  text-align: center;
 }
-/* ======= SEÇÕES ======= */
+
+/* MENU (DESKTOP) */
+.menu {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+  align-items: center;
+}
+
+.menu a {
+  color: var(--yellow);
+  text-decoration: none;
+  font-weight: var(--fw-600);
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.menu a:hover, 
+.menu a:focus {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+/* OVERLAY DO MENU */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1250;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =================== MAIN CONTENT =================== */
 main {
-  padding: 40px 20px;
+  padding: 40px 20px 60px;
   display: grid;
-  gap: 40px;
-  max-width: 1000px;
+  gap: 30px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
+/* =================== SEÇÕES DE PRODUTOS =================== */
 section {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 25px 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: transform var(--transition);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,204,0,0.3);
+  border-radius: 16px;
+  padding: 30px 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
 }
 
 section:hover {
   transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  border-color: var(--yellow);
 }
 
-/* ======= TÍTULOS ======= */
+/* TÍTULOS DAS SEÇÕES */
 h2, h3 {
-  font-family: 'Poppins', sans-serif;
-  color: var(--highlight);
+  color: var(--yellow);
+  font-weight: var(--fw-700);
+  margin-bottom: 20px;
   text-align: center;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   margin-bottom: 15px;
 }
 
-/* ======= FORMULÁRIOS ======= */
+/* =================== FORMULÁRIOS =================== */
 label {
   display: block;
-  margin: 6px 0;
+  margin: 10px 0;
   font-size: 1rem;
+  font-weight: var(--fw-600);
+  color: rgba(255,255,255,0.95);
+  cursor: pointer;
 }
 
-select, input[type="checkbox"], input[type="radio"] {
-  accent-color: var(--highlight);
+label:has(input[type="checkbox"]),
+label:has(input[type="radio"]) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
 }
 
-fieldset {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius);
-  padding: 10px 15px;
-  margin-bottom: 15px;
+label:has(input[type="checkbox"]):hover,
+label:has(input[type="radio"]):hover {
+  background: rgba(255,204,0,0.1);
 }
 
-/* ======= BOTÕES ======= */
-button {
-  background-color: var(--highlight);
-  color: var(--menu-bg);
-  border: none;
-  border-radius: var(--radius);
-  padding: 10px 20px;
-  font-weight: 700;
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,204,0,0.4);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: var(--fw-600);
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
-  transition: var(--transition);
-  margin-top: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  margin-top: 8px;
 }
 
-button:hover {
-  background-color: #ffd84d;
-  transform: scale(1.05);
+select:hover,
+select:focus {
+  border-color: var(--yellow);
+  background: rgba(255,255,255,0.15);
+  outline: none;
 }
 
-/* ======= PREÇO ======= */
-div > span {
-  font-weight: bold;
-  color: var(--highlight);
+select option {
+  background: var(--red-strong);
+  color: #fff;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--yellow);
+}
+
+/* FIELDSET */
+fieldset {
+  border: 2px solid rgba(255,204,0,0.3);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+  background: rgba(0,0,0,0.1);
+}
+
+legend {
+  color: var(--yellow);
+  font-weight: var(--fw-700);
+  padding: 0 10px;
   font-size: 1.1rem;
 }
 
-/* ======= RESPONSIVO ======= */
-@media (max-width: 800px) {
+/* =================== PREÇO ESTIMADO =================== */
+div:has(#preco-acai) {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: var(--fw-700);
+  color: var(--yellow);
+  margin-top: 15px;
+  padding: 12px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+
+#preco-acai {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* =================== BOTÕES =================== */
+button {
+  background-color: transparent;
+  color: var(--yellow);
+  font-weight: var(--fw-700);
+  border: 2px solid var(--yellow);
+  border-radius: 12px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  margin: 20px auto 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+button:hover {
+  background-color: var(--yellow);
+  color: var(--red-strong);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255,204,0,0.4);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* =================== RESPONSIVIDADE =================== */
+@media (max-width: 768px) {
+  /* Reorganizar header */
   header {
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+  }
+  
+  /* Mostrar ícone do menu hambúrguer */
+  .menu-icon {
+    display: block;
+    order: -1;
+  }
+  
+  /* Título centralizado */
+  .title {
+    flex: 1;
     text-align: center;
-  }
-
-  .menu {
-    width: calc(100% - 40px);
-    left: 20px;
-  }
-
-  section {
-    padding: 20px;
-  }
-
-  h2, h3 {
     font-size: 1.2rem;
+  }
+  
+  /* Menu lateral (mobile) */
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: var(--red-strong);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    flex-direction: column;
+    padding: 20px 10px;
+    z-index: 1300;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    gap: 8px;
+  }
+  
+  .menu.open {
+    transform: translateX(0);
+  }
+  
+  .menu li {
+    width: 100%;
+  }
+  
+  .menu a {
+    display: block;
+    padding: 12px 16px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  main {
+    padding: 30px 15px 50px;
+    gap: 20px;
+  }
+  
+  section {
+    padding: 24px 18px;
+  }
+  
+  button {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  main {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+/* ANIMAÇÃO DE FADE IN */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
   }
 }
