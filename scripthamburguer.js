@@ -1,4 +1,3 @@
-// Menu Mobile toggle
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById('menuBtn');
   const menu = document.getElementById('menu');
@@ -9,7 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Função para adicionar ao carrinho (APENAS UMA VEZ)
+  // Marca que o script já foi executado
+  if (window.carrinhoIniciado) {
+    console.log("Script já foi carregado, ignorando duplicata");
+    return;
+  }
+  window.carrinhoIniciado = true;
+
   function adicionarAoCarrinho(item, preco) {
     if (!item) return;
     
@@ -17,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.push({ nome: item, preco });
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     
-    // Exibe uma notificação temporária
     const notif = document.createElement("div");
     notif.className = "notificacao";
     notif.innerText = `${item} foi adicionado ao carrinho!`;
@@ -25,21 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => notif.remove(), 2000);
   }
 
-  // PROTEÇÃO: Remove listeners antigos antes de adicionar novos
-  const botoes = document.querySelectorAll(".pedido-button");
-  
-  botoes.forEach((btn) => {
-    // Clona o botão para remover todos os event listeners antigos
-    const novoBotao = btn.cloneNode(true);
-    btn.parentNode.replaceChild(novoBotao, btn);
-  });
-
-  // Agora adiciona os listeners nos botões limpos
   document.querySelectorAll(".pedido-button").forEach((btn) => {
+    // Marca cada botão como "processado"
+    if (btn.dataset.listenerAdded) return;
+    btn.dataset.listenerAdded = "true";
+    
     let processando = false;
     
-    // IMPORTANTE: usar "once: false" mas controlar com a flag
-    btn.addEventListener("click", function handler(e) {
+    btn.addEventListener("click", function(e) {
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -55,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       
-      // Pega a descrição do produto
       const descricao = this.closest('.item-card')?.querySelector('p')?.textContent?.trim();
       const nomeCompleto = descricao ? `${nome} - ${descricao}` : nome;
       
@@ -63,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       setTimeout(() => {
         processando = false;
-      }, 1000);
-    });
+      }, 1500);
+    }, { once: false });
   });
 });
