@@ -168,20 +168,19 @@
     alert(`${nome} foi adicionado ao carrinho!`);
   }
 
-  // ADICIONAR EVENTO AOS BOTÕES
+  // Impedir navegação e adicionar ao carrinho
   const botoes = document.querySelectorAll('.pedido-button');
 
   botoes.forEach(botao => {
     botao.addEventListener('click', function(e) {
-      e.preventDefault(); // impede o <a href="#"> de recarregar a página
-
+      e.preventDefault(); // IMPede a navegação para outra página
       const nome = this.dataset.item;
       const preco = this.dataset.preco;
-
       adicionarAoCarrinho(nome, preco);
     });
   });
 </script>
+
 
 </body>
 </html> 
