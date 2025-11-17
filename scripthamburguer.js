@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Função para adicionar ao carrinho
+  // Função para adicionar ao carrinho (APENAS UMA VEZ)
   function adicionarAoCarrinho(item, preco) {
     if (!item) return;
     
@@ -25,20 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => notif.remove(), 2000);
   }
 
-  // Eventos nos botões de pedido
+  // PROTEÇÃO: Remove listeners antigos antes de adicionar novos
+  const botoes = document.querySelectorAll(".pedido-button");
+  
+  botoes.forEach((btn) => {
+    // Clona o botão para remover todos os event listeners antigos
+    const novoBotao = btn.cloneNode(true);
+    btn.parentNode.replaceChild(novoBotao, btn);
+  });
+
+  // Agora adiciona os listeners nos botões limpos
   document.querySelectorAll(".pedido-button").forEach((btn) => {
     let processando = false;
     
-    btn.addEventListener("click", (e) => {
+    // IMPORTANTE: usar "once: false" mas controlar com a flag
+    btn.addEventListener("click", function handler(e) {
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
       
       if (processando) return;
       processando = true;
       
-      const button = e.currentTarget;
-      const nome = button.dataset.item?.trim();
-      const preco = parseFloat(button.dataset.preco) || 0;
+      const nome = this.dataset.item?.trim();
+      const preco = parseFloat(this.dataset.preco) || 0;
       
       if (!nome) {
         processando = false;
@@ -46,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
       // Pega a descrição do produto
-      const descricao = button.closest('.item-card')?.querySelector('p')?.textContent?.trim();
+      const descricao = this.closest('.item-card')?.querySelector('p')?.textContent?.trim();
       const nomeCompleto = descricao ? `${nome} - ${descricao}` : nome;
       
       adicionarAoCarrinho(nomeCompleto, preco);
