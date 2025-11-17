@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Função para adicionar ao carrinho
   function adicionarAoCarrinho(item, preco) {
-    if (!item) return; // se não houver nome, não adiciona
+    if (!item) return;
     
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     carrinho.push({ nome: item, preco });
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     
-    // Exibe uma notificação temporária em vez de alert
+    // Exibe uma notificação temporária
     const notif = document.createElement("div");
     notif.className = "notificacao";
     notif.innerText = `${item} foi adicionado ao carrinho!`;
@@ -27,31 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Eventos nos botões de pedido
   document.querySelectorAll(".pedido-button").forEach((btn) => {
-    let processando = false; // FLAG para evitar cliques duplicados
+    let processando = false;
     
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       
-      // Se já está processando, ignora o clique
       if (processando) return;
       processando = true;
       
       const button = e.currentTarget;
-      const item = button.dataset.item?.trim();
+      const nome = button.dataset.item?.trim();
       const preco = parseFloat(button.dataset.preco) || 0;
       
-      if (!item) {
+      if (!nome) {
         processando = false;
-        return; // não adiciona produto sem nome
+        return;
       }
       
-      adicionarAoCarrinho(item, preco);
+      // Pega a descrição do produto
+      const descricao = button.closest('.item-card')?.querySelector('p')?.textContent?.trim();
+      const nomeCompleto = descricao ? `${nome} - ${descricao}` : nome;
       
-      // ❌ REMOVIDO O REDIRECIONAMENTO AUTOMÁTICO
-      // O usuário só vai para o carrinho quando clicar no link/botão específico
+      adicionarAoCarrinho(nomeCompleto, preco);
       
-      // Libera o botão após 1 segundo
       setTimeout(() => {
         processando = false;
       }, 1000);
