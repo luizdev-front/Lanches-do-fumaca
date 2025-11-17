@@ -17,12 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.push({ nome: item, preco });
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     
-    // Exibe uma notificação temporária
-    const notif = document.createElement("div");
-    notif.className = "notificacao";
-    notif.innerText = `${item} foi adicionado ao carrinho!`;
-    document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 2000);
+    // Alert mostrando exatamente o que foi adicionado
+    alert(`${item} - R$ ${preco.toFixed(2)}\n\nFoi adicionado ao carrinho!`);
   }
 
   // Eventos nos botões de pedido
@@ -44,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       
-      // Pega a descrição do produto
+      // Pega a descrição do produto (ingredientes)
       const descricao = btn.closest('.item-card')?.querySelector('p')?.textContent?.trim();
       const nomeCompleto = descricao ? `${nome} - ${descricao}` : nome;
       
@@ -56,3 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+```
+
+Agora o alert vai mostrar exatamente o que foi adicionado ao carrinho:
+```
+X-salada - 1 hambúrguer, Mussarela, Alface Americana, Tomate e Ketchup - R$ 10.00
+
+Foi adicionado ao carrinho!
