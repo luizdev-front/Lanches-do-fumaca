@@ -25,9 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".pedido-button").forEach((btn) => {
     let processando = false;
     
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+   btn.addEventListener("click", (e) => {
+  e.preventDefault();  // Mantém apenas isto
       
       if (processando) return;
       processando = true;
