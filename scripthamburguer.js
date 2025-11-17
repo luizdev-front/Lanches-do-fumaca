@@ -1,3 +1,4 @@
+// Menu Mobile toggle
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById('menuBtn');
   const menu = document.getElementById('menu');
@@ -8,13 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Marca que o script já foi executado
-  if (window.carrinhoIniciado) {
-    console.log("Script já foi carregado, ignorando duplicata");
-    return;
-  }
-  window.carrinhoIniciado = true;
-
+  // Função para adicionar ao carrinho
   function adicionarAoCarrinho(item, preco) {
     if (!item) return;
     
@@ -22,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.push({ nome: item, preco });
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     
+    // Exibe uma notificação temporária
     const notif = document.createElement("div");
     notif.className = "notificacao";
     notif.innerText = `${item} foi adicionado ao carrinho!`;
@@ -29,37 +25,34 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => notif.remove(), 2000);
   }
 
+  // Eventos nos botões de pedido
   document.querySelectorAll(".pedido-button").forEach((btn) => {
-    // Marca cada botão como "processado"
-    if (btn.dataset.listenerAdded) return;
-    btn.dataset.listenerAdded = "true";
-    
     let processando = false;
     
-    btn.addEventListener("click", function(e) {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      e.stopImmediatePropagation();
       
       if (processando) return;
       processando = true;
       
-      const nome = this.dataset.item?.trim();
-      const preco = parseFloat(this.dataset.preco) || 0;
+      const nome = btn.dataset.item?.trim();
+      const preco = parseFloat(btn.dataset.preco) || 0;
       
       if (!nome) {
         processando = false;
         return;
       }
       
-      const descricao = this.closest('.item-card')?.querySelector('p')?.textContent?.trim();
+      // Pega a descrição do produto
+      const descricao = btn.closest('.item-card')?.querySelector('p')?.textContent?.trim();
       const nomeCompleto = descricao ? `${nome} - ${descricao}` : nome;
       
       adicionarAoCarrinho(nomeCompleto, preco);
       
       setTimeout(() => {
         processando = false;
-      }, 1500);
-    }, { once: false });
+      }, 1000);
+    });
   });
 });
