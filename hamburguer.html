@@ -156,12 +156,32 @@
     </div>
 
 </section>  
-<script>  
-  function adicionarAoCarrinho(nome, preco) {  
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];  
-    carrinho.push({ nome: nome, preco: Number(preco) });  
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));  
-    alert(`${nome} foi adicionado ao carrinho!`);  
-  }  </script>  
+<script>
+function adicionarAoCarrinho(nome, preco) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.push({ nome: nome, preco: Number(preco) });
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert(`${nome} foi adicionado ao carrinho!`);
+}
+
+// Impedir qualquer outro script de capturar os cliques
+document.querySelectorAll('.pedido-button').forEach(botao => {
+  botao.addEventListener('click', function(e) {
+    e.preventDefault();      // Impede navegar para outra página
+    e.stopPropagation();     // Impede clicar duas vezes / outros scripts
+
+    const nome = this.dataset.item;
+    const preco = this.dataset.preco;
+
+    // Pega a descrição do lanche (ingredientes)
+    const descricao = this.closest('.item-card').querySelector('p').textContent;
+
+    // Nome completo para aparecer no carrinho
+    const nomeCompleto = `${nome} - ${descricao}`;
+
+    adicionarAoCarrinho(nomeCompleto, preco);
+  });
+});
+</script>  
 </body>  
 </html
