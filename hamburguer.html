@@ -161,13 +161,27 @@
     </div>
 </section>
 <script>
-  function adicionarAoCarrinho(nome, preco) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome: nome, preco: Number(preco) });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    alert(`${nome} foi adicionado ao carrinho!`);
-  }
+  function adicionarAoCarrinho(nome, preco) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.push({ nome: nome, preco: Number(preco) });
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    alert(`${nome} foi adicionado ao carrinho!`);
+  }
 
+  // ADICIONAR EVENTO AOS BOTÕES
+  const botoes = document.querySelectorAll('.pedido-button');
+
+  botoes.forEach(botao => {
+    botao.addEventListener('click', function(e) {
+      e.preventDefault(); // impede o <a href="#"> de recarregar a página
+
+      const nome = this.dataset.item;
+      const preco = this.dataset.preco;
+
+      adicionarAoCarrinho(nome, preco);
+    });
+  });
 </script>
+
 </body>
 </html> 
