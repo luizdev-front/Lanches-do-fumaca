@@ -168,18 +168,18 @@ function adicionarAoCarrinho(nome, preco) {
   alert(`${nome} foi adicionado ao carrinho!`);
 }
 
-// Adiciona evento de clique para todos os botões de pedido
+// Seleciona todos os links de pedido
 document.querySelectorAll('.pedido-button').forEach(botao => {
   botao.addEventListener('click', function(e) {
-    e.preventDefault(); // impede recarregar/navegar
+    e.preventDefault(); // IMPede a navegação do <a>
 
     const nome = this.dataset.item;
     const preco = this.dataset.preco;
 
-    // Pega a descrição do card (recheios do lanche)
+    // Pega a descrição do lanche do <p> dentro do mesmo card
     const descricao = this.closest('.item-card').querySelector('p').textContent;
 
-    // Monta o nome completo com recheios
+    // Monta o nome completo com ingredientes
     const nomeCompleto = `${nome} - ${descricao}`;
 
     adicionarAoCarrinho(nomeCompleto, preco);
