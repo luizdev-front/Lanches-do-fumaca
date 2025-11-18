@@ -3,42 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedido - Pastelaria do Fumaça</title>
+  <title>Finalizar Pedido | Pastelaria do Fumaça</title>
   <link rel="stylesheet" href="stylepedido.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<header>
-  <div class="title">Confira seu pedido</div>
+<header class="cabecalho">
+  <h1>Confira seu pedido</h1>
 </header>
 
-<main>
-  <section id="produto"></section>
+<main class="container">
 
-  <section id="cliente-info">
-    <h3>Informações do Cliente</h3>
-  <label>Nome: <input type="text" id="nome"></label><br>
-<label>Endereço (bairro): <input type="text" id="endereco"></label><br>
-<label>Rua: <input type="text" id="rua"></label><br>
-<label>Número: <input type="text" id="numero"></label>
-  <label>Observações: <input type="text" id="observacoes"></label><br>
-    <label>Pagamento:
+  <section id="produto" class="box"></section>
+
+  <section id="cliente-info" class="box">
+    <h2>Seus dados</h2>
+
+    <div class="campo">
+      <label>Nome</label>
+      <input type="text" id="nome" placeholder="Seu nome">
+    </div>
+
+    <div class="campo">
+      <label>Bairro</label>
+      <input type="text" id="endereco" placeholder="Ex: MARÉ MANSA">
+    </div>
+
+    <div class="campo-duplo">
+      <div class="campo">
+        <label>Rua</label>
+        <input type="text" id="rua" placeholder="Sua rua">
+      </div>
+      <div class="campo">
+        <label>Número</label>
+        <input type="text" id="numero" placeholder="Nº da casa">
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Observações</label>
+      <textarea id="observacoes" rows="2" placeholder="Ex: retirar cebola"></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Método de pagamento</label>
       <select id="pagamento">
         <option value="">Selecione</option>
         <option value="dinheiro">Dinheiro</option>
         <option value="cartao">Cartão</option>
         <option value="pix">Pix</option>
       </select>
-    </label>
-    <div id="pix-info" class="hidden"></div>
-    <br>
-    <button id="enviar-vendedora-btn">Finalizar Pedido</button>
+    </div>
+
+    <div id="pix-info" class="pix hidden"></div>
+
+    <button id="enviar-vendedora-btn" class="btn-principal">
+      Finalizar Pedido
+    </button>
+
   </section>
+
 </main>
 
-<!-- ⚙️ Importa o script separado -->
 <script src="scriptpedido.js"></script>
-
 </body>
 </html>
