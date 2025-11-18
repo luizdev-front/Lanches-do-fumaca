@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     produtoDiv.innerHTML += `<h3>Total: R$ ${total.toFixed(2)}</h3>`;
   }
 
-  function removerItem(i) {
+  function removerItem(index) {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     carrinho.splice(i, 1);
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
