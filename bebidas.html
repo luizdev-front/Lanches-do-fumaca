@@ -53,7 +53,6 @@
     carrinho.push({ nome, preco });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
     alert(`${nome} foi adicionado ao carrinho!`);
-    window.location.href = "pedido.html";
   }
 
   document.addEventListener('DOMContentLoaded', () => {
