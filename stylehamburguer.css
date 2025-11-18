@@ -112,26 +112,27 @@ header {
   margin-bottom: 30px;
 }
 
-/* GRID PADRÃO (DESKTOP) */
+/* GRID ULTRA RESPONSIVO – melhor solução */
 .pasteis-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
-  max-width: var(--max-width);
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+  align-items: start;
 }
 
-/* ITENS */
+/* Cards sempre ajustados corretamente */
 .item-card {
+  width: 100%;
+  max-width: 100%;
   background: rgba(255,255,255,0.1);
   border: 2px solid rgba(255,204,0,0.3);
   border-radius: 16px;
   padding: 24px 20px;
   backdrop-filter: blur(10px);
   transition: 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .item-card:hover {
