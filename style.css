@@ -290,7 +290,7 @@ body.menu-open {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #000;
+  color: #fdfdfd;
   text-decoration: none;
   font-size: 18px;
   font-weight: 600;
