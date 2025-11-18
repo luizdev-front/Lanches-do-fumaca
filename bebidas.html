@@ -46,6 +46,7 @@
 </section>
 
 <script>
+<script>
 function adicionarAoCarrinho(nome, preco) {
   if (!nome || isNaN(preco)) {
     console.error("Dados inválidos:", nome, preco);
@@ -57,13 +58,12 @@ function adicionarAoCarrinho(nome, preco) {
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
   alert(`${nome} foi adicionado ao carrinho!`);
-  // ❌ remover chamada que causava erro e redirecionamento
 }
 
 // Atualiza carrinho SOMENTE se existir o elemento (evita erro nas outras páginas)
 function atualizarCarrinho() {
   const carrinhoContainer = document.getElementById('carrinho');
-  if (!carrinhoContainer) return; // impede erros fora do pedido.html
+  if (!carrinhoContainer) return;
 
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
   carrinhoContainer.innerHTML = '';
@@ -96,25 +96,25 @@ function removerDoCarrinho(index) {
   atualizarCarrinho();
 }
 
-// Menu responsivo
-const menuToggle = document.getElementById('menu-toggle');
-const navMenu = document.getElementById('nav-menu');
+// MENU CORRETO PARA ESTA PÁGINA (usa menuBtn e menu)
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
 
-menuToggle?.addEventListener('click', (e) => {
+menuBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  navMenu.classList.toggle('active');
-  menuToggle.classList.toggle('active');
-  navMenu.classList.toggle('open');
+  menu.classList.toggle("open");
 });
 
-document.addEventListener('click', (e) => {
-  if (!navMenu?.contains(e.target) && e.target !== menuToggle) {
-    navMenu?.classList.remove('open');
+document.addEventListener("click", (e) => {
+  if (!menu.contains(e.target) && e.target !== menuBtn) {
+    menu.classList.remove("open");
   }
 });
 
-// Só atualiza carrinho se a página tiver o elemento
+// Atualiza carrinho somente se existir a área de carrinho
 document.addEventListener('DOMContentLoaded', atualizarCarrinho);
+</script>
+
 </script>
 
 </body>
