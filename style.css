@@ -269,37 +269,45 @@ body.menu-open {
   .hero-content {
     padding: 16px;
   }
-}    .footer-instagram {
-  background: #111;
-  color: #fff;
+}   .footer-instagram {
+  background: #f1c40f; /* amarelo bonito */
+  color: #000;
   text-align: center;
-  padding: 25px 10px;
+  padding: 30px 10px;
   font-family: 'Poppins', sans-serif;
-  margin-top: 40px;
+  margin-top: 0;
+  border-top: 6px solid #d40000; /* vermelho da sua marca */
 }
 
 .footer-instagram p {
-  font-size: 18px;
-  margin-bottom: 10px;
-  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #000;
 }
 
 .instagram-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: #ff5f8a; 
+  gap: 10px;
+  color: #000;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .instagram-icon {
-  width: 20px;
-  height: 20px;
-  transition: 0.2s;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  transition: 0.2s ease-in-out;
 }
 
 .instagram-link:hover .instagram-icon {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
+
+.instagram-link:hover {
+  color: #5a0000; /* toque mais escuro no hover */
+}
+
