@@ -46,30 +46,75 @@
 </section>
 
 <script>
-  // Corrigir função duplicada e IDs errados
-  function adicionarAoCarrinho(nome, preco) {
-    if (!nome || isNaN(preco)) return;
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({ nome, preco });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    alert(`${nome} foi adicionado ao carrinho!`);
+function adicionarAoCarrinho(nome, preco) {
+  if (!nome || isNaN(preco)) {
+    console.error("Dados inválidos:", nome, preco);
+    return;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.push({ nome: nome, preco: preco });
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menu.classList.toggle("open");
-    });
+  alert(`${nome} foi adicionado ao carrinho!`);
+  // ❌ remover chamada que causava erro e redirecionamento
+}
 
-    document.addEventListener("click", (e) => {
-      if (!menu.contains(e.target) && e.target !== menuBtn) {
-        menu.classList.remove("open");
-      }
-    });
+// Atualiza carrinho SOMENTE se existir o elemento (evita erro nas outras páginas)
+function atualizarCarrinho() {
+  const carrinhoContainer = document.getElementById('carrinho');
+  if (!carrinhoContainer) return; // impede erros fora do pedido.html
+
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinhoContainer.innerHTML = '';
+
+  let total = 0;
+
+  carrinho.forEach((item, index) => {
+    const precoValido = parseFloat(item.preco);
+    if (!isNaN(precoValido)) total += precoValido;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'carrinho-item';
+    itemDiv.innerHTML = `
+      ${item.nome} - R$ ${precoValido.toFixed(2).replace('.', ',')}
+      <button onclick="removerDoCarrinho(${index})">Remover</button>
+    `;
+    carrinhoContainer.appendChild(itemDiv);
   });
+
+  const totalDiv = document.createElement('div');
+  totalDiv.className = 'carrinho-total';
+  totalDiv.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace('.', ',')}</strong>`;
+  carrinhoContainer.appendChild(totalDiv);
+}
+
+function removerDoCarrinho(index) {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  atualizarCarrinho();
+}
+
+// Menu responsivo
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+menuToggle?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  navMenu.classList.toggle('active');
+  menuToggle.classList.toggle('active');
+  navMenu.classList.toggle('open');
+});
+
+document.addEventListener('click', (e) => {
+  if (!navMenu?.contains(e.target) && e.target !== menuToggle) {
+    navMenu?.classList.remove('open');
+  }
+});
+
+// Só atualiza carrinho se a página tiver o elemento
+document.addEventListener('DOMContentLoaded', atualizarCarrinho);
 </script>
 
 </body>
