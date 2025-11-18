@@ -141,6 +141,19 @@ min-height: auto;
   margin: 0 auto;
   padding: 0 10px;
 }
+/* Tablet – 2 por linha */
+@media (max-width: 992px) {
+  .pasteis-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Celular – 1 por linha */
+@media (max-width: 600px) {
+  .pasteis-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 
 /* CARD DOS ITENS */
