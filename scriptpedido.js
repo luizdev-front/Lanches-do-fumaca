@@ -31,10 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const normalizar = (s) =>
     s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  const gerarCodigo = () =>
-    `PED-${Date.now()}-${Math.floor(Math.random() * 999)
-      .toString()
-      .padStart(3, "0")}`;
+  // NOVO: número sequencial para pedidos
+  const gerarNumeroPedido = () => {
+    let numero = Number(localStorage.getItem("numeroPedido")) || 0;
+    numero++;
+    localStorage.setItem("numeroPedido", numero);
+    return numero;
+  };
 
   /* --------------------------
      RENDER DO CARRINHO (PROFISSIONAL)
@@ -96,7 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
   pagamentoSelect.addEventListener("change", () => {
     if (pagamentoSelect.value === "pix") {
       pixDiv.classList.remove("hidden");
-      pixDiv.innerHTML = `<strong>Após finalizar o pedido, o valor e chave serão exibidos.</strong>`;
+      pixDiv.innerHTML = `
+        <h3>Pagamento PIX</h3>
+        <p><strong>Valor:</strong> será calculado após finalizar</p>
+      `;
     } else {
       pixDiv.classList.add("hidden");
       pixDiv.innerHTML = "";
@@ -137,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const taxa = dadosBairro.taxa;
-    const codigo = gerarCodigo();
+    const numeroPedido = gerarNumeroPedido(); // novo número sequencial
 
     let total = carrinho.reduce((s, item) => s + (item.preco || 0), 0);
     let totalFinal = total + taxa;
@@ -163,17 +169,17 @@ document.addEventListener("DOMContentLoaded", () => {
 📝 Obs: ${campos.obs.value || "Nenhuma"}
 
 💳 Pagamento: ${pagamentoSelect.value.toUpperCase()}
-🔖 Pedido: *${codigo}*
+${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13988799046\n" : ""}
+🔖 Pedido Nº *${numeroPedido}*
 `;
 
     /* --------------------------
-       PIX – MOSTRAR VALORES
+       PIX – MOSTRAR APENAS VALOR NA TELA
     -------------------------- */
     if (pagamentoSelect.value === "pix") {
       pixDiv.classList.remove("hidden");
       pixDiv.innerHTML = `
         <h3>Pagamento PIX</h3>
-        <p><strong>Chave:</strong> 13988799046</p>
         <p><strong>Valor:</strong> R$ ${totalFinal.toFixed(2)}</p>
       `;
     }
