@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const normalizar = (s) =>
     s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  // NOVO: número sequencial para pedidos
+  // Número sequencial para pedidos
   const gerarNumeroPedido = () => {
     let numero = Number(localStorage.getItem("numeroPedido")) || 0;
     numero++;
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* --------------------------
-     RENDER DO CARRINHO (PROFISSIONAL)
+     RENDER DO CARRINHO
   -------------------------- */
   function renderCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
@@ -143,13 +143,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const taxa = dadosBairro.taxa;
-    const numeroPedido = gerarNumeroPedido(); // novo número sequencial
+    const numeroPedido = gerarNumeroPedido();
 
     let total = carrinho.reduce((s, item) => s + (item.preco || 0), 0);
     let totalFinal = total + taxa;
 
     /* --------------------------
-       MONTAR MENSAGEM
+       MONTAR MENSAGEM — NOVO FORMATO
     -------------------------- */
     let msg = `📦 *Novo Pedido*\n\n`;
 
@@ -164,17 +164,21 @@ document.addEventListener("DOMContentLoaded", () => {
 🚚 Entrega: R$ ${taxa.toFixed(2)}
 💰 Total: R$ ${totalFinal.toFixed(2)}
 
-👤 Cliente: ${campos.nome.value}
-🏠 ${campos.rua.value}, Nº ${campos.numero.value}, ${campos.bairro.value}
-📝 Obs: ${campos.obs.value || "Nenhuma"}
+👤 Nome: ${campos.nome.value}
+🏙️ Bairro: ${campos.bairro.value}
+📍 Rua: ${campos.rua.value}
+🏠 Número: ${campos.numero.value}
+📝 Observações: ${campos.obs.value || "Nenhuma"}
 
 💳 Pagamento: ${pagamentoSelect.value.toUpperCase()}
 ${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13988799046\n" : ""}
-🔖 Pedido Nº *${numeroPedido}*
+🔖 Pedido Nº ${numeroPedido}
+
+📄 Envie o comprovante após o pagamento.
 `;
 
     /* --------------------------
-       PIX – MOSTRAR APENAS VALOR NA TELA
+       PIX – MOSTRAR VALOR NA TELA
     -------------------------- */
     if (pagamentoSelect.value === "pix") {
       pixDiv.classList.remove("hidden");
@@ -204,4 +208,3 @@ ${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13988799046\n" : ""}
   -------------------------- */
   renderCarrinho();
 });
-
