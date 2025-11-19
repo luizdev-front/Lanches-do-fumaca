@@ -203,6 +203,7 @@ h1, h2, h3 {
 }
 .lista-taxas {
   background: #fff;
+  color: #000; /* ← ISSO DEIXA O TEXTO VISÍVEL */
   padding: 15px;
   margin-top: 20px;
   border-radius: 10px;
@@ -212,6 +213,8 @@ h1, h2, h3 {
 .lista-taxas h3 {
   margin-bottom: 10px;
   font-size: 18px;
+  color: #d92128; /* título em vermelho do tema */
+  font-weight: bold;
 }
 
 .lista-taxas ul {
@@ -222,4 +225,5 @@ h1, h2, h3 {
 .lista-taxas li {
   margin-bottom: 6px;
   font-size: 15px;
+  color: #333; /* texto escuro e legível */
 }
