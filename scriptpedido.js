@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 📝 Observações: ${campos.obs.value || "Nenhuma"}
 
 💳 Pagamento: ${pagamentoSelect.value.toUpperCase()}
-${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13988799046\n" : ""}
+${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n" : ""}
 🔖 Pedido Nº ${numeroPedido}
 
 📄 Envie o comprovante após o pagamento.
