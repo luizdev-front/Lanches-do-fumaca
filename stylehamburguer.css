@@ -128,7 +128,9 @@ header {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* =================== NOVO GRID PERFEITO =================== */
+/* ------------------------------
+   GRID DOS CARDS (PASTEIS / LANCHES)
+---------------------------------- */
 .pasteis-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -137,66 +139,94 @@ header {
     max-width: 1300px;
     padding: 0 20px;
     margin: 0 auto;
-    align-items: stretch;    /* 👉 FORÇA TODOS NA MESMA ALTURA */
-    justify-items: stretch;  /* 👉 REMOVE CENTRALIZAÇÃO */
+
+    /* 🔥 Alinhamento perfeito */
+    align-items: stretch;
+    justify-items: stretch;
 }
 
 
-/* =================== CARDS =================== */
+/* ------------------------------
+   CARD INDIVIDUAL
+---------------------------------- */
 .item-card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255,204,0,0.3);
-  border-radius: 16px;
-  padding: 24px 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,204,0,0.3);
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
 
+    /* 🔥 Essencial para todos ficarem alinhados */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    gap: 10px;
 }
 
 .item-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-  border-color: var(--yellow);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+    border-color: rgba(255,204,0,0.5);
 }
 
-.item-card span {
-  font-size: 1.1rem;
-  color: var(--yellow);
-  font-weight: var(--fw-700);
-  margin-bottom: 8px;
+
+/* ------------------------------
+   TÍTULO DO CARD
+---------------------------------- */
+.item-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #ffcc00;
+    font-weight: bold;
+    text-align: center;
 }
 
+
+/* ------------------------------
+   DESCRIÇÃO
+---------------------------------- */
 .item-card p {
-  font-size: .9rem;
-  color: rgba(255,255,255,0.9);
-  line-height: 1.5;
-  flex: 1;
-  margin-bottom: 12px;
+    font-size: 17px;
+    color: #ffffff;
+    margin-bottom: 14px;
+
+    /* 🔥 Faz o texto "empurrar" o botão para baixo */
+    flex: 1;
 }
 
-/* =================== BOTÃO =================== */
-.pedido-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: var(--yellow);
-  color: var(--red-strong);
-  font-weight: bold;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: .3s;
+
+/* ------------------------------
+   PREÇO
+---------------------------------- */
+.item-card .preco {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
-.pedido-button:hover {
-  background-color: #ffe066;
-  transform: scale(1.05);
+
+/* ------------------------------
+   BOTÃO DE PEDIR
+---------------------------------- */
+.item-card button {
+    background: #ffcc00;
+    color: #8b0000;
+    font-weight: bold;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.item-card button:hover {
+    background: #ffdb4d;
+    transform: scale(1.03);
 }
 
 .pedido-button:active {
