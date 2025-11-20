@@ -5,7 +5,7 @@
   --red-strong: #d92128;
   --red-bg: #e31b23;
   --yellow: #ffcc00;
-  --white-trans: rgba(255,255,255,0.92);
+  --white-trans: rgba(255, 255, 255, 0.92);
   --max-width: 1200px;
   --fw-regular: 400;
   --fw-600: 600;
@@ -19,7 +19,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -41,7 +42,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1200;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   display: flex;
   align-items: center;
   padding: 12px 20px;
@@ -92,7 +93,7 @@ header {
 }
 
 .menu a:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   color: #fff;
 }
 
@@ -100,7 +101,7 @@ header {
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1250;
   opacity: 0;
   visibility: hidden;
@@ -125,108 +126,76 @@ header {
   color: var(--yellow);
   font-weight: var(--fw-700);
   margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ------------------------------
-   GRID DOS CARDS (PASTEIS / LANCHES)
----------------------------------- */
+/* =================== NOVO GRID PERFEITO =================== */
 .pasteis-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    width: 100%;
-    max-width: 1300px;
-    padding: 0 20px;
-    margin: 0 auto;
-
-    /* 🔥 Alinhamento perfeito */
-    align-items: stretch;
-    justify-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 20px;
+  margin: 0 auto;
+  align-items: start;
+  justify-content: center;
+  justify-items: center;
 }
 
-
-/* ------------------------------
-   CARD INDIVIDUAL
----------------------------------- */
+/* =================== CARDS =================== */
 .item-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,204,0,0.3);
-    border-radius: 16px;
-    padding: 24px 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    transition: all 0.3s ease;
-
-    /* 🔥 Essencial para todos ficarem alinhados */
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    gap: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 204, 0, 0.3);
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .item-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 26px rgba(0,0,0,0.3);
-    border-color: rgba(255,204,0,0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  border-color: var(--yellow);
 }
 
-
-/* ------------------------------
-   TÍTULO DO CARD
----------------------------------- */
-.item-card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-    color: #ffcc00;
-    font-weight: bold;
-    text-align: center;
+.item-card span {
+  font-size: 1.1rem;
+  color: var(--yellow);
+  font-weight: var(--fw-700);
+  margin-bottom: 8px;
 }
 
-
-/* ------------------------------
-   DESCRIÇÃO
----------------------------------- */
 .item-card p {
-    font-size: 17px;
-    color: #ffffff;
-    margin-bottom: 14px;
-
-    /* 🔥 Faz o texto "empurrar" o botão para baixo */
-    flex: 1;
+  font-size: .9rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 12px;
 }
 
-
-/* ------------------------------
-   PREÇO
----------------------------------- */
-.item-card .preco {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffcc00;
-    text-align: center;
-    margin-bottom: 15px;
+/* =================== BOTÃO =================== */
+.pedido-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--yellow);
+  color: var(--red-strong);
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: .3s;
 }
 
-
-/* ------------------------------
-   BOTÃO DE PEDIR
----------------------------------- */
-.item-card button {
-    background: #ffcc00;
-    color: #8b0000;
-    font-weight: bold;
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.item-card button:hover {
-    background: #ffdb4d;
-    transform: scale(1.03);
+.pedido-button:hover {
+  background-color: #ffe066;
+  transform: scale(1.05);
 }
 
 .pedido-button:active {
@@ -257,7 +226,7 @@ header {
     background: var(--red-strong);
     flex-direction: column;
     padding: 20px 10px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     transform: translateX(-100%);
     transition: .3s ease-in-out;
   }
@@ -283,7 +252,13 @@ header {
 
 /* =================== ANIMAÇÃO =================== */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
