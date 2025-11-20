@@ -191,7 +191,7 @@ ${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n" : ""}
     /* --------------------------
        ENVIAR PARA WHATSAPP
     -------------------------- */
-    const numero = "5513988799046";
+    const numero = "5513996039919";
     window.open(
       `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`,
       "_blank"
