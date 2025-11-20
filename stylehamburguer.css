@@ -130,17 +130,17 @@ header {
 
 /* =================== NOVO GRID PERFEITO =================== */
 .pasteis-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  width: 100%;
-  max-width: 1300px;
-  padding: 0 20px;
-  margin: 0 auto;
-  align-items: start;
-    justify-content: center;
-    justify-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 20px;
+    margin: 0 auto;
+    align-items: stretch;    /* 👉 FORÇA TODOS NA MESMA ALTURA */
+    justify-items: stretch;  /* 👉 REMOVE CENTRALIZAÇÃO */
 }
+
 
 /* =================== CARDS =================== */
 .item-card {
@@ -154,6 +154,8 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
 }
 
 .item-card:hover {
