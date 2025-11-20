@@ -120,18 +120,17 @@ header {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* =================== GRID CENTRALIZADO =================== */
 .pasteis-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 320px)); /* 🔥 LARGURA FIXA MÁXIMA */
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 🔥 Agora ocupa todo espaço de forma uniforme */
+  gap: 32px; /* Mais espaçamento elegante entre os cards */
   width: 100%;
-  max-width: 1400px;
-  padding: 0 20px;
+  max-width: 1200px; /* Mantém tudo bem centralizado */
   margin: 0 auto;
-  justify-content: center; /* 🔥 CENTRALIZA O GRID */
-  align-items: stretch;
+  padding: 0 20px;
+  justify-items: center; /* 🔥 Centraliza cada card */
 }
+
 
 /* =================== CARDS CENTRALIZADOS =================== */
 .item-card {
