@@ -311,6 +311,8 @@ body.menu-open {
   color: #5a0000; /* toque mais escuro no hover */
 }
 .Entregas {
-align-itens:center;
-color: #fdfdfd;
+  text-align: center; /* era align-itens, que não existe */
+  color: #fdfdfd;
+  margin-top: 10px; /* deixa um espacinho */
 }
+
