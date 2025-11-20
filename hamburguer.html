@@ -1,161 +1,165 @@
-<html lang="pt-br">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <script src="scripthamburguer.js" defer></script>  
-  <link rel="stylesheet" href="stylehamburguer.css">  
-    <link href="https   href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">  
-    <title>Pastelaria de Hambúrgueres</title>  
-</head>  
-<body>  
-<header>  
-  <div class="menu-icon" id="menuBtn">&#9776;</div>  
-  <ul class="menu" id="menu">  
-    <li><a href="index.html">Início</a></li>  
-    <li><a href="pastel.html">Pastel</a></li>  
-    <li><a href="hamburguer.html">Hambúrguer</a></li>  
-    <li><a href="bebidas.html">Sucos e refrigerantes</a></li>  
-    <li><a href="acai.html">Açaí e Milk-Shake</a></li>  
-    <li><a href="pedido.html">Carrinho</a></li>  
-  </ul>  
-  <div class="title">Faça seu pedido!</div>  
-</header> 
-    <section class="pasteis-section" id="lanches">  
-    <h2 class="section-title">Cardápio de Lanches</h2>  
-    <div class="pasteis-grid">          <!-- X Salada -->
-        <div class="item-card">
-            <span>X-salada - R$ 10,00</span>
-            <p>1 hambúrguer, Mussarela, Alface Americana, Tomate e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="X-salada" data-preco="10.00">Pedir</a>
-        </div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripthamburguer.js" defer></script>
+    <link rel="stylesheet" href="stylehamburguer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Pastelaria do Fumaça</title>
+</head>
+<body>
+<header>
+  <div class="menu-icon" id="menuBtn">&#9776;</div>
+  <ul class="menu" id="menu">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="pastel.html">Pastel</a></li>
+    <li><a href="hamburguer.html">Hambúrguer</a></li>
+    <li><a href="bebidas.html">Sucos e refrigerantes</a></li>
+    <li><a href="acai.html">Açaí e Milk-Shake</a></li>
+    <li><a href="pedido.html">Carrinho</a></li>
+  </ul>
+  <div class="title">Faça o seu pedido!</div>
+</header>
 
-        <div class="item-card">
-            <span>X-saladão - R$ 13,00</span>
-            <p>2 hambúrgueres, Mussarela, Alface Americana, Tomate, Milho, Batata Palha, Ketchup e Mostarda</p>
-            <a href="#" class="pedido-button" data-item="X-saladão" data-preco="13.00">Pedir</a>
-        </div>
+<section class="pasteis-section" id="lanches">
+    <h2 class="section-title">Cardápio de Lanches</h2>
+    <div class="pasteis-grid">
 
-        <!-- Top Lanches -->
-        <div class="item-card">
-            <span>Top Burguer - R$ 10,00</span>
-            <p>2 hambúrgueres, Mussarela e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Burguer" data-preco="10.00">Pedir</a>
-        </div>
+        <!-- X Salada -->
+        <div class="item-card">
+            <span>X-salada - R$ 10,00</span>
+            <p>1 hambúrguer, Mussarela, Alface Americana, Tomate e Ketchup</p>
+            <button class="pedido-button" data-item="X-salada" data-preco="10.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Salada - R$ 14,00</span>
-            <p>2 hambúrgueres, Mussarela, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Salada" data-preco="14.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>X-saladão - R$ 13,00</span>
+            <p>2 hambúrgueres, Mussarela, Alface Americana, Tomate, Milho, Batata Palha, Ketchup e Mostarda</p>
+            <button class="pedido-button" data-item="X-saladão" data-preco="13.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Egg - R$ 17,00</span>
-            <p>1 hambúrguer, Mussarela, 2 Ovos, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Egg" data-preco="17.00">Pedir</a>
-        </div>
+        <!-- Top Lanches -->
+        <div class="item-card">
+            <span>Top Burguer - R$ 10,00</span>
+            <p>2 hambúrgueres, Mussarela e Ketchup</p>
+            <button class="pedido-button" data-item="Top Burguer" data-preco="10.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Calabresa - R$ 17,00</span>
-            <p>2 hambúrgueres, Mussarela, Calabresa, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Calabresa" data-preco="17.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Salada - R$ 14,00</span>
+            <p>2 hambúrgueres, Mussarela, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
+            <button class="pedido-button" data-item="Top Salada" data-preco="14.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Bacon - R$ 18,00</span>
-            <p>2 hambúrgueres, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Bacon" data-preco="18.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Egg - R$ 17,00</span>
+            <p>1 hambúrguer, Mussarela, 2 Ovos, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
+            <button class="pedido-button" data-item="Top Egg" data-preco="17.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Frango - R$ 20,00</span>
-            <p>2 hambúrgueres, Mussarela, Frango, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Frango" data-preco="20.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Calabresa - R$ 17,00</span>
+            <p>2 hambúrgueres, Mussarela, Calabresa, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
+            <button class="pedido-button" data-item="Top Calabresa" data-preco="17.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Calabacon - R$ 22,00</span>
-            <p>2 hambúrgueres, Mussarela, Calabresa, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Top Calabacon" data-preco="22.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Bacon - R$ 18,00</span>
+            <p>2 hambúrgueres, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
+            <button class="pedido-button" data-item="Top Bacon" data-preco="18.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Tudo - R$ 35,00</span>
-            <p>2 hambúrgueres, Mussarela, Frango, Calabresa, Bacon, Ovo, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada</p>
-            <a href="#" class="pedido-button" data-item="Top Tudo" data-preco="35.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Frango - R$ 20,00</span>
+            <p>2 hambúrgueres, Mussarela, Frango, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
+            <button class="pedido-button" data-item="Top Frango" data-preco="20.00">Pedir</button>
+        </div>
 
-        <!-- Hot Dogs -->
-        <div class="item-card">
-            <span>Hot Dog Tradicional - R$ 12,00</span>
-            <p>Pão, Purê, Milho, Vinagrete, Batata Palha, 1 Salsicha, Mostarda e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Hot Dog Tradicional" data-preco="12.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Calabacon - R$ 22,00</span>
+            <p>2 hambúrgueres, Mussarela, Calabresa, Bacon, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada e Ketchup</p>
+            <button class="pedido-button" data-item="Top Calabacon" data-preco="22.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Dog Cheddar - R$ 18,00</span>
-            <p>Pão, Cheddar, Bacon, Batata Palha, 2 Salsichas e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Dog Cheddar" data-preco="18.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Tudo - R$ 35,00</span>
+            <p>2 hambúrgueres, Mussarela, Frango, Calabresa, Bacon, Ovo, Alface Americana, Tomate, Cebola Roxa, Picles, Cenoura Ralada</p>
+            <button class="pedido-button" data-item="Top Tudo" data-preco="35.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Dog Catupiry - R$ 21,00</span>
-            <p>Pão, Catupiry Original, Bacon, Batata Palha, 2 Salsichas e Ketchup</p>
-            <a href="#" class="pedido-button" data-item="Dog Catupiry" data-preco="21.00">Pedir</a>
-        </div>
+        <!-- Hot Dogs -->
+        <div class="item-card">
+            <span>Hot Dog Tradicional - R$ 12,00</span>
+            <p>Pão, Purê, Milho, Vinagrete, Batata Palha, 1 Salsicha, Mostarda e Ketchup</p>
+            <button class="pedido-button" data-item="Hot Dog Tradicional" data-preco="12.00">Pedir</button>
+        </div>
 
-        <!-- Linha exclusiva -->
-        <div class="item-card">
-            <span>Top Filé - R$ 20,00</span>
-            <p>Pão tipo hot dog, 150g de contra filé, Mussarela, Molho Barbecue, Maionese, Vinagrete e Molho Especial</p>
-            <a href="#" class="pedido-button" data-item="Top Filé" data-preco="20.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Dog Cheddar - R$ 18,00</span>
+            <p>Pão, Cheddar, Bacon, Batata Palha, 2 Salsichas e Ketchup</p>
+            <button class="pedido-button" data-item="Dog Cheddar" data-preco="18.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top Coração - R$ 20,00</span>
-            <p>Pão tipo hot dog, 150g de coração, Mussarela, Molho Barbecue, Maionese, Vinagrete e Molho Especial</p>
-            <a href="#" class="pedido-button" data-item="Top Coração" data-preco="20.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Dog Catupiry - R$ 21,00</span>
+            <p>Pão, Catupiry Original, Bacon, Batata Palha, 2 Salsichas e Ketchup</p>
+            <button class="pedido-button" data-item="Dog Catupiry" data-preco="21.00">Pedir</button>
+        </div>
 
-        <!-- Hambúrguer caseiro -->
-        <div class="item-card">
-            <span>Top 1 - R$ 23,00</span>
-            <p>Pão tradicional, 2 hambúrgueres de 100g, cheddar cremoso</p>
-            <a href="#" class="pedido-button" data-item="Top 1" data-preco="23.00">Pedir</a>
-        </div>
+        <!-- Linha exclusiva -->
+        <div class="item-card">
+            <span>Top Filé - R$ 20,00</span>
+            <p>Pão tipo hot dog, 150g de contra filé, Mussarela, Molho Barbecue, Maionese, Vinagrete e Molho Especial</p>
+            <button class="pedido-button" data-item="Top Filé" data-preco="20.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top 2 - R$ 25,00</span>
-            <p>Pão tradicional, hambúrguer de 100g, bacon e catupiry original</p>
-            <a href="#" class="pedido-button" data-item="Top 2" data-preco="25.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top Coração - R$ 20,00</span>
+            <p>Pão tipo hot dog, 150g de coração, Mussarela, Molho Barbecue, Maionese, Vinagrete e Molho Especial</p>
+            <button class="pedido-button" data-item="Top Coração" data-preco="20.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Top 3 - R$ 20,00</span>
-            <p>Pão tradicional, hambúrguer de 150g, cheddar, alface, tomate e cebola roxa</p>
-            <a href="#" class="pedido-button" data-item="Top 3" data-preco="20.00">Pedir</a>
-        </div>
+        <!-- Hambúrguer caseiro -->
+        <div class="item-card">
+            <span>Top 1 - R$ 23,00</span>
+            <p>Pão tradicional, 2 hambúrgueres de 100g, cheddar cremoso</p>
+            <button class="pedido-button" data-item="Top 1" data-preco="23.00">Pedir</button>
+        </div>
 
-        <!-- Acompanhamentos -->
-        <div class="item-card">
-            <span>Batata frita pequena - R$ 10,00</span>
-            <p>Porção pequena de batata frita crocante</p>
-            <a href="#" class="pedido-button" data-item="Batata frita pequena" data-preco="10.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top 2 - R$ 25,00</span>
+            <p>Pão tradicional, hambúrguer de 100g, bacon e catupiry original</p>
+            <button class="pedido-button" data-item="Top 2" data-preco="25.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Batata frita média - R$ 20,00</span>
-            <p>Porção média de batata frita crocante</p>
-            <a href="#" class="pedido-button" data-item="Batata frita média" data-preco="20.00">Pedir</a>
-        </div>
+        <div class="item-card">
+            <span>Top 3 - R$ 20,00</span>
+            <p>Pão tradicional, hambúrguer de 150g, cheddar, alface, tomate e cebola roxa</p>
+            <button class="pedido-button" data-item="Top 3" data-preco="20.00">Pedir</button>
+        </div>
 
-        <div class="item-card">
-            <span>Batata frita com cheddar e bacon (pequena) - R$ 18,00</span>
-            <p>Porção pequena de batata frita com cheddar cremoso e bacon crocante</p>
-            <a href="#" class="pedido-button" data-item="Batata frita com cheddar e bacon (pequena)" data-preco="18.00">Pedir</a>
-        </div>
+        <!-- Acompanhamentos -->
+        <div class="item-card">
+            <span>Batata frita pequena - R$ 10,00</span>
+            <p>Porção pequena de batata frita crocante</p>
+            <button class="pedido-button" data-item="Batata frita pequena" data-preco="10.00">Pedir</button>
+        </div>
 
-    </div>
+        <div class="item-card">
+            <span>Batata frita média - R$ 20,00</span>
+            <p>Porção média de batata frita crocante</p>
+            <button class="pedido-button" data-item="Batata frita média" data-preco="20.00">Pedir</button>
+        </div>
 
-</section>  
-</body>  
-</html
+        <div class="item-card">
+            <span>Batata frita com cheddar e bacon (pequena) - R$ 18,00</span>
+            <p>Porção pequena de batata frita com cheddar cremoso e bacon crocante</p>
+            <button class="pedido-button" data-item="Batata frita com cheddar e bacon (pequena)" data-preco="18.00">Pedir</button>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>
