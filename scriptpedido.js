@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* --------------------------
+     LIMPAR CARRINHO AO ENTRAR
+  -------------------------- */
+  localStorage.removeItem("carrinho");
+
   /* --------------------------
      ELEMENTOS
   -------------------------- */
@@ -31,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const normalizar = (s) =>
     s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  // Número sequencial para pedidos
   const gerarNumeroPedido = () => {
     let numero = Number(localStorage.getItem("numeroPedido")) || 0;
     numero++;
@@ -171,10 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
 📝 Observações: ${campos.obs.value || "Nenhuma"}
 
 💳 Pagamento: ${pagamentoSelect.value.toUpperCase()}
-${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n" : ""}
+${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n📄 Envie o comprovante após o pagamento.\n" : ""}
 🔖 Pedido Nº ${numeroPedido}
-
-📄 Envie o comprovante após o pagamento.
 `;
 
     /* --------------------------
@@ -197,6 +200,7 @@ ${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n" : ""}
       "_blank"
     );
 
+    // Limpa carrinho após enviar
     localStorage.removeItem("carrinho");
     renderCarrinho();
   }
