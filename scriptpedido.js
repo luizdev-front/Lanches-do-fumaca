@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {  /* --------------------------
-
+document.addEventListener("DOMContentLoaded", () => {
 /* --------------------------
 ELEMENTOS
 -------------------------- */
@@ -32,6 +31,7 @@ FUNÇÕES ÚTEIS
 const normalizar = (s) =>
 s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+// Número sequencial para pedidos
 const gerarNumeroPedido = () => {
 let numero = Number(localStorage.getItem("numeroPedido")) || 0;
 numero++;
@@ -171,8 +171,10 @@ msg += `
 📝 Observações: ${campos.obs.value || "Nenhuma"}
 
 💳 Pagamento: ${pagamentoSelect.value.toUpperCase()}
-${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n📄 Envie o comprovante após o pagamento.\n" : ""}
+${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n" : ""}
 🔖 Pedido Nº ${numeroPedido}
+
+📄 Envie o comprovante após o pagamento.
 `;
 
 /* --------------------------  
@@ -195,7 +197,6 @@ window.open(
   "_blank"  
 );  
 
-// Limpa carrinho após enviar  
 localStorage.removeItem("carrinho");  
 renderCarrinho();
 
@@ -207,4 +208,4 @@ document.getElementById("enviar-vendedora-btn").onclick = finalizarPedido;
 INICIO
 -------------------------- */
 renderCarrinho();
-}); 
+});
