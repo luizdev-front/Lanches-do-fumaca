@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {  /* --------------------------
-LIMPAR CARRINHO AO ENTRAR
--------------------------- */
-localStorage.removeItem("carrinho");
 
 /* --------------------------
 ELEMENTOS
