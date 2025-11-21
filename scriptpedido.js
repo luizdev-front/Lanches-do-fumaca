@@ -208,4 +208,4 @@ document.getElementById("enviar-vendedora-btn").onclick = finalizarPedido;
 INICIO
 -------------------------- */
 renderCarrinho();
-});
+}); 
