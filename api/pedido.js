@@ -43,23 +43,29 @@ export default function handler(req, res) {
     numeroGlobal++;
     const numeroPedido = numeroGlobal;
 
-    let mensagem = `*Pedido nº ${numeroPedido}*\n\n*Itens:*\n`;
+    let mensagem = `🍽️ *Pedido nº ${numeroPedido}*\n\n`;
+
+    mensagem += `🛒 *Itens do pedido:*\n`;
     carrinho.forEach((item) => {
       const adicionais = item.adicionais?.length
-        ? ` (${item.adicionais.join(", ")})`
+        ? `\n   ➕ Adicionais: ${item.adicionais.join(", ")}`
         : "";
-      mensagem += `- ${item.nome}${adicionais} – R$ ${item.preco?.toFixed(2) || "0.00"}\n`;
+      mensagem += `• ${item.nome} — R$ ${item.preco?.toFixed(2) || "0.00"}${adicionais}\n`;
     });
 
-    mensagem += `\n*Taxa de entrega:* R$ ${taxaEntrega.toFixed(2)}\n`;
-    mensagem += `*Total:* R$ ${totalFinal.toFixed(2)}\n\n`;
+    mensagem += `\n🚚 *Taxa de entrega:* R$ ${taxaEntrega.toFixed(2)}\n`;
+    mensagem += `💰 *Total:* R$ ${totalFinal.toFixed(2)}\n\n`;
 
-    mensagem += `*Cliente:*\n${cliente.nome}\n${cliente.rua}, ${cliente.numero}\n${cliente.bairro}\n`;
-    if (cliente.obs) mensagem += `Obs: ${cliente.obs}\n\n`;
+    mensagem += `👤 *Dados do cliente:*\n`;
+    mensagem += `• Nome: ${cliente.nome}\n`;
+    mensagem += `• Endereço: ${cliente.rua}, nº ${cliente.numero}\n`;
+    mensagem += `• Bairro: ${cliente.bairro}\n`;
+    if (cliente.obs) mensagem += `• Observações: ${cliente.obs}\n`;
 
-    mensagem += `*Pagamento:* ${pagamento}\n`;
+    mensagem += `\n💳 *Forma de pagamento:* ${pagamento}\n`;
     if (pagamento === "pix") {
-      mensagem += `Chave PIX: SEU-EMAIL@PIX.COM\n`;
+      mensagem += `🔑 Chave PIX: 13996039919\n`;
+      mensagem += `📌 Essa é a chave correta. Após o pagamento, envie o comprovante aqui no WhatsApp.\n`;
     }
 
     return res.status(200).json({ mensagem, totalFinal, numeroPedido });
