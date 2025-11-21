@@ -32,13 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const normalizar = (s) =>
     s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  const gerarNumeroPedido = () => {
-    let numero = Number(localStorage.getItem("numeroPedido")) || 0;
-    numero++;
-    localStorage.setItem("numeroPedido", numero);
-    return numero;
-  };
-
   /* --------------------------
   RENDER CARRINHO
   -------------------------- */
@@ -121,86 +114,63 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* --------------------------
-  FINALIZAR PEDIDO
+  FINALIZAR PEDIDO – COM BACK-END SEGURO
   -------------------------- */
-  function finalizarPedido() {
+  async function finalizarPedido() {
     if (!validarCampos()) {
       alert("Preencha todos os campos!");
       return;
     }
 
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    if (carrinho.length === 0)
-      return alert("Seu carrinho está vazio!");
+    if (carrinho.length === 0) return alert("Seu carrinho está vazio!");
 
-    const bairroFormatado = normalizar(campos.bairro.value);
-    const dadosBairro = bairrosTaxas.find(
-      (b) => normalizar(b.bairro) === bairroFormatado
-    );
+    const cliente = {
+      nome: campos.nome.value,
+      bairro: campos.bairro.value,
+      rua: campos.rua.value,
+      numero: campos.numero.value,
+      obs: campos.obs.value
+    };
 
-    if (!dadosBairro) {
-      alert("Este bairro não está na área atendida!");
-      return;
+    const pagamento = pagamentoSelect.value;
+
+    try {
+      const response = await fetch("/api/pedido", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ carrinho, cliente, pagamento })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return alert(data.erro || "Erro ao enviar pedido");
+      }
+
+      // Abrir WhatsApp com mensagem pronta
+      const numeroWhats = "5513996039919";
+      window.open(
+        `https://wa.me/${numeroWhats}?text=${encodeURIComponent(data.mensagem)}`,
+        "_blank"
+      );
+
+      // Mostrar valor PIX, se for pagamento PIX
+      if (pagamento === "pix") {
+        pixDiv.classList.remove("hidden");
+        pixDiv.innerHTML = `
+          <h3>Pagamento PIX</h3>
+          <p><strong>Valor:</strong> R$ ${data.totalFinal.toFixed(2)}</p>
+        `;
+      }
+
+      // Limpar carrinho
+      localStorage.removeItem("carrinho");
+      renderCarrinho();
+    } catch (err) {
+      console.error(err);
+      alert("Erro de conexão com o servidor. Tente novamente.");
     }
-
-    const taxa = dadosBairro.taxa;
-    const numeroPedido = gerarNumeroPedido();
-
-    let total = carrinho.reduce((s, item) => s + (item.preco || 0), 0);
-    let totalFinal = total + taxa;
-
-    /* --------------------------
-       MONTAR MENSAGEM
-    -------------------------- */
-    let msg = `📦 *Novo Pedido*\n\n`;
-
-    carrinho.forEach((item) => {
-      const adicionais = item.adicionais?.length
-        ? ` (${item.adicionais.join(", ")})`
-        : "";
-      msg += `• ${item.nome}${adicionais} – R$ ${item.preco.toFixed(2)}\n`;
-    });
-
-    msg += `
-🚚 Entrega: R$ ${taxa.toFixed(2)}
-💰 Total: R$ ${totalFinal.toFixed(2)}
-
-👤 Nome: ${campos.nome.value}
-🏙️ Bairro: ${campos.bairro.value}
-📍 Rua: ${campos.rua.value}
-🏠 Número: ${campos.numero.value}
-📝 Observações: ${campos.obs.value || "Nenhuma"}
-
-💳 Pagamento: ${pagamentoSelect.value.toUpperCase()}
-${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n" : ""}
-🔖 Pedido Nº ${numeroPedido}
-
-📄 Envie o comprovante após o pagamento.
-`;
-
-    /* --------------------------
-       PIX – ATUALIZAR VALOR
-    -------------------------- */
-    if (pagamentoSelect.value === "pix") {
-      pixDiv.classList.remove("hidden");
-      pixDiv.innerHTML = `
-        <h3>Pagamento PIX</h3>
-        <p><strong>Valor:</strong> R$ ${totalFinal.toFixed(2)}</p>
-      `;
-    }
-
-    /* --------------------------
-       ENVIAR PARA WHATSAPP
-    -------------------------- */
-    const numero = "5513996039919";
-
-    window.open(
-      `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`,
-      "_blank"
-    );
-
-    localStorage.removeItem("carrinho");
-    renderCarrinho();
   }
 
   document.getElementById("enviar-vendedora-btn").onclick = finalizarPedido;
