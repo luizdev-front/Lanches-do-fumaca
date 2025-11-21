@@ -1,171 +1,169 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {  /* --------------------------
+LIMPAR CARRINHO AO ENTRAR
+-------------------------- */
+localStorage.removeItem("carrinho");
 
-  /* --------------------------
-     LIMPAR CARRINHO AO ENTRAR
-  -------------------------- */
-  localStorage.removeItem("carrinho");
+/* --------------------------
+ELEMENTOS
+-------------------------- */
+const produtoDiv = document.getElementById("produto");
+const pagamentoSelect = document.getElementById("pagamento");
+const pixDiv = document.getElementById("pix-info");
 
-  /* --------------------------
-     ELEMENTOS
-  -------------------------- */
-  const produtoDiv = document.getElementById("produto");
-  const pagamentoSelect = document.getElementById("pagamento");
-  const pixDiv = document.getElementById("pix-info");
+const campos = {
+nome: document.getElementById("nome"),
+bairro: document.getElementById("endereco"),
+rua: document.getElementById("rua"),
+numero: document.getElementById("numero"),
+obs: document.getElementById("observacoes"),
+};
 
-  const campos = {
-    nome: document.getElementById("nome"),
-    bairro: document.getElementById("endereco"),
-    rua: document.getElementById("rua"),
-    numero: document.getElementById("numero"),
-    obs: document.getElementById("observacoes"),
-  };
+/* --------------------------
+TAXAS POR BAIRRO
+-------------------------- */
+const bairrosTaxas = [
+{ bairro: "MARÉ MANSA", taxa: 4 },
+{ bairro: "VILA RÃ", taxa: 6 },
+{ bairro: "AREIÃO", taxa: 6 },
+{ bairro: "PENÍNSULA", taxa: 6 },
+{ bairro: "PEDREIRA", taxa: 8 },
+];
 
-  /* --------------------------
-     TAXAS POR BAIRRO
-  -------------------------- */
-  const bairrosTaxas = [
-    { bairro: "MARÉ MANSA", taxa: 4 },
-    { bairro: "VILA RÃ", taxa: 6 },
-    { bairro: "AREIÃO", taxa: 6 },
-    { bairro: "PENÍNSULA", taxa: 6 },
-    { bairro: "PEDREIRA", taxa: 8 },
-  ];
+/* --------------------------
+FUNÇÕES ÚTEIS
+-------------------------- */
+const normalizar = (s) =>
+s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  /* --------------------------
-     FUNÇÕES ÚTEIS
-  -------------------------- */
-  const normalizar = (s) =>
-    s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const gerarNumeroPedido = () => {
+let numero = Number(localStorage.getItem("numeroPedido")) || 0;
+numero++;
+localStorage.setItem("numeroPedido", numero);
+return numero;
+};
 
-  const gerarNumeroPedido = () => {
-    let numero = Number(localStorage.getItem("numeroPedido")) || 0;
-    numero++;
-    localStorage.setItem("numeroPedido", numero);
-    return numero;
-  };
+/* --------------------------
+RENDER DO CARRINHO
+-------------------------- */
+function renderCarrinho() {
+const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+produtoDiv.innerHTML = "";
 
-  /* --------------------------
-     RENDER DO CARRINHO
-  -------------------------- */
-  function renderCarrinho() {
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    produtoDiv.innerHTML = "";
+if (carrinho.length === 0) {  
+  produtoDiv.innerHTML = "<p>Nenhum item no pedido.</p>";  
+  return;  
+}  
 
-    if (carrinho.length === 0) {
-      produtoDiv.innerHTML = "<p>Nenhum item no pedido.</p>";
-      return;
-    }
+let total = 0;  
 
-    let total = 0;
+carrinho.forEach((item, index) => {  
+  const div = document.createElement("div");  
+  div.classList.add("item-carrinho");  
 
-    carrinho.forEach((item, index) => {
-      const div = document.createElement("div");
-      div.classList.add("item-carrinho");
+  const nome = item.nome || "Item sem nome";  
+  const preco = item.preco || 0;  
+  const adicionais =  
+    item.adicionais?.length ? ` (${item.adicionais.join(", ")})` : "";  
 
-      const nome = item.nome || "Item sem nome";
-      const preco = item.preco || 0;
-      const adicionais =
-        item.adicionais?.length ? ` (${item.adicionais.join(", ")})` : "";
+  const span = document.createElement("span");  
+  span.textContent = `${nome}${adicionais} – R$ ${preco.toFixed(2)}`;  
 
-      const span = document.createElement("span");
-      span.textContent = `${nome}${adicionais} – R$ ${preco.toFixed(2)}`;
+  const btn = document.createElement("button");  
+  btn.className = "btn-remover";  
+  btn.textContent = "Remover";  
+  btn.addEventListener("click", () => removerItem(index));  
 
-      const btn = document.createElement("button");
-      btn.className = "btn-remover";
-      btn.textContent = "Remover";
-      btn.addEventListener("click", () => removerItem(index));
+  div.appendChild(span);  
+  div.appendChild(btn);  
 
-      div.appendChild(span);
-      div.appendChild(btn);
+  produtoDiv.appendChild(div);  
 
-      produtoDiv.appendChild(div);
+  total += preco;  
+});  
 
-      total += preco;
-    });
+const totalEl = document.createElement("h3");  
+totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;  
+produtoDiv.appendChild(totalEl);
 
-    const totalEl = document.createElement("h3");
-    totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;
-    produtoDiv.appendChild(totalEl);
-  }
+}
 
-  /* --------------------------
-     REMOVER ITEM
-  -------------------------- */
-  function removerItem(index) {
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    carrinho.splice(index, 1);
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    renderCarrinho();
-  }
+/* --------------------------
+REMOVER ITEM
+-------------------------- */
+function removerItem(index) {
+const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+carrinho.splice(index, 1);
+localStorage.setItem("carrinho", JSON.stringify(carrinho));
+renderCarrinho();
+}
 
-  /* --------------------------
-     PIX – UX
-  -------------------------- */
-  pagamentoSelect.addEventListener("change", () => {
-    if (pagamentoSelect.value === "pix") {
-      pixDiv.classList.remove("hidden");
-      pixDiv.innerHTML = `
-        <h3>Pagamento PIX</h3>
-        <p><strong>Valor:</strong> será calculado após finalizar</p>
-      `;
-    } else {
-      pixDiv.classList.add("hidden");
-      pixDiv.innerHTML = "";
-    }
-  });
+/* --------------------------
+PIX – UX
+-------------------------- */
+pagamentoSelect.addEventListener("change", () => {
+if (pagamentoSelect.value === "pix") {
+pixDiv.classList.remove("hidden");
+pixDiv.innerHTML =   <h3>Pagamento PIX</h3>   <p><strong>Valor:</strong> será calculado após finalizar</p>  ;
+} else {
+pixDiv.classList.add("hidden");
+pixDiv.innerHTML = "";
+}
+});
 
-  /* --------------------------
-     VALIDAR CAMPOS
-  -------------------------- */
-  function validarCampos() {
-    const todosPreenchidos =
-      Object.values(campos).every((c) => c.value.trim() !== "") &&
-      pagamentoSelect.value !== "";
+/* --------------------------
+VALIDAR CAMPOS
+-------------------------- */
+function validarCampos() {
+const todosPreenchidos =
+Object.values(campos).every((c) => c.value.trim() !== "") &&
+pagamentoSelect.value !== "";
 
-    return todosPreenchidos;
-  }
+return todosPreenchidos;
 
-  /* --------------------------
-     FINALIZAR PEDIDO
-  -------------------------- */
-  function finalizarPedido() {
-    if (!validarCampos()) {
-      alert("Preencha todos os campos!");
-      return;
-    }
+}
 
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    if (carrinho.length === 0) return alert("Seu carrinho está vazio!");
+/* --------------------------
+FINALIZAR PEDIDO
+-------------------------- */
+function finalizarPedido() {
+if (!validarCampos()) {
+alert("Preencha todos os campos!");
+return;
+}
 
-    const bairroFormatado = normalizar(campos.bairro.value);
-    const dadosBairro = bairrosTaxas.find(
-      (b) => normalizar(b.bairro) === bairroFormatado
-    );
+const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];  
+if (carrinho.length === 0) return alert("Seu carrinho está vazio!");  
 
-    if (!dadosBairro) {
-      alert("Este bairro não está na área atendida!");
-      return;
-    }
+const bairroFormatado = normalizar(campos.bairro.value);  
+const dadosBairro = bairrosTaxas.find(  
+  (b) => normalizar(b.bairro) === bairroFormatado  
+);  
 
-    const taxa = dadosBairro.taxa;
-    const numeroPedido = gerarNumeroPedido();
+if (!dadosBairro) {  
+  alert("Este bairro não está na área atendida!");  
+  return;  
+}  
 
-    let total = carrinho.reduce((s, item) => s + (item.preco || 0), 0);
-    let totalFinal = total + taxa;
+const taxa = dadosBairro.taxa;  
+const numeroPedido = gerarNumeroPedido();  
 
-    /* --------------------------
-       MONTAR MENSAGEM — NOVO FORMATO
-    -------------------------- */
-    let msg = `📦 *Novo Pedido*\n\n`;
+let total = carrinho.reduce((s, item) => s + (item.preco || 0), 0);  
+let totalFinal = total + taxa;  
 
-    carrinho.forEach((item) => {
-      const adicionais = item.adicionais?.length
-        ? ` (${item.adicionais.join(", ")})`
-        : "";
-      msg += `• ${item.nome}${adicionais} – R$ ${item.preco.toFixed(2)}\n`;
-    });
+/* --------------------------  
+   MONTAR MENSAGEM — NOVO FORMATO  
+-------------------------- */  
+let msg = `📦 *Novo Pedido*\n\n`;  
 
-    msg += `
+carrinho.forEach((item) => {  
+  const adicionais = item.adicionais?.length  
+    ? ` (${item.adicionais.join(", ")})`  
+    : "";  
+  msg += `• ${item.nome}${adicionais} – R$ ${item.preco.toFixed(2)}\n`;  
+});  
+
+msg += `
+
 🚚 Entrega: R$ ${taxa.toFixed(2)}
 💰 Total: R$ ${totalFinal.toFixed(2)}
 
@@ -180,35 +178,36 @@ ${pagamentoSelect.value === "pix" ? "💸 Chave PIX: 13996039919\n📄 Envie o c
 🔖 Pedido Nº ${numeroPedido}
 `;
 
-    /* --------------------------
-       PIX – MOSTRAR VALOR NA TELA
-    -------------------------- */
-    if (pagamentoSelect.value === "pix") {
-      pixDiv.classList.remove("hidden");
-      pixDiv.innerHTML = `
-        <h3>Pagamento PIX</h3>
-        <p><strong>Valor:</strong> R$ ${totalFinal.toFixed(2)}</p>
-      `;
-    }
+/* --------------------------  
+   PIX – MOSTRAR VALOR NA TELA  
+-------------------------- */  
+if (pagamentoSelect.value === "pix") {  
+  pixDiv.classList.remove("hidden");  
+  pixDiv.innerHTML = `  
+    <h3>Pagamento PIX</h3>  
+    <p><strong>Valor:</strong> R$ ${totalFinal.toFixed(2)}</p>  
+  `;  
+}  
 
-    /* --------------------------
-       ENVIAR PARA WHATSAPP
-    -------------------------- */
-    const numero = "5513996039919";
-    window.open(
-      `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`,
-      "_blank"
-    );
+/* --------------------------  
+   ENVIAR PARA WHATSAPP  
+-------------------------- */  
+const numero = "5513996039919";  
+window.open(  
+  `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`,  
+  "_blank"  
+);  
 
-    // Limpa carrinho após enviar
-    localStorage.removeItem("carrinho");
-    renderCarrinho();
-  }
+// Limpa carrinho após enviar  
+localStorage.removeItem("carrinho");  
+renderCarrinho();
 
-  document.getElementById("enviar-vendedora-btn").onclick = finalizarPedido;
+}
 
-  /* --------------------------
-     INICIO
-  -------------------------- */
-  renderCarrinho();
-});
+document.getElementById("enviar-vendedora-btn").onclick = finalizarPedido;
+
+/* --------------------------
+INICIO
+-------------------------- */
+renderCarrinho();
+}); 
