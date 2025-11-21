@@ -1,12 +1,26 @@
+let numeroGlobal = 0;
+
+function normalizar(s) {
+  return s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+const bairrosTaxas = [
+  { bairro: "MARÉ MANSA", taxa: 4 },
+  { bairro: "VILA RÃ", taxa: 6 },
+  { bairro: "AREIÃO", taxa: 6 },
+  { bairro: "PENÍNSULA", taxa: 6 },
+  { bairro: "PEDREIRA", taxa: 8 },
+];
+
 export default function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ erro: "Método não permitido" });
   }
 
   try {
-    const { carrinho, cliente, pagamento } = req.body;
+    const { carrinho = [], cliente = {}, pagamento } = req.body;
 
-    if (!carrinho || !cliente || !pagamento) {
+    if (!carrinho.length || !cliente.nome || !cliente.bairro || !pagamento) {
       return res.status(400).json({ erro: "Dados incompletos" });
     }
 
@@ -20,19 +34,21 @@ export default function handler(req, res) {
     }
 
     const taxaEntrega = taxaObj.taxa;
-    const totalCarrinho = carrinho.reduce((acc, item) => acc + (item.preco || 0), 0);
+    const totalCarrinho = carrinho.reduce(
+      (acc, item) => acc + (item.preco ? item.preco : 0),
+      0
+    );
     const totalFinal = totalCarrinho + taxaEntrega;
 
     numeroGlobal++;
     const numeroPedido = numeroGlobal;
 
-    let mensagem = `*Pedido nº ${numeroPedido}*\n\n`;
-    mensagem += `*Itens:*\n`;
+    let mensagem = `*Pedido nº ${numeroPedido}*\n\n*Itens:*\n`;
     carrinho.forEach((item) => {
       const adicionais = item.adicionais?.length
         ? ` (${item.adicionais.join(", ")})`
         : "";
-      mensagem += `- ${item.nome}${adicionais} – R$ ${item.preco.toFixed(2)}\n`;
+      mensagem += `- ${item.nome}${adicionais} – R$ ${item.preco?.toFixed(2) || "0.00"}\n`;
     });
 
     mensagem += `\n*Taxa de entrega:* R$ ${taxaEntrega.toFixed(2)}\n`;
@@ -46,11 +62,7 @@ export default function handler(req, res) {
       mensagem += `Chave PIX: SEU-EMAIL@PIX.COM\n`;
     }
 
-    return res.status(200).json({
-      mensagem,
-      totalFinal,
-      numeroPedido,
-    });
+    return res.status(200).json({ mensagem, totalFinal, numeroPedido });
   } catch (err) {
     console.error("Erro interno:", err);
     return res.status(500).json({ erro: "Erro interno no servidor" });
