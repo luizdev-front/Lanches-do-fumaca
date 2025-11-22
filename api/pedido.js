@@ -1,9 +1,11 @@
 let numeroGlobal = 0;
 
+// Normaliza texto para comparar acentos, caixa alta/baixa, etc.
 function normalizar(s) {
   return s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+// Bairros e taxas válidas
 const bairrosTaxas = [
   { bairro: "MARÉ MANSA", taxa: 4 },
   { bairro: "VILA RÃ", taxa: 6 },
@@ -12,10 +14,16 @@ const bairrosTaxas = [
   { bairro: "PEDREIRA", taxa: 8 },
 ];
 
-// Agora com cartão
-const formasPagamentoAceitas = ["pix", "dinheiro", "cartão"];
+// Formas de pagamento aceitas (sem depender de acentos)
+const formasPagamentoAceitas = [
+  "PIX",
+  "DINHEIRO",
+  "CARTAO",
+  "CARTÃO",
+];
 
 export default function handler(req, res) {
+  // Apenas POST é permitido
   if (req.method !== "POST") {
     return res.status(405).json({ erro: "Método não permitido" });
   }
@@ -23,61 +31,71 @@ export default function handler(req, res) {
   try {
     const { carrinho = [], cliente = {}, pagamento } = req.body;
 
+    // Validação básica
     if (!carrinho.length || !cliente.nome || !cliente.bairro || !pagamento) {
       return res.status(400).json({ erro: "Dados incompletos" });
     }
 
-    const tipoPagamento = pagamento.toLowerCase();
-    if (!formasPagamentoAceitas.includes(tipoPagamento)) {
-      return res.status(400).json({ erro: "Forma de pagamento não aceita" });
-    }
+    // Normaliza o bairro informado pelo cliente
+    const bairroInformado = normalizar(cliente.bairro);
 
-    const bairroNormalizado = normalizar(cliente.bairro);
-    const taxaObj = bairrosTaxas.find(
-      (b) => normalizar(b.bairro) === bairroNormalizado
+    // Encontra o bairro correto mesmo que a pessoa escreva errado
+    const taxaObj = bairrosTaxas.find((b) =>
+      normalizar(b.bairro).includes(bairroInformado) ||
+      bairroInformado.includes(normalizar(b.bairro))
     );
 
     if (!taxaObj) {
       return res.status(400).json({ erro: "Bairro não atendido" });
     }
 
+    // Calcula valores
     const taxaEntrega = taxaObj.taxa;
-
     const totalCarrinho = carrinho.reduce(
       (acc, item) => acc + (item.preco ? item.preco : 0),
       0
     );
-
     const totalFinal = totalCarrinho + taxaEntrega;
 
+    // Incrementa número do pedido
     numeroGlobal++;
     const numeroPedido = numeroGlobal;
 
-    let mensagem = `Pedido nº ${numeroPedido}\n\n`;
+    // Verifica forma de pagamento
+    const tipoPagamento = normalizar(pagamento);
 
-    mensagem += `Itens:\n`;
+    if (!formasPagamentoAceitas.includes(tipoPagamento)) {
+      return res.status(400).json({ erro: "Forma de pagamento não aceita" });
+    }
+
+    // Monta mensagem do WhatsApp
+    let mensagem = `🍽️ *Pedido nº ${numeroPedido}*\n\n`;
+
+    mensagem += `🛒 *Itens do pedido:*\n`;
     carrinho.forEach((item) => {
       const adicionais = item.adicionais?.length
-        ? ` (Adicionais: ${item.adicionais.join(", ")})`
+        ? `\n   ➕ Adicionais: ${item.adicionais.join(", ")}`
         : "";
-      mensagem += `• ${item.nome} — R$ ${item.preco?.toFixed(2)}${adicionais}\n`;
+      mensagem += `• ${item.nome} — R$ ${item.preco?.toFixed(2) || "0.00"}${adicionais}\n`;
     });
 
-    mensagem += `\nTaxa de entrega: R$ ${taxaEntrega.toFixed(2)}\n`;
-    mensagem += `Total: R$ ${totalFinal.toFixed(2)}\n\n`;
+    mensagem += `\n🚚 *Taxa de entrega:* R$ ${taxaEntrega.toFixed(2)}\n`;
+    mensagem += `💰 *Total:* R$ ${totalFinal.toFixed(2)}\n\n`;
 
-    mensagem += `Cliente:\n`;
+    mensagem += `👤 *Dados do cliente:*\n`;
     mensagem += `• Nome: ${cliente.nome}\n`;
     mensagem += `• Endereço: ${cliente.rua}, nº ${cliente.numero}\n`;
     mensagem += `• Bairro: ${cliente.bairro}\n`;
     if (cliente.obs) mensagem += `• Observações: ${cliente.obs}\n`;
 
-    mensagem += `\nPagamento: ${tipoPagamento}\n`;
+    mensagem += `\n💳 *Forma de pagamento:* ${pagamento}\n`;
 
-    if (tipoPagamento === "pix") {
-      mensagem += `Chave PIX: 13996039919\n`;
+    if (tipoPagamento === "PIX") {
+      mensagem += `🔑 Chave PIX: 13996039919\n`;
+      mensagem += `📌 Envie o comprovante aqui no WhatsApp.\n`;
     }
 
+    // Resposta final
     return res.status(200).json({
       mensagem,
       totalFinal,
