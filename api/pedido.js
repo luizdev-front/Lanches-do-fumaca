@@ -65,7 +65,7 @@ export default function handler(req, res) {
     mensagem += `\n💳 *Forma de pagamento:* ${pagamento}\n`;
     if (pagamento === "pix") {
       mensagem += `🔑 Chave PIX: 13996039919\n`;
-      mensagem += `📌 Essa é a chave correta. Após o pagamento, envie o comprovante aqui no WhatsApp.\n`;
+      mensagem += `📌 Após o pagamento, envie o comprovante aqui no WhatsApp.\n`;
     }
 
     return res.status(200).json({ mensagem, totalFinal, numeroPedido });
