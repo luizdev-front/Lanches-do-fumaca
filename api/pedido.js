@@ -23,6 +23,18 @@ const formasPagamentoAceitas = [
 ];
 
 export default function handler(req, res) {
+
+  // ===== CONFIGURAÇÃO DE CORS =====
+  res.setHeader("Access-Control-Allow-Origin", "https://lanches-do-fumaca.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Preflight da vercel / navegador
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  // =================================
+
   // Apenas POST é permitido
   if (req.method !== "POST") {
     return res.status(405).json({ erro: "Método não permitido" });
@@ -36,10 +48,8 @@ export default function handler(req, res) {
       return res.status(400).json({ erro: "Dados incompletos" });
     }
 
-    // Normaliza o bairro informado pelo cliente
     const bairroInformado = normalizar(cliente.bairro);
 
-    // Encontra o bairro correto mesmo que a pessoa escreva errado
     const taxaObj = bairrosTaxas.find((b) =>
       normalizar(b.bairro).includes(bairroInformado) ||
       bairroInformado.includes(normalizar(b.bairro))
@@ -49,26 +59,24 @@ export default function handler(req, res) {
       return res.status(400).json({ erro: "Bairro não atendido" });
     }
 
-    // Calcula valores
     const taxaEntrega = taxaObj.taxa;
+
     const totalCarrinho = carrinho.reduce(
       (acc, item) => acc + (item.preco ? item.preco : 0),
       0
     );
+
     const totalFinal = totalCarrinho + taxaEntrega;
 
-    // Incrementa número do pedido
     numeroGlobal++;
     const numeroPedido = numeroGlobal;
 
-    // Verifica forma de pagamento
     const tipoPagamento = normalizar(pagamento);
 
     if (!formasPagamentoAceitas.includes(tipoPagamento)) {
       return res.status(400).json({ erro: "Forma de pagamento não aceita" });
     }
 
-    // Monta mensagem do WhatsApp
     let mensagem = `🍽️ *Pedido nº ${numeroPedido}*\n\n`;
 
     mensagem += `🛒 *Itens do pedido:*\n`;
@@ -95,7 +103,6 @@ export default function handler(req, res) {
       mensagem += `📌 Envie o comprovante aqui no WhatsApp.\n`;
     }
 
-    // Resposta final
     return res.status(200).json({
       mensagem,
       totalFinal,
